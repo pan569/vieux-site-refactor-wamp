@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" >
+		<meta name="author" content="Stéphane Jourdain" >
+		<meta name="description	" content="Date:10/09/2021" >	
+		<title>controle svg par Js</title>
+
+		<link href="../resourses/themes/theme.monBog/img/favicon.ico" rel="shortcut icon" type="image/ico" />
+
+		<link href="../vue/resources/css/html.css" rel="stylesheet" type="text/css">
+		<link href="../vue/resources/css/js.css" rel="stylesheet" type="text/css">
+		<link href="../vue/resources/css/gestionAlbumLab01.css" rel="stylesheet" type="text/css">
+
+		<script src="../vue/resources/js/gestionAlbumLab01.js" async></script>
+	</head>
+	<body>
+		<h1>experimentation javascript et svg</h1>
+		
+		
+		
+		<svg id="visioneuse" width="1000" height="600" xml:lang="fr" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			
+			<title>title</title>
+			<desc>travail sur les fichiers SVG</desc>			
+			<rect x="0" y="0" width="1000" height="600" class="forme" />   
+			
+			<image  xlink:href="../vue/resources/img/X/Grille.png" />		
+				
+			<g id="image" >	
+				<image  xlink:href="" transform="translate(200,0) scale(1)"/>					
+				<text x="505"  y="55" style="font-family: Impact ;font-size:65px; fill:black; text-anchor:middle;" >pas d'image selectionée</text>
+				<text x="500"  y="50" style="font-family: Impact ;font-size:65px; fill:white; text-anchor:middle;" >pas d'image selectionée</text>
+			</g>							
+			<g  style="opacity: 0.5;" />				
+				<image id="png" xlink:href="../vue/resources/img/png/R.png"  transform="translate(1) scale(1)" />
+				<text x="95" y="80" class="bulle"  transform="translate(1) scale(1)"  ></text>
+			</g>
+			
+			
+					
+		</svg>
+		 
+	</body>
+</html>	

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PageMaitre>	
+	<Menus>
+		<Accueil url="index.php?application=Page01&amp;fonction=index" description="Accueil du cite" image="" css="menu-item" cible="_self" titre="Accueil"/>		
+		<Blog url="index.php?application=Blog&amp;fonction=index" description="Mon blog" image="" css="menu-item" cible="_self" />
+		<Article url="index.php?application=Page02&amp;fonction=index" description="Plein de blabla" image="" css="menu-item" cible="_self" titre="Article"/>
+		<SVG url="index.php?application=Page03&amp;fonction=index" description="bac a sable fichier svg" image="" css="menu-item" cible="_self" titre="Article"/>
+		<Labo url="index.php?application=Objet&amp;fonction=index" description="Zone d'experimentation de ligne de code" image="" css="menu-item" cible="_self" />
+		<LaboJC url="index.php?application=Labjc&amp;fonction=index" description="Zone d'experimentation de JavaScript" image="" css="menu-item" cible="_self" />
+		<Album url="index.php?application=Album&amp;fonction=index" description="Album de photo" image="" css="menu-item" cible="_self" />
+		<Botanique url="index.php?application=Botanique&amp;fonction=index" description="Base de donnée botanique" image="" css="menu-item" cible="_self" titre="Botanique"/>
+		<Configuration url="index.php?application=motif&amp;fonction=index" description="Configuration du site" image="" css="menu-item" cible="_self" titre="Configuration"/>
+		<facebook url="#" description="Page facebook" image="facebook.png" css="LinkPage1" cible="index.php" titre="facebook"/>
+		<twitter url="#" description="page Twitter" image="twitter.png" css="LinkPage2" cible="index.php"/>		
+	</Menus>	
+</PageMaitre>

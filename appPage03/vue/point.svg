@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg width="10px" height="10px" xml:lang="fr"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+   <title>point</title>
+   <desc>represente un point</desc>
+   
+   <style type="text/css">
+    <![CDATA[         
+   .formeB
+   {
+       fill:transparent;
+       stroke:red;
+       stroke-width:1px;
+       	       
+   }     
+       
+   ]]>
+   </style>
+   
+	<line x1="5" y1="0" x2="5"  y2="10" class="formeB" />
+	<line x1="0" y1="5" x2="10"  y2="5" class="formeB" />
+	
+</svg>

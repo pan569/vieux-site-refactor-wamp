@@ -1,0 +1,59 @@
+﻿/**** Formulaire ****/
+label 
+{
+	font-family:Verdana;
+	font-size:11px;
+	color:#FFFFFF;
+	font-weight:900;
+}
+input 
+{
+	/*border:1px solid black;*/
+	background-color:Transparent;
+	
+	/*width:100px;
+	height:12px;*/
+	
+	font-family:Verdana;
+	font-size:11px;
+	color:#FFFFFF;
+	font-weight:900;
+	
+	border-bottom-color:#0066CC;
+	border-right-color:#0066CC;
+	
+	padding:2px;
+}
+select
+{
+	background-color:Transparent;
+	
+	height:20px;
+	
+	font-family:Verdana;
+	font-size:11px;
+	color:#FFFFFF;
+	font-weight:900;		
+	
+	padding:2px;
+}
+option 
+{
+	background-color:Transparent;
+	color:#000000;
+	font-weight:900;
+}
+textarea 
+{
+	/*border:1px solid black;*/
+	background-color:Transparent;
+	font-family:Verdana;
+	font-size:11px;
+	color:#FFFFFF;
+	font-weight:900;
+	
+	border-bottom-color:#0066CC;
+	border-right-color:#0066CC;
+}
+
+/**** ********** ****/

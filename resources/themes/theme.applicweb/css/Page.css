@@ -1,0 +1,328 @@
+﻿#CadrePrincipal
+{
+	/*background:url('Image/Fond_CadrePrincipal.png') no-repeat fixed center;*/
+	
+	width: 800px; 
+	height:700px;  
+	margin:0px auto;
+	text-align:left;
+			
+}
+
+.couleur2
+{
+	color: #0066CC;
+}
+
+#TableauDeBord
+{
+	position: absolute;
+	top: 50px;
+  	right: 10px;
+  	width: 500px;
+  	
+  	background-color: #000000;
+  	
+  	font-family:serif;
+	font-size: 12px;
+	//text-align: center;
+	text-decoration: none;
+	color: #000000;
+}
+#TableauDeBord caption
+{
+	font-family:serif;
+	color: #ffffff;
+}
+#TableauDeBord th 
+{
+	width:auto;
+	
+	font-family:serif;
+	font-size: 12px;
+	text-align: left;
+	/*text-decoration: none;*/
+	color: #ffffff;	
+	
+	border: 0px none #000000; 
+	margin: 0px; 
+	padding: 0px; 
+	border-collapse: collapse; 
+	border-spacing: 0px;
+}
+#TableauDeBord td 
+{
+	background-color:Transparent;	
+	
+	height: 25px; /*= Hauteur du bouton*/
+	width: auto; /*= Largeur du bouton*/		
+	
+	font-family:serif;
+	font-size: 12px;
+	/*text-align: center;*/
+	text-decoration: none;
+	color: #ffffff;
+	
+	border: 0px none #000000; 
+	margin: 0px; 
+	padding: 0px; 
+	border-collapse: collapse; 
+	border-spacing: 0px;
+		
+}
+
+#CadreEntete
+{
+	background-color:Transparent;
+	
+	width:800px;	
+	height:auto; 
+	margin:0px;
+	margin-bottom:2px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+		
+	float:left;
+}
+
+#logo
+{
+	background: url('Image/ApplicWeb.png') no-repeat center;
+	/*
+	height:100px;
+	width:380px;
+	*/
+	height:50px;
+	width:190px;
+	margin-right:5px;
+	margin-bottom:5px;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+#user
+{
+	background-color:Transparent;
+	
+	height:100px;
+	width:380px;
+	
+	margin:10px;
+	margin-left:0px;
+	margin-bottom:5px;
+	
+	text-align:center;
+	vertical-align:middle;
+
+}
+/***********************/
+#CadreMenu
+{
+	background-color:Transparent;
+	
+	width:800px;	
+	height:auto; 
+	margin:0px;
+	margin-bottom:2px;
+	margin-left:0px;
+	margin-right:0px;
+	margin-top:0px;
+		
+	float:left;
+}
+
+
+
+#Cadre
+{	
+	background-color:#000000;	
+	
+	
+    height: 25px;
+    width: 384px;/*= Nbre bouton x Largeur bouton*/
+    
+    margin-top:10px;
+    margin-right:10px;
+    margin-bottom:5px;
+    
+    float:left;
+}
+
+.CadreMenu
+{	
+	background-color:Transparent;	
+	
+    height: 25px;
+    width: 100%;/*= Nbre bouton x Largeur bouton*/    
+    
+    
+    border-collapse:collapse;    
+}
+.CadreMenu td 
+{
+	background-color:Transparent;	
+	
+	height: 25px; /*= Hauteur du bouton*/
+	width: 100px; /*= Largeur du bouton*/		
+	
+	font-family:Verdana;
+	font-size: 9px;
+	text-align: center;
+	
+	border: 0px none #000000; 
+	margin: 0px; 
+	padding: 0px; 
+	border-collapse: collapse; 
+	border-spacing: 0px;
+		
+}
+
+.CadreMenu a 
+{
+	display: block;
+	width: auto;
+	height: 20px;
+	
+	font-family:Verdana;
+	font-size: 10px;
+	text-align: center;
+	text-decoration: none;
+	color: #FFFFFF;
+	
+	margin:0px;
+	
+	padding:0px;
+	padding-bottom:0px;
+	padding-top:5px;	
+			
+}
+.CadreMenu a:link {
+    color: #FFFFFF;
+	background-image: url(Image/buttons.png);
+	background-repeat: repeat-x ;
+	background-position: 0px 0px;
+}
+.CadreMenu a:link span
+{
+	color:#0066CC;
+}
+.CadreMenu a:visited {
+    color: #FFFFFF;
+	background-image: url(Image/buttons.png);
+	background-repeat: repeat-x;
+	background-position: 0px 0px;
+}
+.CadreMenu a:visited span
+{
+	color:#0066CC;
+}
+.CadreMenu a:hover {
+    font-weight:900;
+    color:#0066CC;
+	background-image: url(Image/buttons.png);
+	background-repeat: repeat-x;
+	background-position: 0px -25px;
+}
+.CadreMenu a:hover span
+{
+	color:#FFFFFF;
+}
+
+.CadreMenu a:active 
+{
+	color: #0066CC;
+	background-image: url(Image/buttons.png);
+	background-repeat: repeat-x;
+	background-position: 0px -50px;
+}
+.CadreMenu a:active span
+{
+	color:#FFFFFF;
+}
+
+
+
+
+/***********************/
+#CadreCorps
+{
+	background-color:Transparent;
+	background:url('Image/Fond_CadrePrincipal.gif') no-repeat fixed center;
+	
+	width:800px;
+	height:560px;	
+	margin:0px;
+	margin-bottom:0px;	
+	margin-top:0px;
+	margin-left:0px;
+	margin-right:0px;
+	overflow:auto;
+		
+	float:left;	
+}
+
+/***********************/
+#CadrePage
+{
+	background-color:Transparent;
+	
+	background-image: url('Image/FOND_Noir_Opacite_60.png'); 
+	background-repeat:repeat; 
+	background-position: left top;
+	
+	width:auto;
+	height:550px;
+	margin:0px;
+	padding:10px;
+	border: solid 1px #000000; 
+	
+	
+}
+
+/***********************/
+.TEST
+{ 
+	/*padding-top:2px;*/
+	/*padding-bottom:2px;*/
+	vertical-align:text-bottom;
+}
+
+.WebApplic_65x17
+{
+	background-color:#ffffff;	
+	background-image: url('Image/WebApplic_65x17.png'); 
+	background-repeat: no-repeat; 
+	background-position:center center;
+	
+	height:17px;
+	width:65px;
+	
+	margin:0px;
+	padding:0px;
+	
+}
+
+
+#CadrePied
+{
+	
+	background-color:#000000;
+	background-image: url('Image/FOND_Noir_Opacite_60.png'); 
+	background-repeat:repeat; 
+	background-position: left top;	
+	
+	width: 800px;
+	height: 20px;
+	margin:0;
+	margin-top:2px;
+	margin-left:0px;
+	margin-right:0px;
+
+	padding:0px;
+	padding-top:5px;
+	
+	text-align:center;
+	
+	float:left;
+}

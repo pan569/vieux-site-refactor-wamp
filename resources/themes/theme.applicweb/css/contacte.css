@@ -1,0 +1,14 @@
+﻿#CadreContacte
+{
+	background-color:Transparent;
+	background-image: url('Image/FOND_Noir_Opacite_60.png'); 
+	background-repeat:repeat; 
+	background-position: left top;
+	
+	height:600px;
+	/*width:758px;	
+	margin:0px;*/
+	padding:10px;
+	border: solid 1px #000000; 
+	
+}

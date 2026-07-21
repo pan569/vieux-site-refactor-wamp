@@ -1,0 +1,152 @@
+let bwalert = document.getElementById('bwalert');
+let bwprompt = document.getElementById('bwprompt');
+let bwconfirm = document.getElementById('bwconfirm');
+let ajouter = document.getElementById('bajout');
+
+bwalert.addEventListener('click', windows_alert);
+bwprompt.addEventListener('click', windows_prompt);
+bwconfirm.addEventListener('click', windows_confirm);
+//ajouter.addEventListener('click', ajout);
+
+function windows_alert(){
+    alert('Bonjour');
+}
+
+function windows_prompt()
+{
+   	let r = prompt('Ca va ?');
+	document.getElementById('pwRprompt').innerHTML = r;
+	
+}
+
+function windows_confirm()
+{
+	let r = confirm('Ca va ?');
+
+	if(r)
+	{
+		document.getElementById('pwRconfirm').innerHTML = "cool";
+	}
+	else
+	{
+		document.getElementById('pwRconfirm').innerHTML = "ah! dommage !";
+	}
+}
+
+function ajout(){
+    let para = document.createElement('p');
+    para.textContent = 'Paragraphe ajouté';
+    document.body.appendChild(para);
+}
+
+
+
+document.getElementById('pfenext').innerHTML = window.outerWidth + ' X ' + window.outerHeight;
+
+document.getElementById('pfeneint').innerHTML = window.innerWidth + ' X ' + window.innerHeight;
+
+console.log(window);
+
+document.getElementById('pwidth').innerHTML =  screen.width;
+document.getElementById('pavailWidth').innerHTML =  screen.availWidth;
+document.getElementById('pheight').innerHTML =  screen.height;
+document.getElementById('pavailHeight').innerHTML =  screen.availHeight;
+document.getElementById('pcolorDepth').innerHTML =  screen.colorDepth;
+document.getElementById('ppixelDepth').innerHTML =  screen.pixelDepth;
+
+
+
+let winSize = 'width=500, height=500';
+let bwopen = document.getElementById('bwopen');
+let bwresizeBy = document.getElementById('bwresizeBy');
+let bwresizeto = document.getElementById('bwresizeto');
+let bwmoveBy = document.getElementById('bwmoveBy');
+let bwmoveTo = document.getElementById('bwmoveTo');
+let bwscrollby = document.getElementById('bwscrollby');
+let bwscrollTo = document.getElementById('bwscrollTo');
+let bwclose = document.getElementById('bwclose');
+
+bwopen.addEventListener('click', window_open);
+bwresizeBy.addEventListener('click', window_resizeBy);
+bwresizeto.addEventListener('click', window_resizeto);
+bwmoveBy.addEventListener('click', window_moveBy);
+bwmoveTo.addEventListener('click', window_moveTo);
+bwscrollby.addEventListener('click', window_scrollby);
+bwscrollTo.addEventListener('click', window_scrollTo);
+bwclose.addEventListener('click', window_close);
+
+
+function window_open()
+{
+	fenetre = window.open('https://developer.mozilla.org/fr/docs/Web/API/Window/open', '', winSize);
+}
+function window_resizeBy()
+{
+	fenetre.resizeBy(200, 100);
+}
+function window_resizeto()
+{
+	fenetre.resizeTo(960, 720);
+}
+function window_moveBy()
+{
+	fenetre.moveBy(100, 100);//Déplace la fenêtre 100px à droite et 100px en bas
+}
+function window_moveTo()
+{
+	fenetre.moveTo(0, 0);//Place la fenêtre contre le bord supérieur gauche
+}
+function window_scrollby()
+{
+	fenetre.scrollBy(0, 200);//Défile de 200px vers le bas
+}
+function window_scrollTo()
+{
+	fenetre.scrollTo(0, 0);//Remonte en haut de la page
+}
+function window_close()
+{
+	fenetre.close();
+} 
+
+console.log(window.screen);
+
+document.getElementById('planguage').innerHTML = navigator.language;	
+document.getElementById('pcookieEnabled').innerHTML = navigator.cookieEnabled;
+document.getElementById('pplatform').innerHTML = navigator.platform;
+document.getElementById('pappName').innerHTML = navigator.appName;
+document.getElementById('pappCodeName').innerHTML = navigator.appCodeName;
+document.getElementById('pappVersion').innerHTML = navigator.appVersion;
+document.getElementById('puserAgent').innerHTML = navigator.userAgent;                                  
+document.getElementById('pgeolocation').innerHTML = navigator.geolocation;
+
+console.log(window.navigator);
+console.log(window.navigator.geolocation);
+
+document.getElementById('phlenght').innerHTML =  history.length;
+let bhgo = document.getElementById('bhgo');
+let bhback = document.getElementById('bhback');
+let bhforward = document.getElementById('bhforward');
+bhgo.addEventListener('click', history_go);
+bhback.addEventListener('click', history_back);
+bhforward.addEventListener('click', history_forward);
+
+function history_go()
+{
+	history.go(-2)
+}
+function history_back()
+{
+	history.back()
+}
+function history_forward()
+{
+	history.forward()
+}
+
+console.log(window.history);
+
+
+(function(){})();	
+	
+	

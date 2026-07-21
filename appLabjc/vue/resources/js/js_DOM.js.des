@@ -1,0 +1,75 @@
+console.log(document);
+console.log(document.childNodes);
+
+document.getElementById('pDOMbaseURI').innerHTML =  document.baseURI;
+document.getElementById('pDOMbaseURIObject').innerHTML =  document.baseURIObject;
+document.getElementById('pDOMchildNodes').innerHTML =  document.childNodes;
+document.getElementById('pDOMfirstChild').innerHTML =  document.firstChild;
+document.getElementById('pDOMlastChild').innerHTML =  document.lastChild;
+document.getElementById('pDOMnextSibling').innerHTML =  document.nextSibling;
+document.getElementById('pDOMnodeName').innerHTML =  document.nodeName;
+document.getElementById('pDOMnodeType').innerHTML =  document.nodeType;
+
+
+
+noeud = document;
+document.getElementById('pUNparentNode').innerHTML = noeud.parentNode;
+document.getElementById('pUNparentElement').innerHTML = noeud.parentElement;
+document.getElementById('pUNchildNodes').innerHTML = noeud.childNodes;
+document.getElementById('pUNchildren').innerHTML = noeud.children;
+document.getElementById('pUNfirstChild').innerHTML = noeud.firstChild;
+document.getElementById('pUNfirstElementChild').innerHTML = noeud.firstElementChild;
+document.getElementById('pUNlastChild').innerHTML = noeud.lastChild;
+document.getElementById('pUNlastElementChild').innerHTML = noeud.lastElementChild;
+document.getElementById('pUNpreviousSibling').innerHTML = noeud.previousSibling;
+document.getElementById('pUNpreviousElementSibling').innerHTML = noeud.previousElementSibling;
+document.getElementById('pUNnextSibling').innerHTML = noeud.nextSibling;
+document.getElementById('pUNnextElementSibling').innerHTML = noeud.nextElementSibling;
+
+
+document.getElementById('pUNnodeName').innerHTML = noeud.nodeName;
+document.getElementById('pUNnodeValue').innerHTML = noeud.nodeValue;
+document.getElementById('pUNnodeType').innerHTML = noeud.nodeType;
+
+
+document.getElementById('pUEquerySelectorAll').innerHTML = document.querySelectorAll("p");
+console.log(document.querySelectorAll("p"));
+document.getElementById('pUEquerySelector').innerHTML = document.querySelector("body");
+console.log(document.querySelector("body"));
+
+document.getElementById('pDhead').innerHTML =  document.head;
+console.log(document.head);
+document.getElementById('pDtitle').innerHTML =  document.title;
+console.log(document.title);
+document.getElementById('pDlinks').innerHTML =  document.links;
+console.log(document.links);
+document.getElementById('pDurl').innerHTML =  document.url;
+console.log(document.url);
+document.getElementById('pDscripts').innerHTML =  document.scripts;
+console.log(document.scripts);
+document.getElementById('pDbody').innerHTML =  document.body;
+console.log(document.body);
+document.getElementById('pDcookie').innerHTML =  document.cookie;
+console.log(document.cookie);
+
+
+let imgManip = document.getElementById('imgManip');
+document.getElementById('pimgManiphasAttributes').innerHTML = imgManip.hasAttributes();
+document.getElementById('pimgManiphasAttribute').innerHTML = imgManip.hasAttribute("src");
+document.getElementById('pimgManipattributes').innerHTML = imgManip.attributes;
+
+let attribuDeImgManip = imgManip.getAttributeNames();
+document.getElementById('pimgManipgetAttributeNames').innerHTML = attribuDeImgManip;
+document.getElementById('pimgManipgetAttributeValeur').innerHTML = imgManip.getAttribute("src"); 
+console.log(attribuDeImgManip);
+console.log(imgManip.getAttribute("src"));
+
+let imgManip2 = document.getElementById('imgManip2');
+imgManip2.setAttribute("height","24");
+
+let imgManip3 = document.getElementById('imgManip3');
+document.getElementById('pimgManipremoveAttribute_a').innerHTML = imgManip3.getAttributeNames();
+imgManip3.removeAttribute("class");
+document.getElementById('pimgManipremoveAttribute_b').innerHTML = imgManip3.getAttributeNames();
+
+document.getElementById('pStyleModif').style.backgroundColor = "#254862";

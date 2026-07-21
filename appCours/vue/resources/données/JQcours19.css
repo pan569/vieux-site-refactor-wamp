@@ -1,0 +1,31 @@
+h1, ul, li, span{
+	color:black;
+			
+}
+
+
+table{
+	border-collapse: collapse;
+}
+
+th,td{
+	border:1px solid black;
+	padding: 5px;
+}
+			
+.da{
+	background-color: blue;
+	border:2px solid black;
+	position: relative;
+}
+			
+.rouge{
+	background-color: red;
+}
+
+.pmes{
+	padding: 5px;
+	margin: 0px;	
+	border-radius: 5px;
+	border:3px solid red;
+}

@@ -1,0 +1,154 @@
+<?php
+
+
+
+use appAlbum\modele\iptc;
+
+//debug($model,"liste des fichiers JPEG");
+
+
+
+$width=1000;// $model['width'];
+$height=600;
+
+//$nomImage= "lili.jpg";
+$fontSize = "65px";
+$png = null;
+
+if($nomImage === null)
+{
+    
+    $texte = "pas d'image selectionée";
+    $hrefImage="/appAlbum/vue/resource/img/09.jpg";
+    $chemin = "C:\\wamp64\\www\\site01\\appAlbum\\vue\\resources\\img\\09.jpg";
+    $scaleImage = 1;
+    $xImage = ($height - 600)/2;
+}
+else 
+{
+    $chemin = "C:\\wamp64\\www\\site01\\appAlbum\\vue\\resources\\img\\X\\".$nomImage;
+    
+    $exif01 = exif_read_data($chemin,'FILE',true);
+    $iptc = new \appAlbum\modele\iptc($chemin);
+    
+    //debug($iptc->iptc,"itcp");
+    //debug($iptc['Description'],"itcp_description");
+    //debug($iptc['Instructions'],"itcp_Instructions");
+    
+    
+    $texte = $iptc['Description'];
+    $hrefImage="/appAlbum/vue/resources/img/X/{$nomImage}";
+    
+    $scaleImage = $width/$exif01['COMPUTED']['Width'];
+    
+    $height=              $exif01['COMPUTED']['Height']*$scaleImage;
+    $xImage = ($width  - ($exif01['COMPUTED']['Width']*$scaleImage)) /2;
+    
+    
+    if($iptc->offsetExists('Instructions'))
+    {
+        $png = json_decode($iptc['Instructions'], true);
+    }
+    
+    //debug($png,"png");
+    
+    
+    
+}
+
+
+
+/**/    
+?>
+<table>
+    <thead>
+        <tr>
+            <th colspan="3">Album Photo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>			
+				<ul>
+<?php foreach ( $model as $item): ?>
+    				<li>
+    					<a href="<?= $this->routeur->getRoute('index')->generateUri(['fichier' => $item ]);?> "> <?= $item ;?> </a>    	
+    				</li>
+<?php endforeach;?>    
+				</ul>			
+			</td>
+            <td>
+				<svg width="<?= $width;?>" height="<?= $height;?>" xml:lang="fr" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+					<title><?= $nomImage ;?></title>
+					<desc>travail sur les fichiers SVG</desc>
+					<style type="text/css">
+                    <![CDATA[
+                    
+                    @font-face 
+                    {
+                        font-family: 'coeur';
+                        src: url('../appAlbum/vue/resources/fonts//coeur.ttf');   
+                    }
+                    
+                    @font-face 
+                    {
+                        font-family: 'N_COM';
+                        src: url('../appAlbum/vue/resources/fonts/NON-COMMERCIAL_Blockography.ttf');   
+                    }
+                    
+                    
+                    
+                    
+                    .bulle
+                    {
+                        font-family: 'N_COM' ;
+                        font-size:18px;
+                        fill:pink;
+                        text-anchor:middle;
+                    }
+                    
+                    /*style="font-family:Calibri ;font-size:25;fill:black;text-anchor:middle;"*/
+                    
+                    .forme
+                    {
+                        fill:white;
+                        stroke:black;
+                        stroke-width:1px;
+                    }
+   
+                    ]]>
+                    </style>
+  					<rect x="0" y="0" width="<?= $width;?>" height="<?= $height;?>" class="forme" />   
+	
+					
+					<image xlink:href="<?= $hrefImage ;?>" transform="translate(<?= $xImage ;?>,0) scale(<?= $scaleImage ;?>)"/>
+					
+					
+					
+					
+					<text x="<?= $width/2 + 5;?>"  y=<?= 50 + 5;?> style="font-family: Impact ;font-size:<?= $fontSize ?>;fill:black;text-anchor:middle;" ><?= $texte ?></text>
+					<text x="<?= $width/2;?>"  y="50" style="font-family: Impact ;font-size:<?= $fontSize ?>;fill:white;text-anchor:middle;" ><?= $texte ?></text>
+					<?php if ($png !== null): ?>
+					<g style="opacity: 0.5;" />				
+						<image xlink:href="/appAlbum/vue/resources/img/png/<?= $png['image'] ;?>"  transform="translate(<?= $png['translate'] ;?>) scale(<?= $png['scale'] ;?>)" />
+						<text x="95" y="80" class="bulle"  transform="translate(<?= $png['translate'] ;?>) scale(<?= $png['scale'] ;?>)"  ><?= $png['texte'] ?></text>
+					</g>
+					<?php endif ?>
+					
+					<g style="opacity: 0.5;" />				
+						<image xlink:href="/appAlbum/vue/resources/img/gif/simple.gif"  transform=" scale(<?= 0.2 ;?>)" />						
+					</g>
+					
+				</svg>            
+            </td>
+            <td>            	
+            	<?= "";//debug($iptc->); ?>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+	
+

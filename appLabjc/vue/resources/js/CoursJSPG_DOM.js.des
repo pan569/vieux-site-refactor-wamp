@@ -1,0 +1,92 @@
+
+
+/* 1er manipulation DOM */
+/*
+//Sélectionne le premier paragraphe du document et change son texte avec la
+//propriété textContent que nous étudierons plus tard dans cette partie
+document.querySelector('p').textContent = '1er paragraphe du document';
+
+let documentDiv = document.querySelector('div'); //1er div du document
+
+//Sélectionne le premier paragraphe du premier div du document et modifie son texte
+documentDiv.querySelector('p').textContent = '1er paragraphe du premier div';
+
+//Sélectionne le premier paragraphe du document avec un attribut class='bleu'
+//et change sa couleur en bleu avec la propriété style que nous étudierons
+//plus tard dans cette partie
+document.querySelector('p.bleu').style.color = 'blue';
+
+//Sélectionne tous les paragraphes du document
+let documentParas = document.querySelectorAll('p');
+
+//Sélectionne tous les paragraphes du premier div
+let divParas = documentDiv.querySelectorAll('p');
+
+//On utilise forEach() sur notre objet NodeList documentParas pour rajouter du
+//texte dans chaque paragraphe de notre document
+documentParas.forEach(function(nom, index){
+    nom.textContent += ' (paragraphe n°:' + index + ')';
+});
+
+
+/* 2eme manipulation DOM */
+/*
+//Sélectionne l'élément avec un id = 'p1' et modifie la couleur du texte
+document.getElementById('p1').style.color = 'blue';
+/**/
+
+/* 3eme manipulation DOM */
+/*
+//Sélectionne les éléments avec une class = 'bleu'
+let bleu = document.getElementsByClassName('bleu');
+
+//"bleu" est un objet de HTMLCollection qu'on va manipuler comme un tableau
+for(valeur of bleu)
+{
+    valeur.style.color = 'blue';
+}
+/**/
+
+/* 4eme manipulation DOM */
+/*
+//Sélectionne tous les éléments p du document
+let paras = document.getElementsByTagName('p');
+/*
+//"paras" est un objet de HTMLCollection qu'on va manipuler comme un tableau
+for(valeur of paras){
+    valeur.style.color = 'blue';
+}
+/**/
+
+/* 5eme manipulation DOM */
+/*
+//Sélectionne l'élément body et applique une couleur bleu
+document.body.style.color = 'blue';
+
+//Modifie le texte de l'élément title
+document.title= 'Le Document Object Model';
+/**/
+
+/* 6eme manipulation DOM */
+
+//Accède au contenu HTML interne du div et le modifie
+document.querySelector('div').innerHTML += '<ul><li>Elément n°1</li><li>Elément n°2</li></ul>';
+
+//Accède au HTML du 1er paragraphe du document et le modifie
+document.querySelector('p').outerHTML = '<h2>Je suis un titre h2</h2>';
+
+//Accède au contenu textuel de l'élément avec un id='texte' et le modifie.
+//Les balises HTML vont ici être considérées comme du texte
+document.getElementById('texte').textContent = '<span>Texte modifié</span>';
+
+//Accède au texte visible de l'élément avec l'id = 'p2'
+let texteVisible = document.getElementById('p2').innerText;
+//Accède au texte (visible ou non) de l'élément avec l'id = 'p2'
+let texteEntier = document.getElementById('p2').textContent;
+
+//Affiche les résultats du dessus dans l'élément avec l'id = 'p3'
+document.getElementById('p3').innerHTML = 'Texte visible : ' + texteVisible + '<br>Texte complet : ' + texteEntier;
+
+
+
+

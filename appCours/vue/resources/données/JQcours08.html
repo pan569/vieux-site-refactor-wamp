@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Le JQuery</title>
+		<meta charset='utf-8'>
+		
+		<link href="/appCours/vue/resources/données/JQcours08.css" rel="stylesheet" type="text/css">
+		
+	</head>
+	<body>
+
+		<h1>Cours <mark>JQUERY</mark></h1>
+		<h2>Pierre Giraux Cours complet JQuey chapitre 8</h2>
+		<h2>Gestion avancée d'évènements</h2>
+
+		<div>
+			<p class='pmes'> <span id='msg'></span></p>
+		</div>
+
+		<div id='div1' class='d1'>
+			<p class='par'>Un premier paragraphe.</p>
+			<p class='par'>Un second paragraphe.</p>
+		</div>
+		<div id='div2' class='d1'>
+			<p class='par'>Un premier paragraphe.</p>
+			<p class='par'>Un second paragraphe.</p>
+		</div>
+		<div id='div3' class='d1'>
+			<p class='par02'>Un premier paragraphe.</p>
+			<p class='par02'>Un second paragraphe.</p>
+		</div>
+		
+		<div>
+			<button id='b1'>bouton 1</button>
+			<button id='b2'>evenement clic (+)</button>
+			<button id='b3'>evenement clic (-)</button>			
+			<span id='msg02'></span>
+		</div>	
+
+		<fieldset id='fld'>
+			<form id='formulaire' method="post">
+				<p><label for='prenom'>entrez votre prenom</label><input type='text' id='prenom' name='prenom'></p>
+				<p><label for='nom'>entrez votre nom</label><input type='text' id='nom' name='nom'></p>
+				<p><select id='liste'>
+					<option value='c1'>Choix 1</option>
+					<option value='c2'>Choix 2</option>
+				</select></p>
+				<p>Dernier caractère tapé: <span id='ascii'></span></p>
+				<p>
+					<button id='trg'> focus avec trigger</button>
+					<button id='trgh'>focus avec triggerHandler</button>
+				</p>
+				<input type='submit' id="BTenvoyer" value="envoyer">	
+			</form>
+		</fieldset>
+		
+
+		<script src="/resources/themes/theme.monBog/js/jquery-3.7.1.js"></script>
+		<script src="/appCours/vue/resources/données/JQcours08.js"></script>
+	</body>
+</html>
+	

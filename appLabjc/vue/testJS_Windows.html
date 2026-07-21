@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" >
+		<meta name="author" content="Stéphane Jourdain" >	
+		<meta name="description	" content="Date:02/09/2021" >
+		<title>doc & exeple Javascript Windows</title>
+
+		<link href="../resourses/themes/theme.monBog/img/favicon.ico" rel="shortcut icon" type="image/ico" />
+
+		<link href="../vue/resources/css/html.css" rel="stylesheet" type="text/css">
+		<link href="../vue/resources/css/js.css" rel="stylesheet" type="text/css">
+
+		<script src="../vue/resources/js/js_windows.js" async></script>
+	</head>
+	<body>
+		<h1>experimentation javascript </h1>
+		
+		
+		<h2>premiers codes</h2>
+		<table>
+			<caption>des boutons</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr>
+					<td>Bouton qui ouvre une fenetre alert:</td>
+					<td>
+						<p>let bwalert = document.getElementById('bwalert');</p>
+						<p>bwalert.addEventListener('click', windows_alert);<p>
+						<p>function windows_alert(){alert('Bonjour');}</p>						
+					</td>
+					<td ><button id='bwalert'>Cliquez ici</button></td>
+				</tr>
+				<tr>
+					<td>Bouton qui ouvre une fenetre prompt:</td>
+					<td>
+						<p>let bwprompt = document.getElementById('bwprompt');</p>
+						<p>bwprompt.addEventListener('click', windows_prompt);<p>
+						<p>
+							function windows_prompt(){let r = prompt('Ca va ?');document.getElementById('pwRprompt').innerHTML = r;}
+						</p>						
+					</td>
+					<td >
+						<button id='bwprompt'>Cliquez ici</button>
+						<p id='pwRprompt'></p>
+					</td>
+				</tr>
+				<tr>
+					<td>Bouton qui ouvre une fenetre confirm:</td>
+					<td>
+						<p>let bwconfirm = document.getElementById('bwconfirm');</p>
+						<p>bwconfirm.addEventListener('click', windows_confirm);<p>
+						<p>
+						let r = confirm('Ca va ?');
+						if(r){document.getElementById('pwRconfirm').innerHTML = "cool";}
+						else{document.getElementById('pwRconfirm').innerHTML = "ah! dommage !";}
+						</p>
+					
+												
+					</td>
+					<td >
+						<button id='bwconfirm'>Cliquez ici</button>
+						<p id='pwRconfirm'></p>
+					</td>
+				</tr>
+				<tr>
+					<td>Ajoute du texte dans un paragraphe:</td>
+					<td>
+						<p>let ajouter = document.getElementById('bajout');</p>
+						<p>ajouter.addEventListener('click', ajout);</p>
+						<p>let para = document.createElement('p');para.textContent = 'Paragraphe ajouté';document.body.appendChild(para);}</p>
+					</td>
+					<td >
+						<button id='bajout'>Ajouter un paragraphe</button>
+						<p >(desactivé)</p>
+					</td>
+				</tr>		
+			</tbody>			
+		</table>
+		
+ 
+		
+		<h2> l'objet windows</h2>
+		
+		<table>
+			<caption>l'objet windows tailles de fenetre</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>hauteur exterieur:</td><td>window.outerHeight</td><td rowspan="2"><p id='pfenext'></p></td></tr>
+				<tr><td>largeur exterieur:</td><td>window.outerWidth</td></tr>
+				<tr><td>hauteur interieur:</td><td>window.innerHeight</td><td rowspan="2"><p id='pfeneint'></p></td></tr>
+				<tr><td>largeur interieur:</td><td>window.innerWidth</td></tr>
+			</tbody>			
+		</table>
+		
+		
+		<table>
+			<caption>l'objet windows manipulation de fenetre</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>ouvrir une fenetre</td><td>window.open</td><td ><button id='bwopen'>ouvre</button></td></tr>
+				<tr><td>redimentioner une fenetre(relative)</td><td>window.resizeBy</td><td ><button id='bwresizeBy'>taille de la fenetre</button></td></tr>
+				<tr><td>redimentioner une fenetre(absolue):</td><td>window.resizeto</td><td ><button id='bwresizeto'>agrandi de</button></td></tr>
+				<tr><td>bouger une fenetre(relative):</td><td>window.moveBy</td><td ><button id='bwmoveBy'>positionne</button></td></tr>
+				<tr><td>bouger une fenetre(absolue):</td><td>window.moveTo</td><td ><button id='bwmoveTo'>deplace de</button></td></tr>
+				<tr><td>scrolle de fenetre(relative):</td><td>window.scrollby</td><td ><button id='bwscrollby'>scroll a la position</button></td></tr>
+				<tr><td>scrolle de fenetre(absolue):</td><td>window.scrollTo</td><td ><button id='bwscrollTo'>scroll de</button></td></tr>
+				<tr><td>fermer une fenetre:</td><td>window.close</td><td ><button id='bwclose'>fermer</button></td></tr>
+				
+			</tbody>			
+		</table>
+		
+		<table>
+			<caption>l'objet history </caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>nombre de page visité :</td><td>history.length</td><td><p id='phlenght'></p></td></tr>
+				<tr><td>navigué a (+/-)x page:      </td><td>history.go()</td><td ><button id='bhgo'>aller a</button></td></tr>
+				<tr><td>aller a la page precedente: </td><td>history.back()</td><td ><button id='bhback'>-</button></td></tr>
+				<tr><td>aller a la page suivante:</td><td>history.forward()</td><td ><button id='bhforward'>+</button></td></tr>								
+			</tbody>			
+		</table>
+		
+	
+		
+		<table>
+			<caption>l'objet screen</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>largeur totale de l’écran:</td><td>screen.width</td><td><p id='pwidth'></p></td>
+				<tr><td>largeur de l’écran sans barre de tâches:</td><td>screen.availWidth</td><td><p id='pavailWidth'></p></td></tr>
+				<tr><td>hauteur totale de l’écran:</td><td>screen.height</td><td><p id='pheight'></p></td></tr>
+				<tr><td>hauteur de l’écran sansbarre de tâches:</td><td>screen.availHeight</td><td><p id='pavailHeight'></p></td></tr>
+				<tr><td>profondeur de la palette de couleur de l’écran en bits:</td><td>screen.colorDepth</td><td><p id='pcolorDepth'></p></td></tr>
+				<tr><td>résolution de l’écran en bits par pixel:</td><td>screen.pixelDepth</td><td><p id='ppixelDepth'></p></td></tr>
+			</tbody>			
+		</table>
+                
+       <table>
+			<caption>l'objet Navigator</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>langue définie dans le navigateur:</td><td>navigator.language</td><td><p id='planguage'></p></td>
+				<tr><td>détermine si les cookies sont autorisés</td><td>navigator.cookieEnabled</td><td><p id='pcookieEnabled'></p></td></tr>
+				<tr><td>plateforme utilisée:</td><td>navigator.platform</td><td><p id='pplatform'></p></td></tr>
+				<tr><td>nom du navigateur:</td><td>navigator.appName</td><td><p id='pappName'></p></td></tr>
+				<tr><td>nom de code du navigateur:</td><td>navigator.appCodeName</td><td><p id='pappCodeName'></p></td></tr>
+				<tr><td>version:</td><td>Navigator.appVersion</td><td><p id='pappVersion'></p></td></tr>
+				<tr><td>l’en-tête du fichier user-agent:</td><td>navigator.userAgent</td><td><p id='puserAgent'></p></td></tr>
+				<tr><td>objet Geolocation:</td><td>navigator.geolocation</td><td><p id='pgeolocation'></p></td></tr>
+			</tbody>			
+		</table>                  
+          
+      
+                    
+		
+	</body>
+</html>

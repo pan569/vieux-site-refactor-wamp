@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PageMaitre>
+	<Configuration>
+		<SiteNom>Mon blog</SiteNom>
+		<SiteDescriptif>blabla bla</SiteDescriptif>
+		<SiteThemeDossier>|resources|themes</SiteThemeDossier>
+		<SiteThemeNom>monBog</SiteThemeNom>
+		<SiteJavaScriptDossier>javascript|</SiteJavaScriptDossier>
+		<DataBaseServeur>localhost</DataBaseServeur>
+		<DataBaseUtilisateur>root</DataBaseUtilisateur>
+		<DataBaseMdP/>
+		<DataBaseNon>mytest</DataBaseNon>
+		<SiteCopyright>ApplicWeb ©2021</SiteCopyright>		
+	</Configuration>
+	<Credits>
+		<Developpeur nom="ApplicWeb Developpement" adresse="7 rue chateaubriand 00000 Nantes" telephone="06 00 13 00 02" email="applicwebhebIIergement@applicweb.fr" www="applicwebII.fr"/>
+		<Proprietaire nom="Pan59" adresse="9 rue d'ailleur 00000 ICIVILE" telephone="06 22 22 22 01" email="pan59@free.fr" www="lepicurien.fr"/>
+		<Hebergeur nom="ApplicWeb Hebergement" adresse="80 rue du tréchon 59570 OBIES" telephone="06 55 00 20 03" email="applicwebhebergement@applicweb.fr" www="applicweb.Hebergement.fr"/>		
+	</Credits>
+	<Entete>
+		<auteur>Pan59</auteur>
+		<description>Site d'un grand pervers sans limite.&#13;
+Ici vous trouverais tout mes fantasmes&#13;
+		</description>
+		<motsCles>Voyeurisme, attouchement,colection culotte,mature,fillette,animaux&#13;
+		</motsCles>
+		<editeur>Eclipse IDE</editeur>
+		<titre>lepicurien</titre>
+		<image>favicon.ico</image>
+	</Entete>
+	<Menus>
+		<Accueil url="index.php?application=Page01&amp;fonction=index" description="Accueil du cite" image="" css="menu-item" cible="_self" titre="Accueil"/>		
+		<Blog url="index.php?application=Blog&amp;fonction=index" description="Mon blog" image="" css="menu-item" cible="_self"/>
+		<Article url="index.php?application=Page02&amp;fonction=index" description="Plein de blabla" image="" css="menu-item" cible="_self" titre="Article"/>
+		<Album url="index.php?application=Album&amp;fonction=listerAlbums" description="Liste d'album" image="" css="menu-item" cible="_self" titre="Album"/>
+		<Annuaire url="index.php?application=Annuaire&amp;fonction=index" description="favoris d'url" image="" css="menu-item" cible="_self" titre="Annuaire"/>
+		<SVG url="index.php?application=Page03&amp;fonction=index" description="bac a sable fichier svg" image="" css="menu-item" cible="_self" titre="Article"/>
+		<Labo url="index.php?application=Objet&amp;fonction=index" description="Zone d'experimentation de ligne de code" image="" css="menu-item" cible="_self" titre="Labo"/>
+		<LaboJC url="index.php?application=Labjc&amp;fonction=index" description="zone d'experimentation de code javascript" image="" css="menu-item" cible="_self" titre="LaboJC"/>
+		<Cours url="index.php?application=Cours&amp;fonction=index" description="Cours et reference pour le developpement" image="" css="menu-item" cible="_self" titre="Cours"/>		
+		<Botanique url="index.php?application=Botanique&amp;fonction=index" description="Base de donnée botanique" image="" css="menu-item" cible="_self" titre="Botanique"/>
+		<Configuration url="index.php?application=motif&amp;fonction=index" description="Configuration du site" image="" css="menu-item" cible="_self" titre="Configuration"/>
+		<facebook url="#" description="Page facebook" image="facebook.png" css="LinkPage1" cible="index.php" titre="facebook"/>
+		<twitter url="#" description="page Twitter" image="twitter.png" css="LinkPage2" cible="index.php"/>		
+	</Menus>
+	<Pied>
+		<crédit url="/pages/credits.php" description="Accueil du cite" image="" css="menu-item" cible="index.php"/>
+		<contacte url="/contacte/vue/contacte.php" description="Accueil du cite" image="" css="menu-item" cible="index.php"/>
+		<A_propos url="/AppIndividu/Client/controleur/Client.php" description="Espace personnelle" image="" css="menu-item" cible="_self" titre="A_propos"/>
+	</Pied>
+</PageMaitre>

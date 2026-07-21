@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" >
+		<meta name="author" content="Stéphane Jourdain" >
+		<meta name="description	" content="Date:04/09/2021" >	
+		<title>doc & exeple Javascript DOM</title>
+
+		<link href="../resourses/themes/theme.monBog/img/favicon.ico" rel="shortcut icon" type="image/ico" />
+
+		<link href="../vue/resources/css/html.css" rel="stylesheet" type="text/css">
+		<link href="../vue/resources/css/js.css" rel="stylesheet" type="text/css">
+
+		<script src="../vue/resources/js/js_DOM.js" async></script>
+	</head>
+	<body>
+		<h1>experimentation javascript </h1>
+		
+		
+		<h2>DOM Document Object Model</h2>
+		
+		<p>Le DOM est une representation de la page que le navigateur est en train d'afficher<p>
+		<p>Le DOM est sous la forme arborescence de noeud (Node) dont windows.document est la racine.</p>
+		<p>Node (nœud) est une classe abstraite de laquelle de nombreux objets de type DOM API héritent, leur permettant d'être traités de manière similaire et souvent interchangeable. Étant une classe abstraire, il n'existe pas d'objet qui soit directement un Node. Tous les objets implantant les fonctionnalités de Node sont des instances d'une de ses sous-classes, dont les plus notables sont Document, Element et DocumentFragment.</p>
+		<p>Les noeud (node) du DOM peuvent etre de differrent type.</p>					
+		<p>element Classe de base generique de tout les element de document voici la liste de tout les type de noeud</p>
+		
+		<table>
+			<caption>Les type de noeud </caption>
+			<thead>
+    			<tr>
+    				<th>Valeur</th><th>type (Constante)</th><th>Description</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>ELEMENT_NODE</td>
+					<td>Représente un nœud élément (comme p ou div par exemple)></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>ATTRIBUTE_NODE</td>
+					<td>(déprécié)</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>TEXT_NODE</td>
+					<td>Représente un nœud de type texte</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>CDATA_SECTION_NODE </td>
+					<td>(déprécié)</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>ENTITY_REFERENCE_NODE </td>
+					<td>(déprécié)</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>ENTITY_NODE </td>
+					<td>(déprécié)</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>PROCESSING_INSTRUCTION_NODE</td>
+					<td>Nœud valable dans le cas d’un document XML.</td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td>COMMENT_NODE</td>
+					<td>Représente un nœud commentaire</td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td>DOCUMENT_NODE</td>
+					<td>Représente le nœud formé par le document en soi</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>DOCUMENT_TYPE_NODE</td>
+					<td>Représente le nœud doctype</td>
+				</tr>
+				<tr>
+					<td>11</td>
+					<td>DOCUMENT_FRAGMENT_NODE</td>
+					<td>Représente un objet document minimal qui n’a pas de parent </td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td>NOTATION_NODE </td>
+					<td>(déprécié)</td>
+				</tr>				
+			</tbody>			
+		</table>
+		
+		
+		
+		<p>nodelist : collection de noeuds (node) comme peut le renvoyer un <strong>Node.childNodes</strong> ou <strong>document.querySelectorAll()</strong>.</p> 
+		<p>forEach() : nodeList.forEach(callback[, thisArg]) Execute un callable pour chaque element </p>
+		
+		
+		
+		
+		<table>
+			<caption>Manipuler les noeud</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>Retourne une DOMString (chaine de caractères) représentant l'URL de base du document contenant le Node. En HTML, il correspond au protocole, au nom de domaine et à la structure du répertoire, jusqu'au dernier /.:</td><td>document.baseURI</td><td ><p id='pDOMbaseURI'></p></td></tr>
+				<tr><td>(Non disponible pour le contenu Web). L'objet en lecture seule nsIURI représentant l'URI de base pour l'élément.:</td><td>document.baseURIObject</td><td ><p id='pDOMbaseURIObject'></p></td></tr>
+				<tr><td>Renvoie un NodeList contenant tous les enfants de ce nœud. NodeList signifie que si les enfants du Node changent, l'objet NodeList est automatiquement mis à jour.:</td><td>document.childNodes</td><td ><p id='pDOMchildNodes'></p></td></tr>
+				<tr><td>Renvoie un Node représentant le premier nœud enfant direct de ce nœud ou null s'il n'a pas d'enfant:</td><td>document.firstChild</td><td ><p id='pDOMfirstChild'></p></td></tr>
+				<tr><td>Retourne un Node représentant le dernier nœud enfant direct de ce nœud ou null s'il n'a pas d'enfant.:</td><td>document.lastChild</td><td ><p id='pDOMlastChild'></p></td></tr>
+				<tr><td>Retourne un Node représentant le nœud suivant dans l'arbre ou null s'il n'y en a pas.:</td><td>document.nextSibling</td><td ><p id='pDOMnextSibling'></p></td></tr>
+				<tr><td>Retourne une DOMString (chaîne de caractères) contenant le nom du nœud. La structure du nom diffère du type de nœud. Par exemple, un HTMLElement contiendra le nom de la balise correspondante, comme 'audio'  pour un HTMLAudioElement (en-US), un nœud Text doit avoir la chaîne '#text' ou un  Document  doit avoir la chaîne '#document'..:</td><td>document.nodeName</td><td ><p id='pDOMnodeName'></p></td></tr>
+				<tr><td>Retourne un unsigned short (non signé court) représentant le type du nœud.:</td><td>document.nodeType</td><td ><p id='pDOMnodeType'></p></td></tr>
+				
+			</tbody>			
+		</table>
+		
+		
+		<p id='p1'>Un paragraphe <span>avec un span</span></p>
+        <div>
+            <p id='p2'>Un paragraphe dans le div</p>
+            <p>Un autre paragraphe dans le div</p>
+        </div>
+        <p>Un autre paragraphe</p>
+		
+		
+		<table>
+			<caption>Naviger dans l'arbre DOM</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>renvoie le noeud parent (ou null):</td><td>node.parentNode</td><td ><p id='pUNparentNode'></p></td></tr>
+				<tr><td>renvoie le noeud element parent (ou null):</td><td>node.parentElement </td><td ><p id='pUNparentElement'></p></td></tr>
+				<tr><td>renvoie les noeud enfant (ou null):</td><td>node.childNodes</td><td ><p id='pUNchildNodes'></p></td></tr>
+				<tr><td>renvoie les noeud element enfant (ou null):</td><td>node.children</td><td ><p id='pUNchildren'></p></td></tr>
+				<tr><td>renvoie le premier noeud enfant (ou null):</td><td>node.firstChild</td><td ><p id='pUNfirstChild'></p></td></tr>
+				<tr><td>renvoie le premier noeud element enfant (ou null):</td><td>node.firstElementChild</td><td ><p id='pUNfirstElementChild'></p></td></tr>
+				<tr><td>renvoie le dernier noeud enfant (ou null):</td><td>node.lastChild</td><td ><p id='pUNlastChild'></p></td></tr>
+				<tr><td>renvoie le dernier noeud element enfant (ou null):</td><td>node.lastElementChild</td><td ><p id='pUNlastElementChild'></p></td></tr>
+				<tr><td>renvoie le noeud enfant precedent (ou null):</td><td>node.previousSibling</td><td ><p id='pUNpreviousSibling'></p></td></tr>
+				<tr><td>renvoie le noeud element enfant precedent (ou null):</td><td>node.previousElementSibling</td><td ><p id='pUNpreviousElementSibling'></p></td></tr>
+				<tr><td>renvoie le noeud enfant suivant (ou null):</td><td>node.nextSibling</td><td ><p id='pUNnextSibling'></p></td></tr>
+				<tr><td>renvoie le noeud element enfant suivant (ou null):</td><td>node.nextElementSibling </td><td ><p id='pUNnextElementSibling'></p></td></tr>
+			</tbody>			
+		</table>
+		
+		<table>
+			<caption>Information sur un noeud</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>renvoie le nom du noeud:</td><td>node.nodeName</td><td ><p id='pUNnodeName'></p></td></tr>
+				<tr><td>renvoie la valeur du noeud:</td><td>node.nodeValue </td><td ><p id='pUNnodeValue'></p></td></tr>
+				<tr><td>renvoie le type du noeud:</td><td>node.nodeType</td><td ><p id='pUNnodeType'></p></td></tr>				
+			</tbody>			
+		</table>
+		
+		
+		<table>
+			<caption>Manipulation de l'arbre</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>creer un noeud Element:</td><td>node.createElement()</td><td ><p id='pUNcreateElement'></p></td></tr>
+				<tr><td>creer un noeud Texte:</td><td>node.createTextNode()</td><td ><p id='pUNcreateTextNode'></p></td></tr>
+				<tr><td>clone un noeud :</td><td>node.cloneNode()</td><td ><p id='pUNcloneNode'></p></td></tr>				
+				<tr><td>ajouter un noeud avant le premier enfant:</td><td>node.prepend() </td><td ><p id='pUNprepend'></p></td></tr>
+				<tr><td>ajouter un noeud avant le premier enfant:</td><td>node.append() </td><td ><p id='pUNappend'></p></td></tr>
+				<tr><td>ajouter un noeud en tant que dernier enfant:</td><td>node.appendChild() </td><td ><p id='pUNappendChild'></p></td></tr>
+				<tr><td>ajouter un noeud "A" avant un noeud "B" :</td><td>node.appendChild(A,B) </td><td ><p id='pUNappendChild'></p></td></tr>
+				<tr><td>remplace un noeud "A" par un noeud "B" :</td><td>node.replaceChild(A,B) </td><td ><p id='pUNreplaceChild'></p></td></tr>
+				<tr><td>suprime un noeud:</td><td>node.remove()</td><td ><p id='pUNremove'></p></td></tr>
+				<tr><td>suprime un noeud enfant:</td><td>node.removeChild(noeud)</td><td ><p id='pUNnodeType'></p></td></tr>				
+			</tbody>			
+		</table>
+
+
+		<table>
+			<caption>Insertion dans l'arbre</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>insère un nœud élément à une position donnée par rapport à l’élément sur lequel il est appelé.:</td><td>node.insertAdjacentElement('motclé', element)</td><td ><p id='pUNinsertAdjacentElement'></p></td></tr>
+				<tr><td>insère un nœud texte à une position donnée par rapport à l’élément sur lequel il est appelé.:</td><td>node.insertAdjacentText('motclé',htmlcontant)</td><td ><p id='pUNinsertAdjacentText'></p></td></tr>
+				<tr><td>analyse une chaine de caractères en tant que HTML et insère les nœuds créés avec le balisage donné dans le DOM à une certaine position spécifiée.:</td><td>node.insertAdjacentHTML('motclé','texte)</td><td ><p id='pUNinsertAdjacentHTML'></p></td></tr>
+				<tr><td>Mot clé pour incerer avant l'element :</td><td>beforebegin </td><td ><p id='pUNbeforebegin'></p></td></tr>
+				<tr><td>Mot clé pour incerer aprés l'element :</td><td>afterend  </td><td ><p id='pUNafterend'></p></td></tr>
+				<tr><td>Mot clé pour incerer avant avant le premier enfant de l’élément :</td><td>afterbegin  </td><td ><p id='pUNafterbegin'></p></td></tr>				
+				<tr><td>Mot clé pour incerer avant apres le dernier enfant de l’élément :</td><td>beforeend  </td><td ><p id='pUNbeforeend'></p></td></tr>
+				
+								
+			</tbody>			
+		</table>
+		
+		
+		<table>
+			<caption>Ciblage precis d'element dans l'arbre</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr>
+					<td>recuprer tout les elements (modeList), d'un selecteur donnée, d'un element parent :</td>
+					<td>
+						<p>syntaxe: NodeList = parentNode.<strong>querySelectorAll(selectors)</strong>;</p>
+						<p>exemple (nodeList de tout les element paragraphe (p) de document ): ListSelecteurP = <strong>document.querySelectorAll("p")</strong>;</p>
+					</td>
+					<td ><p id='pUEquerySelectorAll'></p></td>
+				</tr>
+				<tr>
+					<td>recupere le premier element (element), d'un selecteur donnée, d'un element parent:</td>
+					<td>
+						<p>syntaxe: Element = parentNode.<strong>querySelector(selectors)</strong>;</p>
+						<p>exemple (premier element paragraphe (body) de document ) ElementBody = <strong>document.querySelector("Body")</strong>;</p>
+					</td>
+					<td ><p id='pUEquerySelector'></p></td>
+				</tr>
+				<tr><td>Accéder à un élément de document avec son attribut id:</td><td>var element = document.<strong>getElementById("id")</strong>;</td><td ><p id='pUEgetElementById'></p></td></tr>
+				<tr><td>Accéder au éléments (HTMLCollection) d'un element ou de document avec son attribut class:</td><td>var elements = document.<strong>getElementsByClassName("class")</strong>;</td><td ><p id='pUEgetElementsByClassName'></p></td></tr>
+				<tr><td>Accéder au éléments (HTMLCollection) d'un element ou de document avec son attribut name:</td><td>var elements = document.<strong>getElementsByName("name")</strong>;</td><td ><p id='pUEgetElementsByClassName'></p></td></tr>
+				<tr><td>Accéder au éléments (HTMLCollection) d'un element ou de document avec son identité:</td><td>var elements = document.<strong>getElementsByTagName("identité")</strong>;</td><td ><p id='pUEgetElementsByClassName'></p></td></tr>
+			</tbody>
+		</table>				
+		
+
+		<table>
+			<caption>Accéder directement à des éléments particuliers avec les propriétés de Document</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>:</td><td>document.<strong>head</strong>;</td><td ><p id='pDhead'></p></td></tr>
+				<tr><td>:</td><td>document.<strong>title</strong>;</td><td ><p id='pDtitle'></p></td></tr>
+				<tr><td>:</td><td>document.<strong>links</strong>;</td><td ><p id='pDlinks'></p></td></tr>
+				<tr><td>:</td><td>document.<strong>url</strong>;</td><td ><p id='pDurl'></p></td></tr>
+				<tr><td>:</td><td>document.<strong>scripts</strong>;</td><td ><p id='pDscripts'></p></td></tr>
+				<tr><td>:</td><td>document.<strong>body</strong>;</td><td ><p id='pDbody'></p></td></tr>
+				<tr><td>:</td><td>document.<strong>cookie</strong>;</td><td ><p id='pDcookie'></p></td></tr>
+			</tbody>
+		</table>
+		
+		<table>
+			<caption>Modifier les elements</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr><td>permet de récupérer ou de redéfinir la syntaxe HTML interne à un élément:</td><td>element.<strong>innerHTML</strong>;</td><td ><p ></p></td></tr>
+				<tr><td>permet de récupérer ou de redéfinir l’ensemble de la syntaxe HTML interne d’un élément et de l’élément en soi:</td><td>element.<strong>outerHTML</strong>;</td><td ><p ></p></td></tr>
+				<tr><td>représente le contenu textuel visible sur le document final d’un nœud et de ses descendants. On utilisera cette propriété à partir d’un objet Element.:</td><td>element.<strong>innerText</strong>;</td><td ><p ></p></td></tr>
+				<tr><td>représente le contenu textuel d’un nœud et de ses descendants. On utilisera cette propriété à partir d’un objet Element:</td><td>element.<strong>textContent</strong>;</td><td ><p ></p></td></tr>
+			</tbody>
+		</table>
+		
+		<img id="imgManip" src="../vue/resources/img/index.png" width="45" height="45" class="card-avatar">
+		<table>
+			<caption>manipuler les attributs d'un element</caption>
+			<thead>
+    			<tr>
+    				<th>Description</th><th>Code</th><th>in situ</th>
+    			</tr>
+  			</thead>
+			<tbody>
+				<tr>
+					<td>tester la présence d'un l'attributs quelconque dans un element:</td>
+					<td>
+						<p>var result = element.<strong>hasAttributes(name)</strong>;</p>
+						<p>ex: var result = imgManip.<strong>hasAttributes()</strong>;</p>
+					</td>
+					<td ><p id='pimgManiphasAttributes'></p></td>
+				</tr>
+				<tr>
+					<td>tester la présence de l'attributs "name" dans un element:</td>
+					<td>
+						<p>var result = element.<strong>hasAttribute(name)</strong>;</p>
+						<p>ex: var result = imgManip.<strong>hasAttribute("src")</strong>;</p>
+					</td>
+					<td ><p id='pimgManiphasAttribute'></p></td>
+				</tr>
+				<tr>
+					<td>récupérer les nom et valeurs des attribut d’un attribut dans un noeud Attr:</td>
+					<td>
+						<p>var Attr = element.<strong>attributes</strong>;<p>
+						<p>var imgManipAttr = imgManip.<strong>attributes</strong>;<p>
+					</td>
+					<td id='pimgManipattributes'><p ></p></td>
+				</tr>
+				<tr>
+					<td> récupérer que les noms des attributs d’un élément:</td>
+					<td>
+						<p>var array = element.<strong>getAttributeNames()</strong>;<p>
+						<p>ex: var imgManipAttr = imgManip.<strong>getAttributeNames()</strong>;<p>
+					</td>
+					<td ><p id='pimgManipgetAttributeNames'></p></td>
+				</tr>
+				<tr>
+					<td> récupérer que la valeurs d'un attributs d’un élément:</td>
+					<td>
+						<p>var array = element.<strong>getAttributeNames()</strong>;<p>
+						<p>ex: var imgManipValAttr = imgManip.<strong>getAttribute("src")</strong>;<p>
+					</td>
+					<td ><p id='pimgManipgetAttributeValeur'></p></td>
+				</tr>
+				<tr>
+					<td> modifie la valeurs d'un attributs d’un élément:</td>
+					<td>
+						<p>element.<strong>setAttribute(attribut,valeur)</strong>;<p>
+						<p>ex: imgManip2.<strong>setAttribute("height","24")</strong>;<p>
+					</td>
+					<td ><img id="imgManip2" src="../vue/resources/img/index.png" width="45" height="45" class="card-avatar"></td>
+				</tr>
+				<tr>
+					<td> récupérer que la valeurs d'un attributs d’un élément:</td>
+					<td>
+						<p>var array = element.<strong>getAttributeNames()</strong>;<p>
+						<p>ex: var imgManipValAttr = imgManip.<strong>getAttribute("src")</strong>;<p>
+					</td>
+					<td ><p id='pimgManipgetAttributeValeur'></p></td>
+				</tr>
+				<tr>
+					<td> supprimer d'un attributs d’un élément:</td>
+					<td>
+						<p>element.<strong>removeAttribute(attribut)</strong>;<p>
+						<p>ex: imgManip3.<strong>removeAttribute("class")</strong>;<p>
+					</td>
+					<td >
+						<p id='pimgManipremoveAttribute_a'></p>
+						<img id="imgManip3" src="../vue/resources/img/index.png" width="45" height="45" class="card-avatar">
+						<p id='pimgManipremoveAttribute_b'></p>
+					</td>
+				</tr>
+				<tr>
+					<td>inverser ou forcer la valeur d'un attribut type booleen:</td>
+					<td>
+						<p>element.<strong>toggleAttribute(name [, force])</strong>;<p>					
+					</td>
+					<td ></td>
+				</tr>
+				<tr>
+					<td>modifier le style d'un element:</td>
+					<td>
+						<p><strong>element.style.</strong>nonDuStyle = valeur;<p>
+						<p>ex: <strong>pStyleModif.style.</strong>.backgroundColor = "#254862"<p>					
+					</td>
+					<td >
+						<p id='pStyleModif'> exemple de modif de syle avec javascript </p>
+						
+					</td>
+				</tr>
+			</tbody>
+		</table>		
+		
+
+	</body>
+</html>

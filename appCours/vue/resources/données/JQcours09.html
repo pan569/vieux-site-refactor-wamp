@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Le JQuery</title>
+		<meta charset='utf-8'>
+		
+		<link href="/appCours/vue/resources/données/JQcours09.css" rel="stylesheet" type="text/css">
+		
+	</head>
+	<body>
+
+		<h1>Cours <mark>JQUERY</mark></h1>
+		<h2>Pierre Giraux Cours complet JQuey chapitre 9</h2>
+		<h2>Selection et modification d'elements HTML</h2>
+
+		<div>
+			<p class='pmes'> <span id='msg'></span></p>
+		</div>
+		
+		<div>
+			<h1 id="t1a" class='th1'>titre type 1</h1>
+			<p class='pmes'> <span id='msga'></span></p>
+			<h1 id="t1b" class='th1'>titre type 1</h1>
+			<p class='pmes'> <span id='msgb'></span></p>
+			<h1 id="t1bc" class='th1'>titre type 1</h1>
+			<p class='pmes'> <span id='msgc'></span></p>
+			<h2 id="t2" class='th2'>titre type 2</h2>
+			<h3 id="t3" class='th3'>titre type 3</h3>
+			<a> un lien </a>
+		</div>
+
+		<div id='div1' class='d1'>
+			<p class='par'>Un premier paragraphe.</p>
+			<p class='par'>Un second paragraphe.</p>
+		</div>
+		
+		
+		<div>
+			<button id='b1'>bouton 1</button>
+			<button id='b2'>evenement clic (+)</button>
+			<button id='b3'>evenement clic (-)</button>			
+			<span id='msg02'></span>
+		</div>	
+
+		<fieldset id='fld'>
+			<form id='formulaire' method="post">
+				<p><label for='prenom'>entrez votre prenom</label><input type='text' id='prenom' name='prenom'><span id='spPrenom'></span></p>
+				<p><label for='nom'>entrez votre nom</label><input type='text' id='nom' name='nom'><span id='spNom'></span></p>
+				<p> <label for='check01'>cocher/decocher la case</label><input type='checkbox' id='check01' checked='checked'><span id='spcheck01'></span></p>
+				<p>
+					<select id='liste' multiple='multiple'>
+						<option value='c1'>Choix 1</option>
+						<option value='c2'>Choix 2</option>
+						<option value='c3'>Choix 3</option>
+					</select>
+					<span id='spListe'></span>
+				</p>
+				<p>Dernier caractère tapé: <span id='ascii'></span></p>
+				<p>
+					<button id='trg'> focus avec trigger</button>
+					<button id='trgh'>focus avec triggerHandler</button>
+				</p>
+				<input type='submit' id="BTenvoyer" value="envoyer">	
+			</form>
+		</fieldset>
+		
+
+		<script src="/resources/themes/theme.monBog/js/jquery-3.7.1.js"></script>
+		<script src="/appCours/vue/resources/données/JQcours09.js"></script>
+	</body>
+</html>
+	

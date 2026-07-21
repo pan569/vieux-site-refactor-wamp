@@ -1,0 +1,64 @@
+﻿#Cadre
+{	
+	background-color:Transparent;
+	background-image: url('Image/FOND_Noir_Opacite_60.png'); 
+	background-repeat:repeat; 
+	background-position: left top;
+	
+	width:760px;
+	height:550px;
+	margin:0px;
+	padding:10px;
+	
+	border: solid 1px #000000;
+	
+}
+
+#CadreLesServices
+{
+	background-color:Transparent;
+		
+	width:750px;
+	height:auto;
+	margin:auto;	
+	padding:5px;
+	
+	text-align:left;
+	
+	border: solid 1px #ffffff;
+	
+	float:left; 
+	
+}
+/*
+#CadreContrat
+{
+    background-color:Transparent;
+		
+	width:368px;
+	margin:auto;	
+	margin-bottom:10px;	
+	padding:5px;
+	
+	text-align:left;
+	
+	border: solid 1px #ffffff;
+	
+	float:right;
+}
+
+#CadreContrat h4
+{
+    background-color:Black; padding:2px; padding-left:5px; padding-right:5px;
+}
+
+.span_left
+{
+    display:block; width:auto; text-align:left; float:left;
+}
+.span_right
+{
+    display:block; width:auto; text-align:right; font-size:10px;
+}
+
+*/

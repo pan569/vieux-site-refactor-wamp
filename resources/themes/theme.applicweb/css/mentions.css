@@ -1,0 +1,30 @@
+﻿
+
+#Mentions_CadreSup
+{
+	text-align:center; 
+	width:100%;
+}
+#Mentions_CadreInf
+{
+	background-color:Transparent; 
+	text-align:center; 
+	width:500px; 
+	padding:5px; 
+	margin:auto; 
+	border: solid 1px #ffffff;
+}
+
+#Mentions_Info
+{
+	background-color:Transparent;
+	background-image: url('Image/FOND_Noir_Opacite_60.png'); 
+	background-repeat:repeat; 
+	background-position: left top;
+	width:480px;
+	height:480px;
+	padding:5px; 
+	margin:auto; 	
+	text-align:left;
+	border: solid 1px #000000;
+}

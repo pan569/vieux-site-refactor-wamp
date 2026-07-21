@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PageMaitre>
+	<Configuration>
+		<SiteNom>Mon blog</SiteNom>
+		<SiteDescriptif>blabla bla</SiteDescriptif>
+		<SiteThemeDossier>/resourses/themes</SiteThemeDossier>
+		<SiteThemeNom>applicweb</SiteThemeNom>
+		<SiteJavaScriptDossier>javascript/</SiteJavaScriptDossier>
+		<DataBaseServeur>localhost</DataBaseServeur>
+		<DataBaseUtilisateur>root</DataBaseUtilisateur>
+		<DataBaseMdP/>
+		<DataBaseNon>mytest</DataBaseNon>
+		<SiteCopyright>ApplicWeb ©2021</SiteCopyright>		
+	</Configuration>
+	<Credits>
+		<Developpeur nom="Stéphane Jourdain" adresse="80 rue du tréchon 59570 Obies" telephone="06 00 00 00 02" email="applicweb@applicweb.fr" www="applicweb.fr"/>
+		<Proprietaire nom="ulysse" adresse="9 rue d'ailleur 00000 ICIVILE" telephone="06 00 00 00 01" email="ulysse1976@free.fr" www="blogUlysse.fr"/>
+		<Hebergeur nom="ApplicWeb Hebergement" adresse="80 rue du tréchon 59570 OBIES" telephone="06 00 00 00 03" email="applicwebhebergement@applicweb.fr" www="applicweb.Hebergement.fr"/>		
+	</Credits>
+	<Entete>
+		<auteur>Stéphane Jourdain</auteur>
+		<description>Petite entreprise de l'Avesnois, ApplicWeb est spatialisé dans la création de site web pour professionnel. ApplicWeb crée des application a votre dimension et vous suit selon l'évolution de votre projet. ApplicWeb vous propose des solutions toutes faites ou des projets spécifique.&#13;
+		</description>
+		<motsCles>developpeur;creantion site;site web;application web;avesnois;Nord;59;Association;PME;particulier&#13;
+		</motsCles>
+		<editeur>Eclipse IDE</editeur>
+		<titre>Applicweb</titre>
+		<image>/Image/favicon.ico</image>
+	</Entete>
+	<Menus>
+		<accueil url="/pagesHTML/accueil.php" description="Accueil du cite" image="ImageIndex.png" css="LinkIndex" cible="index.php"/>
+		<services url="/pagesHTML/services.php" description="Description des services proposer par applicWeb" image="ImageIndex.png" css="menu-item LinkIndex" cible="index.php" titre="services"/>
+		<Client url="/AppIndividu/Client/controleur/Client.php" description="Espace personnelle" image="ImageIndex.png" css="LinkIndex" cible="index.php"/>
+		<Prototype url="/prototype/prototype.php" description="Page de teste de script" image="ImagePrototype.png" css="LinkPrototype" cible="index.php"/>
+		<Individus url="/AppIndividu/controleur/IndividuCollection.php" description="Géstionnaire de personnes" image="ImageIndividu.png" css="LinkIndividu" cible="index.php"/>
+		<page1 url="pages/page1.html" description="Ceux-ci est la page 1" image="ImagePage1.png" css="LinkPage1" cible="index.php"/>
+		<page2 url="pages/page2.html" description="Ceux-ci est la page 2" image="ImagePage2.png" css="LinkPage2" cible="index.php"/>
+		<page3 url="pages/page3.html" description="Ceux-ci est la page 3" image="ImagePage3.png" css="LinkPage3" cible="index.php"/>
+	</Menus>
+	<Pied>
+		<crédit url="/pages/credits.php" description="Accueil du cite" image="ImageIndex.png" css="LinkIndex" cible="index.php"/>
+		<contacte url="/contacte/vue/contacte.php" description="Accueil du cite" image="ImageIndex.png" css="LinkIndex" cible="index.php"/>
+	</Pied>
+</PageMaitre>

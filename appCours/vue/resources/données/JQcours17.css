@@ -1,0 +1,47 @@
+h1, ul, li, span{
+	color:black;
+			
+}
+
+
+table{
+	border-collapse: collapse;
+}
+
+th,td{
+	border:1px solid black;
+	padding: 5px;
+}
+			
+p{
+	padding: 5px;
+	margin: 0px;
+	font-size:16px;	
+	
+}
+
+div{
+	margin:10px;
+	padding: 5px;
+	border-radius: 5px;
+	border:3px solid black;
+}
+
+.bordure{
+	border:2px solid blue;
+}
+
+.epaisTexte{
+	font-weight:bold;
+}
+
+.alignement{
+	text-align:center;
+}
+
+.pmes{
+	padding: 5px;
+	margin: 0px;	
+	border-radius: 5px;
+	border:3px solid red;
+}

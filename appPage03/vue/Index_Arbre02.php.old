@@ -1,0 +1,75 @@
+<?php
+
+use appPage03\modele\DonneesTrigo;
+
+
+
+$rayon = 20;
+$xDebut = $model['width']/2;
+$yDebut = $model['height'] ;
+$xFin = $model['width']/4;
+$yFin = $yDebut;
+
+debug($xDebut,"xDebut");
+debug($yDebut,"yDebut");
+debug($xFin,"xFin");
+debug($yFin,"yFin");
+
+
+$angle=180/9;
+
+for ($i = 0; $i <= 180; $i=$i+$angle ) 
+{
+    echo $i."-";
+}
+
+
+$DT = new DonneesTrigo($angle, $xFin, 0);
+debug($DT);
+
+$resultat = [];
+
+?>
+
+<h1> jouer avec les svg </h1>
+
+<svg width="<?= $model['width'];?>" height="<?= $model['height'];?>" xml:lang="fr" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>Test</title>
+	<desc>travail sur les fichiers SVG</desc>
+	
+	<style type="text/css">
+    <![CDATA[
+       
+   .forme
+   {
+        fill:white;
+        stroke:black;
+        stroke-width:1px;
+   }
+   
+   .formeB
+   {
+       fill:transparent;
+       stroke:red;
+       stroke-width:1px;
+       	       
+   }     
+       
+   ]]>
+   </style>
+		
+	<g id="point" transform="translate(-5,-5)">
+		<image xlink:href="/appPage03/vue/point.svg"  />		
+	</g>
+	
+	
+	
+	<?php for ($i = 0; $i <= 180; $i=$i+$angle): ?>
+	<?php  $dt = new DonneesTrigo($i, $xFin, 0);?>
+    	<line x1="<?= $xDebut ;?>" y1="<?= $yDebut ;?>" x2="<?= $xFin ;?>"  y2="<?=$yFin;?>" transform="rotate(<?= $dt['angleA'] ;?>, <?= $xDebut ;?>, <?= $yDebut ;?>)"  class="forme" />
+		<line x1="<?= $xDebut + $dt['x'] ;?>" y1="<?= $yDebut - $dt['y'] ;?>" x2="<?= $xDebut + $dt['x'] ;?>"  y2="<?= $yDebut -  ($model['width']/3 -0 )  ;?>"  class="forme" />
+	<?php endfor;?>
+	
+	
+</svg>	
+

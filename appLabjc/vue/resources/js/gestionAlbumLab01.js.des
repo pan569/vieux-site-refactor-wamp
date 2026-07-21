@@ -1,0 +1,113 @@
+
+let wight=1000;
+let hight=600;
+
+
+/*
+-g.x
+-g.y
+-g.s
+-g.r
+
+-g.image.source
+
+-g.text.texte
+-g.text.police.nom
+-g.texte.police.taille
+-g.texte.police.couleur
+
+
+*/
+
+
+
+let fontSize="65px";
+
+
+let texte;
+let nomImage ;
+//let hrefImage = '/appAlbum/vue/resources/img/x/'+ nomImage +'.jpg';
+let hrefImage = "../vue/resources/img/X/minipaupau014.jpg";
+let cheminImage;
+let scaleImage;
+let xImage
+
+let hrefPng = "../vue/resources/img/png/R.png";
+let pngTexte = "";
+let pngTranslate = 1;
+let pngScale = 1;
+
+//let nomImage=null;
+/*
+if(nomImage === null)
+{
+	texte = "pas d'image selectionée";
+	hrefImage = '/appAlbum/vue/resources/img/09.jpg';
+	cheminImage  = "C:\wamp64\www\site01\appAlbum\vue\resources\img\09.jpg";
+	scaleImage = 1;
+	xImage =  (width - 600)/2;
+}
+*/
+visioneuse = document.getElementById("visioneuse");
+visioneuse.setAttribute("width",wight);
+visioneuse.setAttribute("height",hight);
+console.log(visioneuse);
+
+let titre = visioneuse.querySelector('title');
+let description = visioneuse.querySelector('desc');
+let rectangle = visioneuse.querySelector('rect');
+
+let image = visioneuse.getElementById('image');
+image.setAttribute("xlink:href",hrefImage);
+
+let png = visioneuse.getElementById('png');
+png.setAttribute("xlink:href",hrefPng);
+
+
+
+
+function TransformPng(L,H,X,Y,S,R)
+{
+	console.log(L);
+	console.log(H);
+	
+	Lf= L * S;
+	Hf= H * S;
+	console.log(Lf);
+	console.log(Hf);
+	
+	
+	//let transform = "translate("+translate+") scale("+scale+")";
+	let calcX =  X ;
+	console.log(calcX);
+	
+	let calcY =  Y ;
+	console.log(calcY);
+	
+	
+	
+	
+	let rotX = Lf/2 + X;
+	console.log(rotX);
+	
+	let rotY = Hf/2 + Y;
+	console.log(rotY);
+	
+	
+	
+	
+	let translate = " translate("+ calcX +","+ calcY +")";
+	let slale = " scale(" + S + ")";
+	let rotate = "";
+
+	if(R != 0)
+	{
+		rotate = " rotate("+ R +","+ rotX +","+ rotY +")";
+	}
+	
+	transform= translate + slale + rotate ;
+	
+	console.log(transform);
+	png.setAttribute("transform",transform);
+}
+

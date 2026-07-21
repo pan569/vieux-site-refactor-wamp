@@ -1,0 +1,122 @@
+
+//Les conditions
+/*
+let obj = {nom:"objet01", valeur01: 30, valeur02: 15};
+console.log(obj);
+
+// if else if else
+console.log("TESTE01: valeur01 est superieur a 18 ok ou entre 15 et 18 ok");
+if(obj.valeur01 >= 18)
+{
+	console.log("TESTE01:c'est bon!");
+}
+else if(obj.valeur01 >= 15)
+{
+	console.log("TESTE01:ca passe!");
+}
+else
+{
+	console.log("TESTE01:ce n'est pas bon'!");
+}
+
+console.log("TESTE02: valeur01 entre 18 et 25");
+if(obj.valeur01 >= 18 && obj.valeur01 <= 25)
+{
+	console.log("TESTE02: c'est bon!");
+}
+else
+{
+	console.log("TESTE02: ce n'est pas bon!");
+}
+
+//les boucles
+
+console.log("boucle WHILE");
+let i = 0;
+while(i < 11)
+{
+	console.log(i);
+	i++;
+}
+
+console.log("boucle FOR");
+for(let cp= 0; cp < 11; cp++)
+{
+	console.log(cp);
+}
+
+console.log("Parcourir un tableau aves FOR");
+
+let tab = ['val01','val02','val03','val04','val05','val06','val07','val08'];
+console.log(tab);
+console.log(tab.length);
+for(let cp= 0; cp < tab.length; cp++)
+{
+	console.log("donnée numero "+ cp + " : "+tab[cp]);
+}
+*/
+let nombre = 95 ;
+let diviseur = [];
+
+for(let cp= 1; cp < 100; cp++)
+{
+	if(cp != 1 && cp != nombre  )
+	{		
+		if(nombre % cp === 0)
+		{
+			diviseur.push(cp);		
+		}
+	}
+}
+if(diviseur.length === 0)
+{
+	console.log(nombre + " est un nombre premier" );
+}
+else
+{
+	console.log(nombre + " n''est pas un nombre premier" );
+	console.log(" il est divisible par " + diviseur );
+	
+}
+/**/
+
+//Les fonctions
+function Diviseur(nombre)
+{
+	let resultat = [];
+
+	for(let cp= 1; cp < 100; cp++)
+	{
+		if(cp != 1 && cp != nombre  )
+		{		
+			if(nombre % cp === 0)
+			{
+				resultat.push(cp);		
+			}
+		}
+	}
+	
+	return 	resultat;
+}
+
+for(let nb= 1; nb < 100; nb++)
+{
+	
+	console.log(" " );
+	console.log(" =================== " );
+	console.log(" " );
+	
+	diviseur = Diviseur(nb);
+	
+	if(diviseur.length === 0)
+	{
+		console.log(nb + " est un nombre premier" );
+	}
+	else
+	{
+		console.log(nb + " n'est pas un nombre premier" );
+		console.log("il est divisible par :" + diviseur );
+	
+	}
+}
+

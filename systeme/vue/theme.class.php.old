@@ -1,0 +1,117 @@
+<?php
+namespace systeme\vue;
+
+/**
+ *
+ * @author Ulysse1976
+ *        
+ */
+class theme
+{
+    
+    private static $_instance;
+    /*
+     * singleton de la classe
+     */
+    public static function getInstance():theme
+    {
+        if(is_null(self::$_instance))
+            self::$_instance = new theme();
+            
+            return self::$_instance;
+    }
+    
+
+    protected $dirname;
+    
+    protected $fichiersCss = [];
+    protected $fichiersJavaSript = [];
+    protected $cheminsDesVues = [];
+ 
+    public function getFichiersCss()
+    {
+        return $this->fichiersCss;
+    }
+ 
+    
+    public function getFichiersJavaSript()
+    {
+        return $this->fichiersJavaSript;
+    }
+    
+    
+    /**
+     */
+    public function __construct()
+    {
+        
+        $SiteThemeDossier=DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR;
+        $SiteThemeNom="bootstrap-4_0_0_a6";
+        $this->dirname ="{$SiteThemeDossier}{$SiteThemeNom}";                
+        
+        // ## AJOUT DES FICHIERS css DU THEME##
+        $this->addCssTheme();
+        
+        // ## AJOUT DES FICHIERS javascript DU THEME##
+        $this->addJavascriptTheme();
+        
+    }
+    
+    protected function addCssTheme():void
+    {
+        $dirnameCSS = "C:\\wamp64\\www\\bordel\\public".$this->dirname.DIRECTORY_SEPARATOR.'css'.DIRECTORY_SEPARATOR;
+        $dir = opendir($dirnameCSS);
+        
+        while($file = readdir($dir))
+        {
+                                    
+            if($file != '.' && $file != '..' && !is_dir($dirnameCSS.$file))
+            {
+                $extension = substr(strrchr($file, '.'), 1);//recupere l'extension
+               
+                if ($extension == "css")
+                {
+                    $href ='..'. str_replace( '\\' , '/' , $this->dirname ).'/css/'. $file;
+                    $this->addCss($href);
+                }
+            }
+        }
+        
+        closedir($dir);
+    }
+    
+    
+    protected function addJavascriptTheme():void
+    {
+        $dirnameCSS = "C:\\wamp64\\www\\bordel\\public".$this->dirname.DIRECTORY_SEPARATOR.'js'.DIRECTORY_SEPARATOR;
+        $dir = opendir($dirnameCSS);
+        
+        while($file = readdir($dir))
+        {
+
+            if($file != '.' && $file != '..' && !is_dir($dirnameCSS.$file))
+            {
+                $extension = substr(strrchr($file, '.'), 1);//recupere l'extension
+                
+                if ($extension == "js")
+                {
+                    $src ='..'. str_replace( '\\' , '/' , $this->dirname ).'/js/'. $file;                 
+                    $this->addJavascript($src);
+                }
+            }
+        }
+        
+        closedir($dir);
+    }
+    
+    protected function addCss(string $href):void
+    {
+        $this->fichiersCss []= '<link href="'.$href.'" rel="stylesheet" type="text/css">';
+    }
+    
+    protected function addJavascript(string $src):void
+    {
+        $this->fichiersJavaSript []= '<script src="'.$src.'"></script>' ;
+    }
+}
+

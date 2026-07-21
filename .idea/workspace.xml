@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="be2da6ba-d8fe-46a6-8382-2d4a572a7263" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" synchronizationState="DONT_SYNCHRONIZE" />
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/AppRegex/vue/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5389">
+              <caret line="322" column="27" selection-start-line="322" selection-start-column="27" selection-end-line="322" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/systeme/Renderer.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+              <folding>
+                <element signature="e#295#372#0#PHP" />
+                <element signature="n#addPath#0;n#Renderer#0;n#!!top" />
+                <element signature="n#hasNamespace#0;n#Renderer#0;n#!!top" />
+                <element signature="n#getNamespace#0;n#Renderer#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/systeme/exreg.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="646">
+              <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Themes/Theme01/general.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>$this-&gt;_</find>
+      <find>$_ENV</find>
+      <find>&lt;?php echo</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>$this-&gt;set</replace>
+      <replace>$this-&gt;donnees['</replace>
+      <replace>&lt;?=</replace>
+      <replace>&lt;?</replace>
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/XXX_AppBlog/controleurBlog.class.php" />
+        <option value="$PROJECT_DIR$/XXX_AppBlog/vue/back/formCategorieAdd.php" />
+        <option value="$PROJECT_DIR$/XXX_AppBlog/vue/back/formCategorieEdit.php" />
+        <option value="$PROJECT_DIR$/AppPageMaitre/vue/front/pageFront.php" />
+        <option value="$PROJECT_DIR$/AppPageMaitre/vue/front/body.php" />
+        <option value="$PROJECT_DIR$/AppPageMaitre/pageBack.php" />
+        <option value="$PROJECT_DIR$/AppPageMaitre/vue/back/corps.php" />
+        <option value="$PROJECT_DIR$/Psr/Http/Message/MessageInterface.Class.php" />
+        <option value="$PROJECT_DIR$/Psr/Http/Message/MessageInterface.class.php" />
+        <option value="$PROJECT_DIR$/Psr/Http/Message/RequestInterface.php" />
+        <option value="$PROJECT_DIR$/Psr/Http/Message/ServerRequestInterface.php" />
+        <option value="$PROJECT_DIR$/Psr/Http/Message/ResponseInterface.php" />
+        <option value="$PROJECT_DIR$/Psr/Http/Message/StreamInterface.php" />
+        <option value="$PROJECT_DIR$/Psr/Http/Message/UriInterface.php" />
+        <option value="$PROJECT_DIR$/Psr/Http/Message/UploadedFileInterface.php" />
+        <option value="$PROJECT_DIR$/AppPageMaitre/controleurPageMaitre.class.php" />
+        <option value="$PROJECT_DIR$/XXX_AppThemes/vue/testCodeCSS.php" />
+        <option value="$PROJECT_DIR$/Themes/Theme01/Nouveau dossier/style.css" />
+        <option value="$PROJECT_DIR$/XXX_AppThemes/vue/PatronCss.php" />
+        <option value="$PROJECT_DIR$/systeme/collection.class.php" />
+        <option value="$PROJECT_DIR$/systeme/form.class.php" />
+        <option value="$PROJECT_DIR$/systeme/items.class.php" />
+        <option value="$PROJECT_DIR$/systeme/GAform.class.php" />
+        <option value="$PROJECT_DIR$/systeme/DataDictionary.class.php" />
+        <option value="$PROJECT_DIR$/XXX_AppBlog/modele/categorie.class.php" />
+        <option value="$PROJECT_DIR$/XXX_AppBlog/modele/article.class.php" />
+        <option value="$PROJECT_DIR$/systeme/autoloader.class.php" />
+        <option value="$PROJECT_DIR$/systeme/item.class.php" />
+        <option value="$PROJECT_DIR$/AppPageMaitre/modele/menu.class.php" />
+        <option value="$PROJECT_DIR$/Themes/Theme02/grafikart.css" />
+        <option value="$PROJECT_DIR$/AppPageMaitre/vue/back/menu.php" />
+        <option value="$PROJECT_DIR$/systeme/configuration.class.php" />
+        <option value="$PROJECT_DIR$/systeme/RouterException.php" />
+        <option value="$PROJECT_DIR$/systeme/Route.php" />
+        <option value="$PROJECT_DIR$/systeme/Router.php" />
+        <option value="$PROJECT_DIR$/XXX_AppBlog/BlogModule.php" />
+        <option value="$PROJECT_DIR$/systeme/Renderer.class.php" />
+        <option value="$PROJECT_DIR$/Psr/Container/ContainerInterface.php" />
+        <option value="$PROJECT_DIR$/Psr/Container/ContainerExceptionInterface.php" />
+        <option value="$PROJECT_DIR$/Psr/Container/NotFoundExceptionInterface.php" />
+        <option value="$PROJECT_DIR$/systeme/Route.class.php" />
+        <option value="$PROJECT_DIR$/systeme/Router.class.php" />
+        <option value="$PROJECT_DIR$/XXX_AppTest/testCode.php" />
+        <option value="$PROJECT_DIR$/AppRegex/controleurApp.class.php" />
+        <option value="$PROJECT_DIR$/AppRegex/controleurRegex.class.php" />
+        <option value="$PROJECT_DIR$/admin.php" />
+        <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/AppRegex/modele/regex.class.php" />
+        <option value="$PROJECT_DIR$/systeme/regex.class.php" />
+        <option value="$PROJECT_DIR$/AppRegex/vue/index.php" />
+        <option value="$PROJECT_DIR$/systeme/exreg.class.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP_Wamp" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="318" />
+    <option name="y" value="-14" />
+    <option name="width" value="960" />
+    <option name="height" value="1040" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="unSite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unSite" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="unSite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unSite" type="462c0819:PsiDirectoryNode" />
+              <item name="AppRegex" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="unSite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unSite" type="462c0819:PsiDirectoryNode" />
+              <item name="AppRegex" type="462c0819:PsiDirectoryNode" />
+              <item name="vue" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="unSite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="unSite" type="462c0819:PsiDirectoryNode" />
+              <item name="systeme" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bin/php/php7.1.16/php.exe" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+    <property name="settings.editor.selected.configurable" value="web.server" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\unSite\AppRegex" />
+      <recent name="C:\wamp64\www\unSite\AppPageMaitre" />
+      <recent name="C:\wamp64\www\unSite\XXX_AppBlog" />
+      <recent name="C:\wamp64\www\unSite\frontOffice\XXX_AppBog" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\unSite\AppRegex\modele" />
+      <recent name="C:\wamp64\www\unSite\systeme" />
+      <recent name="C:\wamp64\www\unSite\systeme\code venant de grafikart" />
+      <recent name="C:\wamp64\www\unSite\Themes\Theme01" />
+      <recent name="C:\wamp64\www\unSite\AppPageMaitre\vue\back" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="be2da6ba-d8fe-46a6-8382-2d4a572a7263" name="Default Changelist" comment="" />
+      <created>1543823643365</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1543823643365</updated>
+      <workItem from="1543823645724" duration="12464000" />
+      <workItem from="1543912747486" duration="19095000" />
+      <workItem from="1543952082636" duration="5555000" />
+      <workItem from="1543979470490" duration="18837000" />
+      <workItem from="1544042716071" duration="2824000" />
+      <workItem from="1544068439059" duration="20603000" />
+      <workItem from="1544157546606" duration="16768000" />
+      <workItem from="1544241012913" duration="26084000" />
+      <workItem from="1544334786461" duration="15431000" />
+      <workItem from="1544412290077" duration="23213000" />
+      <workItem from="1544495296143" duration="8289000" />
+      <workItem from="1544585481656" duration="21097000" />
+      <workItem from="1544664136798" duration="7464000" />
+      <workItem from="1544754075973" duration="938000" />
+      <workItem from="1544764397841" duration="1262000" />
+      <workItem from="1544845216402" duration="6357000" />
+      <workItem from="1544929189408" duration="10453000" />
+      <workItem from="1545013142499" duration="17165000" />
+      <workItem from="1545114423267" duration="5806000" />
+      <workItem from="1545132840305" duration="11000" />
+      <workItem from="1545190681085" duration="157000" />
+      <workItem from="1545190919159" duration="13825000" />
+      <workItem from="1545269962330" duration="12630000" />
+      <workItem from="1545359585081" duration="132000" />
+      <workItem from="1545363724376" duration="1999000" />
+      <workItem from="1545367217604" duration="11000" />
+      <workItem from="1545450217248" duration="13693000" />
+      <workItem from="1545645943213" duration="154000" />
+      <workItem from="1546068834932" duration="5101000" />
+      <workItem from="1546091458849" duration="881000" />
+      <workItem from="1546679386030" duration="7000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="288306000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18283582" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32819384" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32900432" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2217484" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32819384" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" visible="true" weight="0.32900432" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Themes/Theme01/style.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppPageMaitre/modele/entete.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="6" selection-end-column="3" />
+          <folding>
+            <element signature="e#6#92#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/items.class.php" />
+    <entry file="file://$PROJECT_DIR$/systeme/GAform.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#6#92#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XXX_AppBlog/modele/article.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="10" lean-forward="true" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XXX_AppBlog/modele/categorie.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/configuration.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="87" column="5" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
+          <folding>
+            <element signature="n#getInstance#0;n#Configuration#0;n#!!top" />
+            <element signature="n#getDonnees#0;n#Configuration#0;n#!!top" />
+            <element signature="e#642#5039#0#PHP" />
+            <element signature="n#getListeCss#0;n#Configuration#0;n#!!top" />
+            <element signature="n#__construct#0;n#Configuration#0;n#!!top" />
+            <element signature="n#addCss#0;n#Configuration#0;n#!!top" />
+            <element signature="n#Find#0;n#Configuration#0;n#!!top" />
+            <element signature="n#EcrireXml#0;n#Configuration#0;n#!!top" />
+            <element signature="n#offsetExists#0;n#Configuration#0;n#!!top" />
+            <element signature="n#offsetGet#0;n#Configuration#0;n#!!top" />
+            <element signature="n#offsetSet#0;n#Configuration#0;n#!!top" />
+            <element signature="n#offsetUnset#0;n#Configuration#0;n#!!top" />
+            <element signature="n#load#0;n#Configuration#0;n#!!top" />
+            <element signature="n#factoryItem#0;n#Configuration#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../grafikart/GAFramework/src/Framework/Router/Route.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppPageMaitre/vue/back/menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="42" selection-start-line="1" selection-start-column="42" selection-end-line="1" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/DataDictionary.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XXX_AppBlog/vue/front/article.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Themes/Theme02/grafikart.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppPageMaitre/modele/menu.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="149" column="31" selection-start-line="149" selection-start-column="31" selection-end-line="149" selection-end-column="31" />
+          <folding>
+            <element signature="e#200#1721#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../grafikart/GAFramework/src/Framework/Router.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/MyException.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="28" selection-start-line="1" selection-start-column="28" selection-end-line="1" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppPageMaitre/controleurApp.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="98" selection-start-line="15" selection-start-column="98" selection-end-line="15" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppPageMaitre/vue/front/body.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="2" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/code venant de grafikart/Router.php" />
+    <entry file="file://$PROJECT_DIR$/systeme/code venant de grafikart/Route.php" />
+    <entry file="file://$PROJECT_DIR$/systeme/RouterException.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppPageMaitre/vue/front/accueil.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="3" selection-start-column="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/code venant de grafikart/App.class.php" />
+    <entry file="file://$PROJECT_DIR$/systeme/code venant de grafikart/test.php" />
+    <entry file="file://$PROJECT_DIR$/XXX_AppBlog/BlogModule.php" />
+    <entry file="file://$PROJECT_DIR$/Psr/Container/NotFoundExceptionInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Psr/Container/ContainerInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="38" column="29" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Psr/Container/ContainerExceptionInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="12" column="3" selection-start-line="12" selection-start-column="3" selection-end-line="12" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppPageMaitre/controleurPageMaitre.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppPageMaitre/vue/back/pageBack.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/item.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="n#getID#0;n#item#0;n#!!top" />
+            <element signature="n#__get#0;n#item#0;n#!!top" />
+            <element signature="n#INSERT#0;n#item#0;n#!!top" />
+            <element signature="n#UPDATE#0;n#item#0;n#!!top" />
+            <element signature="n#DELETE#0;n#item#0;n#!!top" />
+            <element signature="n#SELECT#0;n#item#0;n#!!top" />
+            <element signature="n#SELECTALL#0;n#item#0;n#!!top" />
+            <element signature="n#SELECTALL_Tab#0;n#item#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/Route.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="e#160#206#0#PHP" />
+            <element signature="n#getName#0;n#Route#0;n#!!top" />
+            <element signature="n#getCallback#0;n#Route#0;n#!!top" />
+            <element signature="n#getParams#0;n#Route#0;n#!!top" />
+            <element signature="n#getPath#0;n#Route#0;n#!!top" />
+            <element signature="n#with#0;n#Route#0;n#!!top" />
+            <element signature="n#getUrl#0;n#Route#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/Router.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XXX_AppTest/testCode.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/collection.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="85" column="43" selection-start-line="85" selection-start-column="7" selection-end-line="85" selection-end-column="43" />
+          <folding>
+            <element signature="e#6#92#0#PHP" expanded="true" />
+            <element signature="e#159#265#0#PHP" />
+            <element signature="e#299#404#0#PHP" />
+            <element signature="n#getDonnees#0;n#collection#0;n#!!top" />
+            <element signature="e#485#604#0#PHP" />
+            <element signature="n#setDonnees#0;n#collection#0;n#!!top" />
+            <element signature="n#get#0;n#collection#0;n#!!top" />
+            <element signature="n#set#0;n#collection#0;n#!!top" />
+            <element signature="n#cleeExiste#0;n#collection#0;n#!!top" />
+            <element signature="n#listeDonnées#0;n#collection#0;n#!!top" />
+            <element signature="e#1131#1242#0#PHP" />
+            <element signature="n#extract#0;n#collection#0;n#!!top" />
+            <element signature="e#1363#1458#0#PHP" />
+            <element signature="n#joint#0;n#collection#0;n#!!top" />
+            <element signature="n#offsetExists#0;n#collection#0;n#!!top" />
+            <element signature="n#offsetGet#0;n#collection#0;n#!!top" />
+            <element signature="n#offsetSet#0;n#collection#0;n#!!top" />
+            <element signature="n#offsetUnset#0;n#collection#0;n#!!top" />
+            <element signature="e#2219#2470#0#PHP" />
+            <element signature="n#getIterator#0;n#collection#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/controleur.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppRegex/controleurApp.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="15" column="78" selection-start-line="15" selection-start-column="78" selection-end-line="15" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XXX_AppBlog/controleurApp.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="808">
+          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppRegex/controleurRegex.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/autoloader.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/form.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding>
+            <element signature="n#ConstructeurChampSelection#0;n#form#0;n#!!top" />
+            <element signature="n#LeLabel#0;n#form#0;n#!!top" />
+            <element signature="e#2824#2980#0#PHP" />
+            <element signature="n#DataList#0;n#form#0;n#!!top" />
+            <element signature="n#Bouton#0;n#form#0;n#!!top" />
+            <element signature="n#spanErreur#0;n#form#0;n#!!top" />
+            <element signature="n#BaliseDecoChamp#0;n#form#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XXX_AppBlog/vue/back/formArticleAdd.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XXX_AppBlog/controleurBlog.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#244#568#0#PHP" />
+            <element signature="e#574#921#0#PHP" />
+            <element signature="e#927#1368#0#PHP" />
+            <element signature="e#2082#2240#0#PHP" />
+            <element signature="e#2433#3102#0#PHP" />
+            <element signature="e#2698#2881#0#PHP" />
+            <element signature="e#3108#3520#0#PHP" />
+            <element signature="e#3295#3470#0#PHP" />
+            <element signature="e#3526#4227#0#PHP" />
+            <element signature="e#3701#4017#0#PHP" />
+            <element signature="e#3787#4007#0#PHP" />
+            <element signature="e#4233#4841#0#PHP" />
+            <element signature="e#4433#4620#0#PHP" />
+            <element signature="e#4847#5285#0#PHP" />
+            <element signature="e#5049#5226#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="37" column="1" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/XXX_AppAuthentification/controleurAuthentification.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="26" column="1" lean-forward="true" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AppRegex/modele/regex.class.php" />
+    <entry file="file://$PROJECT_DIR$/systeme/regex.class.php" />
+    <entry file="file://$PROJECT_DIR$/AppRegex/vue/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5389">
+          <caret line="322" column="27" selection-start-line="322" selection-start-column="27" selection-end-line="322" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/Renderer.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="35" column="45" selection-start-line="35" selection-start-column="45" selection-end-line="35" selection-end-column="45" />
+          <folding>
+            <element signature="e#295#372#0#PHP" />
+            <element signature="n#addPath#0;n#Renderer#0;n#!!top" />
+            <element signature="n#hasNamespace#0;n#Renderer#0;n#!!top" />
+            <element signature="n#getNamespace#0;n#Renderer#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/systeme/exreg.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="43" column="40" selection-start-line="43" selection-start-column="40" selection-end-line="43" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Themes/Theme01/general.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>

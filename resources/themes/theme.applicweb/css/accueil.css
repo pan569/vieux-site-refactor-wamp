@@ -1,0 +1,246 @@
+﻿#CadreAccueil
+{
+	
+	
+}
+/* ################################################################################################# */
+#EtapeSiteWeb
+{
+	background-color:Transparent;
+	/*	
+	background-image: url('Image/FOND_Noir_Opacite_60.png'); 
+	background-repeat:repeat; 
+	background-position: left top;
+	*/
+	height:auto;
+	width:380px;	
+	margin:0px;
+	margin-right:5px;
+	padding:10px;	
+	
+	border:solid 1px #ffffff;
+	
+	float:left;
+}
+
+.paragraphe
+{
+	background-color:Transparent;
+	
+	height:auto;
+	
+	margin:0;
+	margin-top:5px;
+	
+}
+.anim01
+{
+	background-image: url(Image/Anim01.gif);
+	background-repeat: repeat-x ;
+	background-position: 0px 0px;
+	
+	width:50px;
+	height:50px;
+	margin:0px;
+	margin-right:5px;
+	margin-bottom:2px;
+	padding:0px;
+	
+	float:left;	
+}
+
+.anim02
+{
+	background-image: url(Image/Anim01.gif);
+	background-repeat: repeat-x ;
+	background-position: 0px -50px;
+	
+	width:50px;
+	height:50px;
+	margin:0px;
+	margin-right:5px;
+	margin-bottom:2px;
+	padding:0px;
+	
+	float:left;	
+}
+
+.anim03
+{
+	background-image: url(Image/Anim01.gif);
+	background-repeat: repeat-x ;
+	background-position: 0px -100px;
+	
+	width:50px;
+	height:50px;
+	margin:0px;
+	margin-right:5px;
+	margin-bottom:2px;
+	padding:0px;
+	
+	float:left;	
+}
+
+.anim04
+{
+	background-image: url(Image/Anim01.gif);
+	background-repeat: repeat-x ;
+	background-position: 0px -150px;
+	
+	width:50px;
+	height:50px;
+	margin:0px;
+	margin-right:5px;
+	margin-bottom:2px;
+	padding:0px;
+	
+	float:left;	
+}
+
+.EtapeSiteWeb_texte
+{
+	background-color:Transparent;
+	width:310px;
+	height:auto;
+		
+	margin: 0px; 
+	padding:0px;
+	
+	float:left;	
+	
+}
+
+.EtapeSiteWeb_texte ul
+{
+	background-color:Transparent;
+	margin:0px;
+	margin-top:5px;
+	
+}
+
+.EtapeSiteWeb_texte li
+{	
+	background-color:Transparent;
+	list-style-type:circle;
+	list-style-position:outside;	
+}
+
+/* ################################################################################################# */
+#LesCibles
+{
+	background-color:Transparent;	
+	/*background-image: url('Image/FOND_Noir_Opacite_60.png'); 
+	background-repeat:repeat; 
+	background-position: left top;*/
+	
+	height:auto;
+	width:300px;	
+	margin:0px;
+	margin-left:5px;
+	padding:0px;
+	padding-top:5px;
+	
+	text-align:left;	
+	
+	/*border:solid 1px #ffffff;*/
+	
+	float:left;
+}
+#LesCiblesContenue
+{
+	background-color:Transparent; 
+	width:auto;
+	height:auto;
+	margin:0px; 
+	margin-left:80px;
+	padding:0px;
+}
+.Cible
+{
+	background-color:Transparent;
+	
+	width:225px;
+	height:auto;
+	text-align:left;
+	vertical-align:top;
+	
+	border-collapse:collapse;
+	
+}
+
+.ConteneurP
+{
+	background-color:Transparent;
+	
+	height:auto;
+	width:auto;
+	margin:0px;
+	padding:0px;
+}
+
+.TitreP
+{
+	background-color:Transparent;
+	
+	height:auto;
+	width:220px;
+	margin:0px;
+	padding:0px;
+}
+
+.postit_1
+{
+	background-color:Transparent;
+	background-image: url('Image/SurlignageBleu.png'); 
+	background-repeat:no-repeat; 
+	background-position:center center;
+	
+	width: 225px; 
+	height: 100px;
+	margin:0px;
+	padding:0px;
+	padding-top:5px;
+	
+	color:Black; 
+	font-size: 11px; 
+	 
+	text-align: left;
+}
+
+.postit_2
+{
+	background-color:Transparent;
+	background-image: url('Image/SurlignageVert.png'); 
+	background-repeat:no-repeat; 
+	background-position:center center;
+	
+	width: 225px; 
+	height: 100px;
+	margin:0px;
+	padding:0px;
+	padding-top:5px;
+	
+	color:Black; 
+	font-size: 11px; 
+	 
+	text-align: left;
+}
+
+.postit_3
+{
+	background-color:Transparent;
+	background-image: url('Image/SurlignageRouge.png'); 
+	background-repeat:no-repeat; 
+	background-position:center center;
+	
+	width: 225px; 
+	height: 100px;
+	margin:0px;
+	padding:0px;
+	padding-top:5px;
+	
+	color:Black; 
+	font-size: 11px; 
+	 
+	text-align: left;
+}
