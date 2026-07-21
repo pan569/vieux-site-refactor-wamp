@@ -6,9 +6,10 @@ $form = form::getInstance('form-control');
 <h2>Modification des données du menu</h2>    
 <form method="post" action="<?=  $this->routeur->getRoute('modifMenu')->generateUri(); ?>" enctype="multipart/form-data">
     <div class="form-group">
+    <?= $this->champCsrf(); ?>
     	<div>
-    		<h3><?= $model['titre'];?></h3>
-    		<p>url:<?= $model['url'];?>
+    		<h3><?= e($model['titre'] ?? ''); ?></h3>
+    		<p>url: <?= e($model['url'] ?? ''); ?></p>
     		<?= $form->ConstructeurChamp( "Description",'description', $model['description'] !== null ? $model['description'] : "",'textarea',[50,5]);?>    					
     		<?= $form->ConstructeurChamp( "Cible",'cible', $model['cible'] !== null ? $model['cible'] : "",'text');?>
     		<?= $form->ConstructeurChamp( "Css",'css', $model['css'] !== null ? $model['css'] : "",'textarea',[50,2]);?>

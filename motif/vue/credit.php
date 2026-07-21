@@ -3,9 +3,10 @@ use systeme\vue\form;
 $form = form::getInstance('form-control');
 ?>
 <h1>Parametres du site</h1>
-<h2>Modification des données de configuration</h2>    
+<h2>Modification des crédits</h2>    
 <form method="post" action="<?=  $this->routeur->getRoute('modifCredit')->generateUri(); ?>" enctype="multipart/form-data">
     <div class="form-group">
+    <?= $this->champCsrf(); ?>
     <div>
     <h3>Proprietaire du site</h3>
     <?= $form->ConstructeurChamp( "Nom",'Proprietaire_nom', $model['Proprietaire']['nom'] !== null ? $model['Proprietaire']['nom'] : "",'text');?>
@@ -22,7 +23,7 @@ $form = form::getInstance('form-control');
     <?= $form->ConstructeurChamp( "Couriel",'Developpeur_email', $model['Developpeur']['email'] !== null ? $model['Developpeur']['email'] : "",'text');?>
     <?= $form->ConstructeurChamp( "Site",'Developpeur_www', $model['Developpeur']['www'] !== null ? $model['Developpeur']['www'] : "",'text');?>
     </div>
-    <h3>Proprietaire du site</h3>
+    <h3>Hebergeur</h3>
     <?= $form->ConstructeurChamp( "Nom",'Hebergeur_nom', $model['Hebergeur']['nom'] !== null ? $model['Hebergeur']['nom'] : "",'text');?>
     <?= $form->ConstructeurChamp( "Adresse",'Hebergeur_adresse', $model['Hebergeur']['adresse'] !== null ? $model['Hebergeur']['adresse'] : "",'text');?>
     <?= $form->ConstructeurChamp( "Telephone",'Hebergeur_telephone', $model['Hebergeur']['telephone'] !== null ? $model['Hebergeur']['telephone'] : "",'text');?>

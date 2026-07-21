@@ -6,10 +6,10 @@ $form = form::getInstance('form-control');
 <h2>Modification des données de Entete</h2>    
 <form method="post" action="<?=  $this->routeur->getRoute('modifEntete')->generateUri(); ?>" enctype="multipart/form-data">
     <div class="form-group">
+    <?= $this->champCsrf(); ?>
     <div>
-    <h3>Proprietaire du site</h3>
     <h3>le site</h3>
-    <?= $form->ConstructeurChamp( "Nom del'auteur",'auteur', $model['Entete']['auteur'] !== null ? $model['Entete']['auteur'] : "",'text');?>
+    <?= $form->ConstructeurChamp( "Nom de l'auteur",'auteur', $model['Entete']['auteur'] !== null ? $model['Entete']['auteur'] : "",'text');?>
     <?= $form->ConstructeurChamp( "Description",'description', $model['Entete']['description'] !== null ? $model['Entete']['description'] : "",'textarea',[50,5]);?>
     <?= $form->ConstructeurChamp( "Mots clées",'motsCles', $model['Entete']['motsCles'] !== null ? $model['Entete']['motsCles'] : "",'textarea',[50,5]);?>
     <?= $form->ConstructeurChamp( "Editeur",'editeur', $model['Entete']['editeur'] !== null ? $model['Entete']['editeur'] : "",'text');?>

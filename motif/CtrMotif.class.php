@@ -17,7 +17,6 @@ class CtrMotif extends Controleur
 {
     public function __construct(Motif $motif)
     {
-        // nomApplication est maintenant déduit automatiquement par le parent
         parent::__construct($motif);
 
         $s = DIRECTORY_SEPARATOR;
@@ -58,19 +57,27 @@ class CtrMotif extends Controleur
         $model = $this->motif;
 
         if (array_key_exists('form', $variables)) {
+
+            if ($this->refuserSiCsrfInvalide()) {
+                $main = $this->renduPage("modifConfiguration", compact('model'));
+                $this->afficherPage($main);
+                return;
+            }
+
             $t = [];
             foreach (array_keys($model['Configuration']) as $clé) {
-                $t[$clé] = $variables[$clé];
+                $t[$clé] = $variables[$clé] ?? $model['Configuration'][$clé];
             }
             $model['Configuration'] = $t;
             $model->SauvegardeElement('Configuration');
 
+            $this->flashSucces('Configuration enregistrée.');
             $Callback = 'index';
             $variableCallback = [];
-            $this->redirigerRoute(compact('routeur', 'Callback', 'variableCallback'));
+            $this->redirigerRoute(compact('Callback', 'variableCallback'));
         }
 
-        $main = $this->renduPage("modifConfiguration", compact('routeur', 'model'));
+        $main = $this->renduPage("modifConfiguration", compact('model'));
         $this->afficherPage($main);
     }
 
@@ -79,27 +86,35 @@ class CtrMotif extends Controleur
         $model = $this->motif;
 
         if (array_key_exists('form', $variables)) {
+
+            if ($this->refuserSiCsrfInvalide()) {
+                $main = $this->renduPage("modifCredit", compact('model'));
+                $this->afficherPage($main);
+                return;
+            }
+
             $t = [];
             foreach (array_keys($model['Proprietaire']) as $clé) {
-                $t[$clé] = $variables["Proprietaire_$clé"];
+                $t[$clé] = $variables["Proprietaire_$clé"] ?? $model['Proprietaire'][$clé];
             }
             $model['Proprietaire'] = $t;
             $model->SauvegardeElementAttribut('Credits', 'Proprietaire');
 
             $t = [];
             foreach (array_keys($model['Developpeur']) as $clé) {
-                $t[$clé] = $variables["Developpeur_$clé"];
+                $t[$clé] = $variables["Developpeur_$clé"] ?? $model['Developpeur'][$clé];
             }
             $model['Developpeur'] = $t;
             $model->SauvegardeElementAttribut('Credits', 'Developpeur');
 
             $t = [];
             foreach (array_keys($model['Hebergeur']) as $clé) {
-                $t[$clé] = $variables["Hebergeur_$clé"];
+                $t[$clé] = $variables["Hebergeur_$clé"] ?? $model['Hebergeur'][$clé];
             }
             $model['Hebergeur'] = $t;
             $model->SauvegardeElementAttribut('Credits', 'Hebergeur');
 
+            $this->flashSucces('Crédits enregistrés.');
             $Callback = 'index';
             $variableCallback = [];
             $this->redirigerRoute(compact('Callback', 'variableCallback'));
@@ -114,19 +129,27 @@ class CtrMotif extends Controleur
         $model = $this->motif;
 
         if (array_key_exists('form', $variables)) {
+
+            if ($this->refuserSiCsrfInvalide()) {
+                $main = $this->renduPage("modifEntete", compact('model'));
+                $this->afficherPage($main);
+                return;
+            }
+
             $t = [];
             foreach (array_keys($model['Entete']) as $clé) {
-                $t[$clé] = $variables[$clé];
+                $t[$clé] = $variables[$clé] ?? $model['Entete'][$clé];
             }
             $model['Entete'] = $t;
             $model->SauvegardeElement('Entete');
 
+            $this->flashSucces('En-tête enregistré.');
             $Callback = 'index';
             $variableCallback = [];
             $this->redirigerRoute(compact('Callback', 'variableCallback'));
         }
 
-        $main = $this->renduPage("modifEntete", compact('routeur', 'model'));
+        $main = $this->renduPage("modifEntete", compact('model'));
         $this->afficherPage($main);
     }
 
@@ -136,6 +159,13 @@ class CtrMotif extends Controleur
         $model = $AdministrationSite['Menus'][$variables['menu']];
 
         if (array_key_exists('form', $variables)) {
+
+            if ($this->refuserSiCsrfInvalide()) {
+                $main = $this->renduPage("modifMenu", compact('model'));
+                $this->afficherPage($main);
+                return;
+            }
+
             if (array_key_exists('description', $variables))
                 $AdministrationSite['Menus'][$variables['menu']]->set('description', $variables['description']);
 
@@ -150,12 +180,13 @@ class CtrMotif extends Controleur
 
             $AdministrationSite['Menus'][$variables['menu']]->SauvegardeElement();
 
+            $this->flashSucces('Menu enregistré.');
             $Callback = 'index';
             $variableCallback = [];
             $this->redirigerRoute(compact('Callback', 'variableCallback'));
         }
 
-        $main = $this->renduPage("modifMenu", compact('routeur', 'model'));
+        $main = $this->renduPage("modifMenu", compact('model'));
         $this->afficherPage($main);
     }
 
@@ -165,6 +196,13 @@ class CtrMotif extends Controleur
         $model = $AdministrationSite['Pied'][$variables['menu']];
 
         if (array_key_exists('form', $variables)) {
+
+            if ($this->refuserSiCsrfInvalide()) {
+                $main = $this->renduPage("modifMenu", compact('model'));
+                $this->afficherPage($main);
+                return;
+            }
+
             if (array_key_exists('description', $variables))
                 $AdministrationSite['Pied'][$variables['menu']]->set('description', $variables['description']);
 
@@ -179,6 +217,7 @@ class CtrMotif extends Controleur
 
             $AdministrationSite['Pied'][$variables['menu']]->SauvegardeElement();
 
+            $this->flashSucces('Pied de page enregistré.');
             $Callback = 'index';
             $variableCallback = [];
             $this->redirigerRoute(compact('Callback', 'variableCallback'));
