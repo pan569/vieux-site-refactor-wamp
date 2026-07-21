@@ -6,7 +6,7 @@ $ok      = $ok      ?? false;
 $message = $message ?? '';
 $detail  = $detail  ?? '';
 $couleur = $ok ? '#e8f5e9' : '#fdecea';
-bordure  = $ok ? '#2e7d32' : '#c62828';
+$bordure = $ok ? '#2e7d32' : '#c62828';
 $icone   = $ok ? '✓' : '✗';
 ?>
 <div class="test-phase6">
