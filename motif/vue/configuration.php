@@ -6,6 +6,7 @@ $form = form::getInstance('form-control');
 <h2>Modification des données de configuration</h2>    
 <form method="post" action="<?=  $this->routeur->getRoute('modifConfiguration')->generateUri(); ?>" enctype="multipart/form-data">
     <div class="form-group">
+    <?= $this->champCsrf(); ?>
     <div>
     <h3>le site</h3>
     <?= $form->ConstructeurChamp( "Nom du site",'SiteNom', $model['Configuration']['SiteNom'] !== null ? $model['Configuration']['SiteNom'] : "",'text');?>
