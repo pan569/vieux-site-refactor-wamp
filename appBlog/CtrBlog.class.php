@@ -19,7 +19,6 @@ class CtrBlog extends Controleur
 {
     public function __construct(Motif $motif)
     {
-        // nomApplication est maintenant déduit automatiquement par le parent
         parent::__construct($motif);
 
         $s = DIRECTORY_SEPARATOR;
@@ -60,6 +59,13 @@ class CtrBlog extends Controleur
         $model = new Blog();
 
         if (array_key_exists('titre', $variables) || array_key_exists('slug', $variables) || array_key_exists('contenu', $variables)) {
+
+            if ($this->refuserSiCsrfInvalide()) {
+                $main = $this->renduPage("ajouter", compact('model'));
+                $this->afficherPage($main);
+                return;
+            }
+
             $model->set('auteur', 'ulysse1976');
             $model->set('titre', $variables['titre']);
             $model->set('slug', $variables['slug']);
@@ -68,11 +74,13 @@ class CtrBlog extends Controleur
             $model->set('dateModification', MyDateTime::getInstance()->getDateTime());
 
             if ($model->INSERT()) {
-                $model = Blog::SELECT();
+                $this->flashSucces('Article ajouté avec succès.');
                 $Callback = 'index';
                 $variableCallback = [];
                 $this->redirigerRoute(compact('Callback', 'variableCallback'));
             }
+
+            $this->flashErreur('Impossible d\'enregistrer l\'article.');
         }
 
         $main = $this->renduPage("ajouter", compact('model'));
@@ -84,6 +92,13 @@ class CtrBlog extends Controleur
         $model = new Blog($variables['id']);
 
         if (array_key_exists('titre', $variables) || array_key_exists('slug', $variables) || array_key_exists('contenu', $variables)) {
+
+            if ($this->refuserSiCsrfInvalide()) {
+                $main = $this->renduPage("editer", compact('model'));
+                $this->afficherPage($main);
+                return;
+            }
+
             $model->set('auteur', $model['auteur']);
             $model->set('titre', $variables['titre']);
             $model->set('slug', $variables['slug']);
@@ -92,11 +107,13 @@ class CtrBlog extends Controleur
             $model->set('dateModification', MyDateTime::getInstance()->getDateTime());
 
             if ($model->UPDATE()) {
-                $model = Blog::SELECT();
+                $this->flashSucces('Article modifié avec succès.');
                 $Callback = 'index';
                 $variableCallback = [];
                 $this->redirigerRoute(compact('Callback', 'variableCallback'));
             }
+
+            $this->flashErreur('Impossible de modifier l\'article.');
         }
 
         $main = $this->renduPage("editer", compact('model'));
@@ -109,7 +126,15 @@ class CtrBlog extends Controleur
         $model->SELECT_id($variables['id']);
 
         if (array_key_exists('method', $variables)) {
+
+            if ($this->refuserSiCsrfInvalide()) {
+                $main = $this->renduPage("supprimer", compact('model'));
+                $this->afficherPage($main);
+                return;
+            }
+
             $model->DELETE();
+            $this->flashSucces('Article supprimé.');
             $Callback = 'index';
             $variableCallback = [];
             $this->redirigerRoute(compact('Callback', 'variableCallback'));
