@@ -5,15 +5,14 @@ use systeme\routeur\Routeur;
 use motif\modele\Motif;
 use systeme\routeur\Route;
 use systeme\securite\Csrf;
+use systeme\message\MessageFlash;
 
 /**
  * Classe de base de tous les contrôleurs d'application.
  *
  * - Déduit automatiquement $nomApplication à partir du namespace
- *   (appBlog → Blog, motif → motif, etc.)
- * - Plus besoin de la ligne str_replace(...) dans les contrôleurs enfants.
- *
- * Phase 6 : renduPage robuste + helpers CSRF.
+ * - Helpers CSRF (Phase 6)
+ * - Helpers messages flash (Phase 7)
  *
  * @author Ulysse1976
  */
@@ -41,15 +40,11 @@ class Controleur
 
     public function __construct(Motif $motif)
     {
-        // ===== Déduction automatique du nom d'application =====
-        // Permet d'ajouter une application sans avoir à écrire
-        // $this->nomApplication = str_replace("app", "", __NAMESPACE__);
         $ns = (new \ReflectionClass($this))->getNamespaceName();
 
         if ($ns === 'motif') {
             $this->nomApplication = 'motif';
         } else {
-            // appBlog → Blog, appPage02 → Page02, appAnnuaire → Annuaire, etc.
             $this->nomApplication = str_replace('app', '', $ns);
         }
 
@@ -59,7 +54,6 @@ class Controleur
         $s = DIRECTORY_SEPARATOR;
         $x = $_SERVER["DOCUMENT_ROOT"] . "{$s}motif{$s}vue{$s}";
 
-        // Routes communes fournies par le motif (aside / body / page)
         $this->routeur->addRoute(new Route($this->nomApplication, "aside", "", "", "{$x}aside.php"));
         $this->routeur->addRoute(new Route($this->nomApplication, "body",  "", "", "{$x}body.php"));
         $this->routeur->addRoute(new Route($this->nomApplication, "page",  "", "", "{$x}page.php"));
@@ -76,9 +70,6 @@ class Controleur
 
     /**
      * Fait un rendu de la vue.
-     *
-     * @param string $nomDeVue nom de la vue sous la forme "nomDeLaVue"
-     * @return string
      */
     public function renduPage(string $nomDeVue, array $variables = []): string
     {
@@ -95,7 +86,7 @@ class Controleur
         }
 
         $variables['nomDeVue'] = $nomDeVue;
-        extract($variables); // rend les variables visibles dans la vue
+        extract($variables);
         ob_start();
 
         require $fichierVue;
@@ -103,22 +94,56 @@ class Controleur
         return ob_get_clean();
     }
 
-    /**
-     * Vérifie le token CSRF (à appeler avant tout traitement POST sensible).
-     *
-     * @return bool true si le token est valide
-     */
+    /* ========== CSRF (Phase 6) ========== */
+
     protected function verifierCsrf(): bool
     {
         return Csrf::valider();
     }
 
-    /**
-     * Génère le champ HTML CSRF (raccourci pour les vues via le contrôleur).
-     */
     public function champCsrf(): string
     {
         return Csrf::champ();
+    }
+
+    /* ========== Messages flash (Phase 7) ========== */
+
+    protected function flashSucces(string $message): void
+    {
+        MessageFlash::succes($message);
+    }
+
+    protected function flashErreur(string $message): void
+    {
+        MessageFlash::erreur($message);
+    }
+
+    protected function flashInfo(string $message): void
+    {
+        MessageFlash::info($message);
+    }
+
+    /**
+     * HTML des messages flash (pour usage manuel dans une vue).
+     * En pratique body.php les affiche déjà automatiquement.
+     */
+    public function afficherFlash(): string
+    {
+        return MessageFlash::html();
+    }
+
+    /**
+     * Refuse une action POST si le token CSRF est invalide.
+     * Pose un message flash et retourne true si refus.
+     */
+    protected function refuserSiCsrfInvalide(): bool
+    {
+        if ($this->verifierCsrf()) {
+            return false;
+        }
+
+        $this->flashErreur('Action refusée : jeton de sécurité invalide ou expiré. Veuillez réessayer.');
+        return true;
     }
 
     public function dataCheckboxList(array $nomVariables, string $etiquetteRecherché)
