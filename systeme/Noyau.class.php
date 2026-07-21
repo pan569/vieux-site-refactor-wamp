@@ -88,10 +88,9 @@ class Noyau
      * Découvre et instancie automatiquement tous les contrôleurs
      * présents dans les dossiers "app*" et "motif".
      *
-     * Convention :
-     *   - dossier "appAlbum"     → classe \appAlbum\CtrAlbum
-     *   - dossier "appAnnuaire"  → classe \appAnnuaire\CtrlAnnuaire (gère Ctr/Ctrl)
-     *   - dossier "motif"        → classe \motif\CtrMotif
+     * Convention unique :
+     *   - dossier "appAlbum"  → classe \appAlbum\CtrAlbum
+     *   - dossier "motif"     → classe \motif\CtrMotif
      */
     protected function decouvrirApplications(): void
     {
@@ -116,6 +115,7 @@ class Noyau
 
     /**
      * Détermine le nom complet de la classe contrôleur à partir du nom du dossier.
+     * Convention unique : Ctr + NomCourt
      */
     protected function trouverClasseControleur(string $nomDossier): ?string
     {
@@ -125,17 +125,10 @@ class Noyau
 
         // Enlève le préfixe "app" → Album, Page01, Annuaire, etc.
         $nomCourt = ucfirst(substr($nomDossier, 3));
+        $classe   = '\\' . $nomDossier . '\\Ctr' . $nomCourt;
 
-        // Essai Ctr... puis Ctrl... (pour gérer l'ancienne incohérence Annuaire)
-        $candidats = [
-            '\\' . $nomDossier . '\\Ctr'  . $nomCourt,
-            '\\' . $nomDossier . '\\Ctrl' . $nomCourt,
-        ];
-
-        foreach ($candidats as $classe) {
-            if (class_exists($classe)) {
-                return $classe;
-            }
+        if (class_exists($classe)) {
+            return $classe;
         }
 
         // Aucune classe trouvée → on ignore ce dossier
