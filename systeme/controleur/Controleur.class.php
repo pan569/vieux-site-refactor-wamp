@@ -4,6 +4,7 @@ namespace systeme\controleur;
 use systeme\routeur\Routeur;
 use motif\modele\Motif;
 use systeme\routeur\Route;
+use systeme\securite\Csrf;
 
 /**
  * Classe de base de tous les contrôleurs d'application.
@@ -11,6 +12,8 @@ use systeme\routeur\Route;
  * - Déduit automatiquement $nomApplication à partir du namespace
  *   (appBlog → Blog, motif → motif, etc.)
  * - Plus besoin de la ligne str_replace(...) dans les contrôleurs enfants.
+ *
+ * Phase 6 : renduPage robuste + helpers CSRF.
  *
  * @author Ulysse1976
  */
@@ -79,13 +82,43 @@ class Controleur
      */
     public function renduPage(string $nomDeVue, array $variables = []): string
     {
+        $route = $this->routeur->getRoute($nomDeVue);
+
+        if ($route === null) {
+            return '<!-- Vue « ' . htmlspecialchars($nomDeVue, ENT_QUOTES, 'UTF-8') . ' » introuvable -->';
+        }
+
+        $fichierVue = $route->getVue();
+
+        if (!is_file($fichierVue)) {
+            return '<!-- Fichier de vue introuvable : ' . htmlspecialchars($fichierVue, ENT_QUOTES, 'UTF-8') . ' -->';
+        }
+
         $variables['nomDeVue'] = $nomDeVue;
         extract($variables); // rend les variables visibles dans la vue
         ob_start();
 
-        require($this->routeur->getRoute($nomDeVue)->getVue());
+        require $fichierVue;
 
         return ob_get_clean();
+    }
+
+    /**
+     * Vérifie le token CSRF (à appeler avant tout traitement POST sensible).
+     *
+     * @return bool true si le token est valide
+     */
+    protected function verifierCsrf(): bool
+    {
+        return Csrf::valider();
+    }
+
+    /**
+     * Génère le champ HTML CSRF (raccourci pour les vues via le contrôleur).
+     */
+    public function champCsrf(): string
+    {
+        return Csrf::champ();
     }
 
     public function dataCheckboxList(array $nomVariables, string $etiquetteRecherché)
