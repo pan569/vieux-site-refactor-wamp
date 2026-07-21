@@ -2,220 +2,206 @@
 
 namespace systeme;
 
-
 use systeme\objets\Collection;
 use motif\modele\Motif;
 
-
 /**
+ * Noyau du système
  *
- * @author Ulysse1976
- * 
- * Ce fichier est le neud du systeme (du site)
- * 
- *  son role est :
- *  - [ ] De charger l'autoloader
- *  - [ ] De charger le systeme de session
- *  - [x] De centraliser toute les données utile au bon fonctionnement du systeme
- *  - [X] Gerere le controleur
- *  - [ ] Gere le rendorer
- *  
- *  systeme interne :
- *  - [X]systeme de singleton
- *  - [ ]Conteneur de dépendance 
- *  
+ * - Singleton
+ * - Centralise les données
+ * - Découvre automatiquement les applications (dossiers app* + motif)
+ * - Gère le routage vers le bon contrôleur
+ *
+ * Objectif : ajouter ou supprimer une application = ajouter ou supprimer uniquement le dossier.
  */
-
 class Noyau
 {
-    
     const FICHIER_INI = "";
-    
+
     private static $_instance;
-    /*
-     * singleton de la classe
-     */
-    public static function getInstance():Noyau
+
+    public static function getInstance(): Noyau
     {
-        if(is_null(self::$_instance))
+        if (is_null(self::$_instance)) {
             self::$_instance = new Noyau();
-            
-            return self::$_instance;
+        }
+        return self::$_instance;
     }
-    
+
     protected $motif;
-    
     public $données;
-    /**
-     *
-     *
-     * @param string $clee
-     * @return unknown/false
-     */
+
+    /** @var array Liste des contrôleurs d'application */
+    protected $controleurs = [];
+
+    protected $routes = [];
+
     public function getDonnées(string $clee)
     {
         return $this->données->get($clee);
     }
-    
-    /**
-     * liste des controleurs d'application.
-     * @var array
-     */    
-    protected $controleurs = [];    
+
     public function getControleurs()
     {
         return $this->controleurs;
     }
-    
+
     public function getControleur(string $NomControleur)
     {
-        //debug($this->controleurs,"liste des controleurs");
-        //debug($NomControleur,"non du controleur cherché");
-        
-        
-        foreach ($this->controleurs as $controleur)
-        {                       
-            if($controleur->getNomApplication() == $NomControleur)
-            {
-                
-                //debug($controleur,"controleur trouvé");
+        foreach ($this->controleurs as $controleur) {
+            if ($controleur->getNomApplication() == $NomControleur) {
                 return $controleur;
             }
         }
+        return null;
     }
-    
-    protected $routes = [];
-    
+
     public function __construct()
     {
         $this->données = new Collection();
-        
+
+        // Chargement de la configuration via Motif
         $this->motif = new Motif('ini_monBlog.xml');
-                
-        $this->données['#DataBaseServeur']=$this->motif['Configuration']['DataBaseServeur'];// "localhost";
-        $this->données['#DatabasePort']="3307";
-        $this->données['#DataBaseNon']=$this->motif['Configuration']['DataBaseNon'];// "mytest";
-        $this->données['#DatabaseCharset']="utf8";
-        $this->données['#DataBaseUtilisateur']=$this->motif['Configuration']['DataBaseUtilisateur'];// "root";
-        $this->données['#DataBaseMdP']=$this->motif['Configuration']['DataBaseMdP'];// "";
 
-        /**/
-        
-        //- [ ] Gerere le controleur
-        //## initialisation des controleurs d'application ##
-        
-        ////////**************** NE PAs CONSTRUIRE LES CONTROLEURS ICI ****************\\\\\\\\\
-        
-        $this->controleurs[] = new \motif\CtrMotif($this->motif);
-        $this->controleurs[] = new \appPage01\CtrPage01($this->motif);
-        $this->controleurs[] = new \appPage02\CtrPage02($this->motif);
-        $this->controleurs[] = new \appPage03\CtrPage03($this->motif);
-        $this->controleurs[] = new \appLabjc\CtrLabjc($this->motif);
-        $this->controleurs[] = new \appObjet\CtrObjet($this->motif);
-        $this->controleurs[] = new \appBlog\CtrBlog($this->motif);
-        $this->controleurs[] = new \appAlbum\CtrAlbum($this->motif);
-        $this->controleurs[] = new \appBotanique\CtrBotanique($this->motif);
-        $this->controleurs[] = new \appAnnuaire\CtrlAnnuaire($this->motif);
-        $this->controleurs[] = new \appCours\CtrCours($this->motif);
-        //$this->controleurs[] = new \appObjet3\CtrObjet3();                
-        
-        //$this->memRoutes();
-        
-        
+        $this->données['#DataBaseServeur']     = $this->motif['Configuration']['DataBaseServeur'];
+        $this->données['#DatabasePort']        = "3307";
+        $this->données['#DataBaseNon']         = $this->motif['Configuration']['DataBaseNon'];
+        $this->données['#DatabaseCharset']     = "utf8";
+        $this->données['#DataBaseUtilisateur'] = $this->motif['Configuration']['DataBaseUtilisateur'];
+        $this->données['#DataBaseMdP']         = $this->motif['Configuration']['DataBaseMdP'];
 
+        // ===== DÉCOUVERTE AUTOMATIQUE DES APPLICATIONS =====
+        $this->decouvrirApplications();
     }
-   
+
+    /**
+     * Découvre et instancie automatiquement tous les contrôleurs
+     * présents dans les dossiers "app*" et "motif".
+     *
+     * Convention :
+     *   - dossier "appAlbum"     → classe \appAlbum\CtrAlbum
+     *   - dossier "appAnnuaire"  → classe \appAnnuaire\CtrlAnnuaire (gère Ctr/Ctrl)
+     *   - dossier "motif"        → classe \motif\CtrMotif
+     */
+    protected function decouvrirApplications(): void
+    {
+        $racine = $_SERVER["DOCUMENT_ROOT"];
+        $dossiers = array_filter(glob($racine . DIRECTORY_SEPARATOR . '*'), 'is_dir');
+
+        foreach ($dossiers as $cheminDossier) {
+            $nomDossier = basename($cheminDossier);
+
+            // On ne prend que "motif" et les dossiers qui commencent par "app"
+            if ($nomDossier !== 'motif' && strpos($nomDossier, 'app') !== 0) {
+                continue;
+            }
+
+            $classe = $this->trouverClasseControleur($nomDossier);
+
+            if ($classe !== null && class_exists($classe)) {
+                $this->controleurs[] = new $classe($this->motif);
+            }
+        }
+    }
+
+    /**
+     * Détermine le nom complet de la classe contrôleur à partir du nom du dossier.
+     */
+    protected function trouverClasseControleur(string $nomDossier): ?string
+    {
+        if ($nomDossier === 'motif') {
+            return '\\motif\\CtrMotif';
+        }
+
+        // Enlève le préfixe "app" → Album, Page01, Annuaire, etc.
+        $nomCourt = ucfirst(substr($nomDossier, 3));
+
+        // Essai Ctr... puis Ctrl... (pour gérer l'ancienne incohérence Annuaire)
+        $candidats = [
+            '\\' . $nomDossier . '\\Ctr'  . $nomCourt,
+            '\\' . $nomDossier . '\\Ctrl' . $nomCourt,
+        ];
+
+        foreach ($candidats as $classe) {
+            if (class_exists($classe)) {
+                return $classe;
+            }
+        }
+
+        // Aucune classe trouvée → on ignore ce dossier
+        return null;
+    }
+
     public function navig()
     {
-        //regarder si 'appication' existe dans  le tableau _GET
-        if(array_key_exists ( 'application' , $_GET) )
-        {
-            $application=$_GET['application'];
-            
-            $fonction=null;
-            //regarde si 'fonction' existe dans le tableau _GET
-            if(array_key_exists ( 'fonction' , $_GET) )
-                $fonction=$_GET['fonction'];
-            
-                
-            $tabVariables = [];
-            //regarde si 'variables' existe dans le tableau _GET
-            if(array_key_exists ( 'variables' , $_GET) )
-            {
-                $variables=$_GET['variables'];
-                //debug($variables,"Noyau ligne 144 variables");
-                $variableCallback =$this->getControleur($application)->getRouteur()->getRoute($fonction)->getVariableCallback();
-                //debug($variableCallback,"Noyau ligne 147 variableCallback");
-               
-                $match=null;
-                $patern="%[\w\s]+:[\w\s-]+%";        
-                preg_match_all($patern, $variables,$match);                       
-                //debug($match,"Noyau ligne 152 match");
-               
+        if (array_key_exists('application', $_GET)) {
+            $application = $_GET['application'];
 
-                
-                foreach ($match as $var)
-                {            
-                    foreach ($var as $variableCallback)
-                    {                
-                        $t2=explode ( ":" , $variableCallback );
-                        //debug($t2,"Noyau ligne 161 t2");
-                        $tabVariables[$t2[0]]=$t2[1];
+            $fonction = null;
+            if (array_key_exists('fonction', $_GET)) {
+                $fonction = $_GET['fonction'];
+            }
+
+            $tabVariables = [];
+
+            if (array_key_exists('variables', $_GET)) {
+                $variables = $_GET['variables'];
+                $variableCallback = $this->getControleur($application)
+                    ->getRouteur()
+                    ->getRoute($fonction)
+                    ->getVariableCallback();
+
+                $match = null;
+                $patern = "%[\\w\\s]+:[\\w\\s-]+%";
+                preg_match_all($patern, $variables, $match);
+
+                foreach ($match as $var) {
+                    foreach ($var as $variableCallback) {
+                        $t2 = explode(":", $variableCallback);
+                        $tabVariables[$t2[0]] = $t2[1];
                     }
                 }
-                //debug($tabVariables,"Noyau ligne 165 tabVariables");
-                /**/
             }
-            
-            if(count($_POST) != 0)
-            {
-                //debug($_POST);
-                
-                foreach ($_POST as $var => $val)
-                {
-                    $tabVariables[$var]=$val;
+
+            if (count($_POST) != 0) {
+                foreach ($_POST as $var => $val) {
+                    $tabVariables[$var] = $val;
                 }
             }
+        } else {
+            // Application par défaut
+            $application = "Page02";
+            $fonction = "index";
+            $tabVariables = [];
         }
-        else 
-        {
-            $application="Page02";
-            $fonction="index";
-            $tabVariables = [];                
-        }
-        
-        $this->getControleur($application)->ExecCallable($fonction,$tabVariables);
-        /*
+
         $controleur = $this->getControleur($application);
-        $controleur->ExecCallable($fonction,$tabVariables);//->getRoute($fonction)->ExecCallable($variables);
-        /**/
+
+        if ($controleur === null) {
+            // Sécurité : application inconnue
+            die("Application « {$application} » introuvable.");
+        }
+
+        $controleur->ExecCallable($fonction, $tabVariables);
     }
 
-    
-    /* FONCTION POUR DEBEUGAGE */
-    /* ####################### */
+    /* ========== Fonctions de débogage ========== */
+
     public function memRoutes()
     {
-        foreach ($this->controleurs as $controleur)
-        {
-            foreach ($controleur->getRouteur()->getRoutes() as $route)
-            {
-                $this->routes[] = $route;//recupere les routes du routeur du controleur.
+        foreach ($this->controleurs as $controleur) {
+            foreach ($controleur->getRouteur()->getRoutes() as $route) {
+                $this->routes[] = $route;
             }
-        }           
+        }
     }
-    
+
     public function memAllUrl()
     {
-        
-        foreach ($this->routes as $route)
-        {
-           
-            $var=[];
-            echo "- ".$route->generateUri($var)."<br>";
+        foreach ($this->routes as $route) {
+            $var = [];
+            echo "- " . $route->generateUri($var) . "<br>";
         }
-        
-        
     }
 }
-
