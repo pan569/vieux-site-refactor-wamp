@@ -15,31 +15,21 @@ use motif\modele\Motif;
 
 class CtrPage01 extends Controleur
 {
-        
-    
     public function __construct(Motif $motif)
     {
-        
-        $this->nomApplication = str_replace( "app" , "" , __NAMESPACE__ );
-        
+        // nomApplication est maintenant déduit automatiquement par le parent
         parent::__construct($motif);
-        
-        $s=DIRECTORY_SEPARATOR;                
+
+        $s = DIRECTORY_SEPARATOR;
         $this->routeur->addRoute(new Route($this->nomApplication, "index", "", "", __DIR__."{$s}vue{$s}index.php"));
-                
     }
 
     public function index(array $variables = [])
-    {   
-       
-        $s=DIRECTORY_SEPARATOR;        
-        $fichier = __DIR__."{$s}vue{$s}"."articles.html";        
-        $model = file_get_contents($fichier);// systeme\objets\Persistance::getInstance()->LireTxt($fichier);
-        
-        ///$page = $this->motif;
-        echo $this->renduPage("index",compact('model'));
-        /**/
-    }    
+    {
+        $s = DIRECTORY_SEPARATOR;
+        $fichier = __DIR__."{$s}vue{$s}"."articles.html";
+        $model = file_get_contents($fichier);
 
-    
+        echo $this->renduPage("index", compact('model'));
+    }
 }
