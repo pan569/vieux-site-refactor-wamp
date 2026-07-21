@@ -8,7 +8,7 @@ $action = $this->routeur->getRoute($nomDeVue)->generateUri(['id' => $model->get(
 
 if($nomDeVue == "editerEspece")
 {
-    $titre = "Edition de l'éspece " . $model->get('LATIN');
+    $titre = "Edition de l'éspece " . e($model->get('LATIN'));
 }
 else
 {
@@ -17,13 +17,13 @@ else
 
 ?>
 
-<h1><?=$titre;?></h1>    
+<h1><?= e($titre); ?></h1>    
 
 <a class="btn btn-primary" href="<?=  $this->routeur->getRoute('indexEspece')->generateUri(); ?>">Retour a la liste des especes</a>
 
 <form method="post" action="<?=$action; ?>" enctype="multipart/form-data">
     <div class="form-group">
-
+    <?= $this->champCsrf(); ?>
 	<?= $form->ConstructeurChampSelection("Genre", "ID_GENRE", $model->get('ID_GENRE') !== null ? $model->get('ID_GENRE') : 0 ,"select",$listeGenre) ?>                               
     <?= $form->ConstructeurChamp( "LATIN",'LATIN', $model->get('LATIN') !== null ? $model->get('LATIN') : "",'text');?>      
     <?= $form->ConstructeurChamp( "FRANCAIS",'FRANCAIS',   $model->get('FRANCAIS') !== null ? $model->get('FRANCAIS') : "", 'text');?>
@@ -40,6 +40,7 @@ else
 
 <?php if ($nomDeVue == "editerEspece"): ?>
 <form style="display: inline;" method="post" action="<?=  $this->routeur->getRoute('supprimerEspece')->generateUri(['id' => $model->get('id')]); ?>" enctype="multipart/form-data">
+    <?= $this->champCsrf(); ?>
 	<input type="hidden" name="method" value="DELETE">
 	<button class="btn btn-primary">Supprimer</button>
 </form>

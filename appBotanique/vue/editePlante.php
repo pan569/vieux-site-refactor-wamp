@@ -4,25 +4,10 @@ use systeme\vue\form;
 
 $form = form::getInstance('form-control');
 
-
-
-//debug($nomDeVue,"Nom de vue");
-//debug($model,"model");
-//debug($mode['ID_ESPECE'],"ID_ESPECE");
-//debug($model->getCle(),"liste des etiquettes");
-
-
-/*
-$t = $model->get('ID_ESPECE') !== null ? $model->get('ID_ESPECE'):0;
-debug($t,"t");
-/**/
-
 if($nomDeVue == "editerPlante")
 {
-    debug(['id' => $model->get('id')],"id");
     $action = $this->routeur->getRoute($nomDeVue)->generateUri(['id' => $model->get('id')]);
-    $titre = "Edition de la plante " . $model->get('LATIN');
-    
+    $titre = "Edition de la plante " . e($model->get('LATIN'));
 }
 else
 {
@@ -32,14 +17,13 @@ else
 
 ?>
 
-<h1><?=$titre;?></h1>
+<h1><?= e($titre); ?></h1>
 
 <a class="btn btn-primary" href="<?=  $this->routeur->getRoute('indexPlante')->generateUri(); ?>">Retour a la liste des plantes</a>
     
 <form method="post" action="<?= $action; ?>" enctype="multipart/form-data">
     <div class="form-group">
-
-	
+    <?= $this->champCsrf(); ?>
 
 	<?= $form->ConstructeurChamp("Espece", "ID_ESPECE", $model->get('ID_ESPECE') !== null ? $model->get('ID_ESPECE') : 0 ,"select",$listeEspece) ?>                                           
     <?= $form->ConstructeurChamp( "Varieté",'VARIETEE', $model->get('VARIETEE') !== null ? $model->get('VARIETEE') : "",'text');?>    
@@ -47,10 +31,8 @@ else
     <?= $form->ConstructeurChamp( "Type de sesexualité",'SEXUALITE', $model->get('SEXUALITE') !== null ? $model->get('SEXUALITE') : "",'selectDur',$model::_SEXUALITE);?>        
     
     <?= $form->ConstructeurChamp( "Periode de fleuraison",'FLEURESON', $model->get('FLEURESON') !== null ? $model->get('FLEURESON') : "",'checkboxList',$model::_PERIODE); ?>
-    <?= ""; //$form->ConstructeurChamp( "Periode de fleuraison",'FLEURESON[]', $model->get('FLEURESON') !== null ? $model->get('FLEURESON') : "",'selectMultiple',$model::_PERIODE);?>
     
     <?= $form->ConstructeurChamp( "Periode de fructification",'FRUCTIFICATION', $model->get('FRUCTIFICATION') !== null ? $model->get('FRUCTIFICATION') : "",'checkboxList',$model::_PERIODE); ?>
-    <?= ""; //form->ConstructeurChamp( "Periode de fructification",'FRUCTIFICATION[]', $model->get('FRUCTIFICATION') !== null ? $model->get('FRUCTIFICATION') : "",'selectMultiple',$model::_PERIODE);?>
     
     <?= $form->ConstructeurChamp( "Hauteur minimal",'HAUTEUR_MIN', $model->get('HAUTEUR_MIN') !== null ? $model->get('HAUTEUR_MIN') : "",'text');?>
     <?= $form->ConstructeurChamp( "Hauteur maximal",'HAUTEUR_MAX', $model->get('HAUTEUR_MAX') !== null ? $model->get('HAUTEUR_MAX') : "",'text');?>
@@ -66,22 +48,17 @@ else
     <?= $form->ConstructeurChamp( "Humidité",'HUMIDITE', $model->get('HUMIDITE') !== null ? $model->get('HUMIDITE') : "",'text');?>
     
     <?= $form->ConstructeurChamp( "Type de multiplication",'MULTIPLICATION', $model->get('MULTIPLICATION') !== null ? $model->get('MULTIPLICATION') : "",'checkboxList',$model::_MULTIPLICATION); ?>
-    <?= ""; //$form->ConstructeurChamp( "type de multiplication",'MULTIPLICATION[]', $model->get('MULTIPLICATION') !== null ? $model->get('MULTIPLICATION') : "",'selectMultiple',$model::_MULTIPLICATION);?>    
     
     <?= $form->ConstructeurChamp( "Periode de semis en interieur",'SEMIS_INTERIEUR', $model->get('SEMIS_INTERIEUR') !== null ? $model->get('SEMIS_INTERIEUR') : "",'checkboxList',$model::_PERIODE); ?>
-    <?= ""; //$form->ConstructeurChamp( "Periode de semis en interieur",'SEMIS_INTERIEUR[]', $model->get('SEMIS_INTERIEUR') !== null ? $model->get('SEMIS_INTERIEUR') : "",'selectMultiple',$model::_PERIODE);?>
     
     <?= $form->ConstructeurChamp( "Periode de semis en exterieur",'SEMIS_EXTERIEUR', $model->get('SEMIS_EXTERIEUR') !== null ? $model->get('SEMIS_EXTERIEUR') : "",'checkboxList',$model::_PERIODE); ?>
-    <?= ""; //$form->ConstructeurChamp( "Periode de semis en exterieur",'SEMIS_EXTERIEUR[]', $model->get('SEMIS_EXTERIEUR') !== null ? $model->get('SEMIS_EXTERIEUR') : "",'selectMultiple',$model::_PERIODE);?>
     
     <?= $form->ConstructeurChamp( "Periode de plantation",'PLANTATION', $model->get('PLANTATION') !== null ? $model->get('PLANTATION') : "",'checkboxList',$model::_PERIODE); ?>
-    <?= ""; //$form->ConstructeurChamp( "periode de plantation",'PLANTATION[]', $model->get('PLANTATION') !== null ? $model->get('PLANTATION') : "",'selectMultiple',$model::_PERIODE);?>
     
     <?= $form->ConstructeurChamp( "Types de greffe",'GREFFE', $model->get('GREFFE') !== null ? $model->get('GREFFE') : "",'text');?>    
     <?= $form->ConstructeurChamp( "Strate forestiere",'STRATE', $model->get('STRATE') !== null ? $model->get('STRATE') : "",'selectDur',$model::_STRATE);?>
     
     <?= $form->ConstructeurChamp( "Sensible a",'SENSIBILITE', $model->get('SENSIBILITE') !== null ? $model->get('SENSIBILITE') : "",'checkboxList',$model::_SENSIBILITE); ?>
-    <?= ""; //$form->ConstructeurChamp( "Sensible a",'SENSIBILITE[]', $model->get('SENSIBILITE') !== null ? $model->get('SENSIBILITE') : "",'selectMultiple',$model::_SENSIBILITE);?> 
     
     <?= $form->ConstructeurChamp( "Etiquette perso",'LIBELLE', $model->get('LIBELLE') !== null ? $model->get('LIBELLE') : "",'selectDur',$model::_LIBELLE);?>
     
@@ -100,33 +77,6 @@ else
     
 	<?= $form->ConstructeurChamp( "AUTRE",'AUTRE',$interetPlante->get('AUTRE') !== null ? $interetPlante->get('AUTRE') : "",'textarea',[50,5]);?>
         
-    
-    <?= ""; //$form->ConstructeurChamp( "Tige",'CulinairesTIGE', $model->get('TIGE') !== null ? $model->get('TIGE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Feuille",'CulinairesFEUILLE', $model->get('FEUILLE') !== null ? $model->get('FEUILLE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Fleur",'CulinairesFLEUR', $model->get('FLEUR') !== null ? $model->get('FLEUR') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Fruit",'CulinairesFRUIT', $model->get('FRUIT') !== null ? $model->get('FRUIT') : "",'textarea',[50,5]);?>
-    
-    <h2>Intérêts Médicales</h2>
-    <?= ""; //$form->ConstructeurChamp( "Racine",'MédicalesRACINE', $model->get('RACINE') !== null ? $model->get('RACINE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Tige",'MédicalesTIGE', $model->get('TIGE') !== null ? $model->get('TIGE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Feuille",'MédicalesFEUILLE', $model->get('FEUILLE') !== null ? $model->get('FEUILLE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Fleur",'MédicalesFLEUR', $model->get('FLEUR') !== null ? $model->get('FLEUR') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Fruit",'MédicalesFRUIT', $model->get('FRUIT') !== null ? $model->get('FRUIT') : "",'textarea',[50,5]);?>
-    
-    <h2>Intérêts Environementals</h2>
-    <?= ""; //$form->ConstructeurChamp( "Racine",'EnvironementalsRACINE', $model->get('RACINE') !== null ? $model->get('RACINE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Tige",'EnvironementalsTIGE', $model->get('TIGE') !== null ? $model->get('TIGE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Feuille",'EnvironementalsFEUILLE', $model->get('FEUILLE') !== null ? $model->get('FEUILLE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Fleur",'EnvironementalsFLEUR', $model->get('FLEUR') !== null ? $model->get('FLEUR') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Fruit",'EnvironementalsFRUIT', $model->get('FRUIT') !== null ? $model->get('FRUIT') : "",'textarea',[50,5]);?>
-    
-    <h2>Autre</h2>
-    <?= ""; //$form->ConstructeurChamp( "Racine",'AutreRACINE', $model->get('RACINE') !== null ? $model->get('RACINE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Tige",'AutreTIGE', $model->get('TIGE') !== null ? $model->get('TIGE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Feuille",'AutreFEUILLE', $model->get('FEUILLE') !== null ? $model->get('FEUILLE') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Fleur",'AutreFLEUR', $model->get('FLEUR') !== null ? $model->get('FLEUR') : "",'textarea',[50,5]);?>
-    <?= ""; //$form->ConstructeurChamp( "Fruit",'AutreFRUIT', $model->get('FRUIT') !== null ? $model->get('FRUIT') : "",'textarea',[50,5]);?>
-    
     <?= $form->ConstructeurChamp( "ENSEMBLE",'ENSEMBLE', "", 'file');?>
     <?= $form->ConstructeurChamp( "FEUILLE",'FEUILLE', "", 'file');?>
     <?= $form->ConstructeurChamp( "FLEUR",'FLEUR', "", 'file');?>
@@ -140,6 +90,7 @@ else
 
 <?php if ($nomDeVue == "editerPlante"): ?>
 <form style="display: inline;" method="post" action="<?=  $this->routeur->getRoute('supprimerPlante')->generateUri(['id' => $model->get('id')]); ?>" enctype="multipart/form-data">
+    <?= $this->champCsrf(); ?>
 	<input type="hidden" name="method" value="DELETE">
 	<button class="btn btn-primary">Supprimer</button>
 </form>
