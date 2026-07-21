@@ -10,7 +10,9 @@
 		<DataBaseUtilisateur>root</DataBaseUtilisateur>
 		<DataBaseMdP/>
 		<DataBaseNon>mytest</DataBaseNon>
-		<SiteCopyright>ApplicWeb ©2021</SiteCopyright>		
+		<SiteCopyright>ApplicWeb ©2021</SiteCopyright>
+		<!-- Application affichée quand l'URL ne précise pas ?application=... -->
+		<ApplicationParDefaut>Page02</ApplicationParDefaut>
 	</Configuration>
 	<Credits>
 		<Developpeur nom="ApplicWeb Developpement" adresse="7 rue chateaubriand 00000 Nantes" telephone="06 00 13 00 02" email="applicwebhebIIergement@applicweb.fr" www="applicwebII.fr"/>

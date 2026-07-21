@@ -37,6 +37,9 @@ class Noyau
 
     protected $routes = [];
 
+    /** Application affichée quand aucune n'est demandée dans l'URL */
+    protected $applicationParDefaut = 'Page02';
+
     public function getDonnées(string $clee)
     {
         return $this->données->get($clee);
@@ -70,6 +73,12 @@ class Noyau
         $this->données['#DatabaseCharset']     = "utf8";
         $this->données['#DataBaseUtilisateur'] = $this->motif['Configuration']['DataBaseUtilisateur'];
         $this->données['#DataBaseMdP']         = $this->motif['Configuration']['DataBaseMdP'];
+
+        // Application par défaut (configurable dans resources/ini_monBlog.xml)
+        if (isset($this->motif['Configuration']['ApplicationParDefaut'])
+            && $this->motif['Configuration']['ApplicationParDefaut'] !== '') {
+            $this->applicationParDefaut = $this->motif['Configuration']['ApplicationParDefaut'];
+        }
 
         // ===== DÉCOUVERTE AUTOMATIQUE DES APPLICATIONS =====
         $this->decouvrirApplications();
@@ -135,55 +144,75 @@ class Noyau
 
     public function navig()
     {
-        if (array_key_exists('application', $_GET)) {
-            $application = $_GET['application'];
+        // --- Récupération des paramètres d'URL ---
+        $application = $_GET['application'] ?? $this->applicationParDefaut;
+        $fonction    = $_GET['fonction']    ?? 'index';
+        $tabVariables = [];
 
-            $fonction = null;
-            if (array_key_exists('fonction', $_GET)) {
-                $fonction = $_GET['fonction'];
+        // Variables passées dans l'URL (?variables=id:12|p:2)
+        if (!empty($_GET['variables'])) {
+            $controleur = $this->getControleur($application);
+
+            if ($controleur === null) {
+                $this->erreur("Application « {$application} » introuvable.");
+                return;
             }
 
-            $tabVariables = [];
+            $route = $controleur->getRouteur()->getRoute($fonction);
+            if ($route === null) {
+                $this->erreur("Fonction « {$fonction} » introuvable dans l'application « {$application} ».");
+                return;
+            }
 
-            if (array_key_exists('variables', $_GET)) {
-                $variables = $_GET['variables'];
-                $variableCallback = $this->getControleur($application)
-                    ->getRouteur()
-                    ->getRoute($fonction)
-                    ->getVariableCallback();
+            $match = null;
+            $patern = "%[\\w\\s]+:[\\w\\s-]+%";
+            preg_match_all($patern, $_GET['variables'], $match);
 
-                $match = null;
-                $patern = "%[\\w\\s]+:[\\w\\s-]+%";
-                preg_match_all($patern, $variables, $match);
-
-                foreach ($match as $var) {
-                    foreach ($var as $variableCallback) {
-                        $t2 = explode(":", $variableCallback);
+            foreach ($match as $var) {
+                foreach ($var as $paire) {
+                    $t2 = explode(":", $paire);
+                    if (count($t2) === 2) {
                         $tabVariables[$t2[0]] = $t2[1];
                     }
                 }
             }
-
-            if (count($_POST) != 0) {
-                foreach ($_POST as $var => $val) {
-                    $tabVariables[$var] = $val;
-                }
-            }
-        } else {
-            // Application par défaut
-            $application = "Page02";
-            $fonction = "index";
-            $tabVariables = [];
         }
 
+        // Variables POST (formulaires)
+        if (!empty($_POST)) {
+            foreach ($_POST as $var => $val) {
+                $tabVariables[$var] = $val;
+            }
+        }
+
+        // --- Exécution ---
         $controleur = $this->getControleur($application);
 
         if ($controleur === null) {
-            // Sécurité : application inconnue
-            die("Application « {$application} » introuvable.");
+            $this->erreur("Application « {$application} » introuvable.");
+            return;
+        }
+
+        // Vérifie que la méthode existe bien dans le contrôleur
+        if (!method_exists($controleur, $fonction)) {
+            $this->erreur("La méthode « {$fonction} » n'existe pas dans le contrôleur de « {$application} ».");
+            return;
         }
 
         $controleur->ExecCallable($fonction, $tabVariables);
+    }
+
+    /**
+     * Affiche une erreur simple et arrête l'exécution.
+     * (Peut être amélioré plus tard avec une vraie page d'erreur du motif)
+     */
+    protected function erreur(string $message): void
+    {
+        http_response_code(404);
+        echo "<h1>Erreur</h1>";
+        echo "<p>" . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . "</p>";
+        echo "<p><a href=\"index.php\">Retour à l'accueil</a></p>";
+        exit;
     }
 
     /* ========== Fonctions de débogage ========== */
