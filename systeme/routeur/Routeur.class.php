@@ -2,43 +2,46 @@
 namespace systeme\routeur;
 
 /**
- * Created by PhpStorm.
- * User: Ulysse1976
- * Date: 19/12/2018
- * Time: 06:40
+ * Conteneur de routes d'une application.
+ *
+ * Phase 6 : getRoute() retourne null si la route n'existe pas
+ * (évite les notices / erreurs fatales).
  */
-
-class Routeur 
+class Routeur
 {
+    /** @var Route[] */
     protected $routes = [];
-    
-    public function getRoute(string $nomRoute):Route
+
+    /**
+     * Retourne la route demandée, ou null si absente.
+     */
+    public function getRoute(string $nomRoute): ?Route
     {
-        /*
-        debug($nomRoute,"route recherché");
-        debug(array_keys($this->routes),"liste des routes");
-        
-        debug($this->routes[$nomRoute],"la route {$nomRoute}");
-        /**/
-        
-        return $this->routes[$nomRoute];
+        return $this->routes[$nomRoute] ?? null;
     }
-    
-    public function getRoutes()
+
+    /**
+     * @return Route[]
+     */
+    public function getRoutes(): array
     {
-        return  $this->routes;
+        return $this->routes;
     }
 
     public function __construct()
     {
-        
-    }
-    
-    public function  addRoute(Route $route)
-    {
-        
-        $this->routes["{$route->getCallback()}"]=$route;
     }
 
-   
+    public function addRoute(Route $route): void
+    {
+        $this->routes[$route->getCallback()] = $route;
+    }
+
+    /**
+     * Indique si une route existe.
+     */
+    public function hasRoute(string $nomRoute): bool
+    {
+        return isset($this->routes[$nomRoute]);
+    }
 }

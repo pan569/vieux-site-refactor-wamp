@@ -3,6 +3,7 @@
 namespace systeme;
 
 use systeme\objets\Collection;
+use systeme\securite\Securite;
 use motif\modele\Motif;
 
 /**
@@ -14,6 +15,8 @@ use motif\modele\Motif;
  * - Gère le routage vers le bon contrôleur
  *
  * Objectif : ajouter ou supprimer une application = ajouter ou supprimer uniquement le dossier.
+ *
+ * Phase 6 : sanitisation des paramètres URL + page d'erreur unifiée.
  */
 class Noyau
 {
@@ -62,6 +65,11 @@ class Noyau
 
     public function __construct()
     {
+        // Session nécessaire pour CSRF et messages flash futurs
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         $this->données = new Collection();
 
         // Chargement de la configuration via Motif
@@ -137,44 +145,37 @@ class Noyau
 
     public function navig()
     {
-        // --- Récupération des paramètres d'URL ---
-        $application = $_GET['application'] ?? $this->applicationParDefaut;
-        $fonction    = $_GET['fonction']    ?? 'index';
+        // --- Récupération et sanitisation des paramètres d'URL ---
+        $application = Securite::sanitizeNom(
+            $_GET['application'] ?? $this->applicationParDefaut
+        );
+        $fonction = Securite::sanitizeNom(
+            $_GET['fonction'] ?? 'index'
+        );
+
+        if ($application === '') {
+            $application = $this->applicationParDefaut;
+        }
+        if ($fonction === '') {
+            $fonction = 'index';
+        }
+
         $tabVariables = [];
 
         // Variables passées dans l'URL (?variables=id:12|p:2)
         if (!empty($_GET['variables'])) {
-            $controleur = $this->getControleur($application);
-
-            if ($controleur === null) {
-                $this->erreur("Application « {$application} » introuvable.");
-                return;
-            }
-
-            $route = $controleur->getRouteur()->getRoute($fonction);
-            if ($route === null) {
-                $this->erreur("Fonction « {$fonction} » introuvable dans l'application « {$application} ».");
-                return;
-            }
-
-            $match = null;
-            $patern = "%[\\w\\s]+:[\\w\\s-]+%";
-            preg_match_all($patern, $_GET['variables'], $match);
-
-            foreach ($match as $var) {
-                foreach ($var as $paire) {
-                    $t2 = explode(":", $paire);
-                    if (count($t2) === 2) {
-                        $tabVariables[$t2[0]] = $t2[1];
-                    }
-                }
-            }
+            $tabVariables = $this->parserVariablesUrl((string) $_GET['variables']);
         }
 
-        // Variables POST (formulaires)
+        // Variables POST (formulaires) — nettoyage léger des clés
         if (!empty($_POST)) {
             foreach ($_POST as $var => $val) {
-                $tabVariables[$var] = $val;
+                // On garde les tableaux (checkbox multiples) tels quels
+                if (is_array($val)) {
+                    $tabVariables[$var] = $val;
+                } else {
+                    $tabVariables[$var] = is_string($val) ? Securite::nettoyer($val) : $val;
+                }
             }
         }
 
@@ -182,13 +183,13 @@ class Noyau
         $controleur = $this->getControleur($application);
 
         if ($controleur === null) {
-            $this->erreur("Application « {$application} » introuvable.");
+            $this->erreur("Application « {$application} » introuvable.", 404);
             return;
         }
 
         // Vérifie que la méthode existe bien dans le contrôleur
         if (!method_exists($controleur, $fonction)) {
-            $this->erreur("La méthode « {$fonction} » n'existe pas dans le contrôleur de « {$application} ».");
+            $this->erreur("La méthode « {$fonction} » n'existe pas dans le contrôleur de « {$application} ».", 404);
             return;
         }
 
@@ -196,15 +197,59 @@ class Noyau
     }
 
     /**
-     * Affiche une erreur simple et arrête l'exécution.
-     * (Peut être amélioré plus tard avec une vraie page d'erreur du motif)
+     * Parse la chaîne variables de l'URL (format clé:valeur|clé2:valeur2).
      */
-    protected function erreur(string $message): void
+    protected function parserVariablesUrl(string $chaine): array
     {
-        http_response_code(404);
-        echo "<h1>Erreur</h1>";
-        echo "<p>" . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . "</p>";
-        echo "<p><a href=\"index.php\">Retour à l'accueil</a></p>";
+        $resultat = [];
+
+        // Accepte "clé:valeur" séparés par | ou ;
+        $paires = preg_split('/[|;]/', $chaine);
+
+        foreach ($paires as $paire) {
+            $paire = trim($paire);
+            if ($paire === '') {
+                continue;
+            }
+
+            $parts = explode(':', $paire, 2);
+            if (count($parts) === 2) {
+                $cle = Securite::sanitizeNom($parts[0]);
+                $val = Securite::nettoyer($parts[1]);
+                if ($cle !== '') {
+                    $resultat[$cle] = $val;
+                }
+            }
+        }
+
+        return $resultat;
+    }
+
+    /**
+     * Affiche une page d'erreur unifiée (motif/vue/erreur.php) et arrête l'exécution.
+     */
+    protected function erreur(string $message, int $code = 404): void
+    {
+        http_response_code($code);
+
+        $fichierErreur = $_SERVER['DOCUMENT_ROOT']
+            . DIRECTORY_SEPARATOR . 'motif'
+            . DIRECTORY_SEPARATOR . 'vue'
+            . DIRECTORY_SEPARATOR . 'erreur.php';
+
+        if (is_file($fichierErreur)) {
+            // Variables disponibles dans la vue
+            // $message, $code
+            require $fichierErreur;
+        } else {
+            // Fallback minimal si le fichier motif est absent
+            echo '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Erreur</title></head><body>';
+            echo '<h1>Erreur ' . (int) $code . '</h1>';
+            echo '<p>' . htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . '</p>';
+            echo '<p><a href="index.php">Retour à l\'accueil</a></p>';
+            echo '</body></html>';
+        }
+
         exit;
     }
 
