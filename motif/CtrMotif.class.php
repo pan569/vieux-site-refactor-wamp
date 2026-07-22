@@ -250,12 +250,16 @@ class CtrMotif extends Controleur
     }
 
     /**
-     * Redirige vers la page index avec l'onglet souhaité.
+     * Redirige vers la page index avec l'onglet souhaité (query string).
+     * Compatible avec le format d'URL actuel du Routeur.
      */
     private function redirigerVersOnglet(string $onglet): void
     {
-        $Callback = 'index';
-        $variableCallback = ['onglet' => $onglet];
-        $this->redirigerRoute(compact('Callback', 'variableCallback'));
+        $uri = 'index.php?application=' . urlencode($this->nomApplication)
+             . '&fonction=index'
+             . '&onglet=' . urlencode($onglet);
+
+        header('Location: ' . $uri);
+        exit;
     }
 }
