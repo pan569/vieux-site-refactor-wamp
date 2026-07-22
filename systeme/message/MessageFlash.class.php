@@ -13,6 +13,7 @@ use systeme\securite\Securite;
  * Affichage (déjà branché dans motif/vue/body.php) :
  *   <?= MessageFlash::html(); ?>
  *
+ * Styles : classes .flash / .flash-succes|erreur|info dans le thème (theme.monBog).
  * Compatible avec la modularité : aucune dépendance à une application.
  */
 class MessageFlash
@@ -79,6 +80,7 @@ class MessageFlash
 
     /**
      * Rend le HTML des messages flash (et les consomme).
+     * Le style vient du thème via .flash / .flash-{type}.
      */
     public static function html(): string
     {
@@ -88,24 +90,14 @@ class MessageFlash
             return '';
         }
 
-        $html = '<div class="messages-flash" style="margin:1rem 0;">';
+        $html = '<div class="messages-flash">';
 
         foreach ($messages as $m) {
             $type = $m['type'] ?? self::INFO;
             $texte = Securite::e($m['message'] ?? '');
+            $classe = 'flash flash-' . preg_replace('/[^a-z]/', '', strtolower($type));
 
-            $styles = [
-                self::SUCCES => 'background:#d4edda;color:#155724;border:1px solid #c3e6cb;',
-                self::ERREUR => 'background:#f8d7da;color:#721c24;border:1px solid #f5c6cb;',
-                self::INFO   => 'background:#d1ecf1;color:#0c5460;border:1px solid #bee5eb;',
-            ];
-
-            $style = $styles[$type] ?? $styles[self::INFO];
-
-            $html .= '<div class="flash flash-' . Securite::e($type) . '" '
-                . 'style="padding:.75rem 1rem;border-radius:6px;margin-bottom:.5rem;' . $style . '">'
-                . $texte
-                . '</div>';
+            $html .= '<div class="' . $classe . '">' . $texte . '</div>';
         }
 
         $html .= '</div>';
