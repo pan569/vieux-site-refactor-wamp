@@ -157,40 +157,38 @@ class Motif extends Item
     }
     
     
-    public function lister(string $dossier = null,string $typeFichier = null)
+    /**
+     * Liste les fichiers d'un type donné (css|js) dans un dossier resources.
+     * Si le sous-dossier n'existe pas (app sans JS, après nettoyage, etc.), retourne [] sans warning.
+     */
+    public function lister(string $dossier = null, string $typeFichier = null)
     {
-        
-        //debug($dossier,"Motif->lister() dossier");
-        
         $resultat = [];
-                        
-        $dirname = $_SERVER ["DOCUMENT_ROOT"].$dossier.DIRECTORY_SEPARATOR.$typeFichier.DIRECTORY_SEPARATOR;
-                        
-        //debug($dirname,"Motif->lister() dirname");
-        
-        //str_replace( ["\\",'/'] , DIRECTORY_SEPARATOR , $dirname );
-        
-        $dir = opendir($dirname);
-        
-        while($file = readdir($dir))
-        {
-            if($file != '.' && $file != '..' && !is_dir($dirname.$file))
-            {
-                $extension = substr(strrchr($file, '.'), 1);//recupere l'extension
-                if ($extension == $typeFichier)
-                {
-                    
-                    
-                    $fichier =str_replace( '\\' , '/' , $dossier )."/{$typeFichier}/". $file;
-                    
-                    $resultat [] = $fichier;
-                    
+
+        $dirname = $_SERVER["DOCUMENT_ROOT"] . $dossier . DIRECTORY_SEPARATOR . $typeFichier . DIRECTORY_SEPARATOR;
+
+        // Robustesse : une app peut n'avoir que du CSS, ou aucun resource après nettoyage des doublons
+        if (!is_dir($dirname)) {
+            return $resultat;
+        }
+
+        $dir = @opendir($dirname);
+        if ($dir === false) {
+            return $resultat;
+        }
+
+        while ($file = readdir($dir)) {
+            if ($file != '.' && $file != '..' && !is_dir($dirname . $file)) {
+                $extension = substr(strrchr($file, '.'), 1);
+                if ($extension == $typeFichier) {
+                    $fichier = str_replace('\\', '/', $dossier) . "/{$typeFichier}/" . $file;
+                    $resultat[] = $fichier;
                 }
             }
         }
-        
+
         closedir($dir);
-        
+
         return $resultat;
     }
     
