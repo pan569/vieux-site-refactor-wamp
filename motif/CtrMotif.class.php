@@ -1,9 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Ulysse1976
- * Date: 12/12/2018
- * Time: 05:59
+ * Contrôleur de l'application Motif (administration du site).
+ *
+ * Phase onglets : une interface unique avec navigation par onglets
+ * (Vue d'ensemble / Configuration / Crédits / En-tête / Menus / Pied).
+ * Les formulaires POST restent séparés pour simplicité et robustesse.
+ *
+ * @author Ulysse1976
  */
 
 namespace motif;
@@ -28,27 +31,38 @@ class CtrMotif extends Controleur
         $this->routeur->addRoute(new Route($this->nomApplication, "modifPied", "{menu:[\w0-9]+}", "", __DIR__."{$s}vue{$s}menu.php"));
     }
 
+    /**
+     * Affiche le layout Motif (page + body).
+     * L'aside est volontairement simplifié : les onglets remplacent la navigation latérale.
+     */
     public function afficherPage($main)
     {
-        $t = [];
-        $t['Index'] = array('lien' => $this->routeur->getRoute('index')->generateUri(), 'count' => '');
-        $t['configuration'] = array('lien' => $this->routeur->getRoute('modifConfiguration')->generateUri(), 'count' => '');
-        $t['Credit'] = array('lien' => $this->routeur->getRoute('modifCredit')->generateUri(), 'count' => '');
-        $t['Entete'] = array('lien' => $this->routeur->getRoute('modifEntete')->generateUri(), 'count' => '');
+        // Plus d'aside complexe pour l'admin : les onglets suffisent
+        $this->motif['aside'] = [];
 
-        $this->motif['aside'] = $t;
-
-        $dossier = "/appBotanique/vue/resources";
+        $dossier = "/appBotanique/vue/resources"; // historique, conservé pour compatibilité
         $this->motif->ajoutFichier($dossier);
 
         $body = $this->renduPage("body", compact('main'));
         echo $this->renduPage("page", compact('body'));
     }
 
+    /**
+     * Page principale avec système d'onglets.
+     * Paramètre GET 'onglet' pour ouvrir directement le bon panneau après un enregistrement.
+     */
     public function index(array $variables = [])
     {
-        $model = $this->motif;
-        $main = $this->renduPage("index", compact('model'));
+        $model  = $this->motif;
+        $onglet = $variables['onglet'] ?? ($_GET['onglet'] ?? 'apercu');
+
+        // Onglets autorisés
+        $ongletsValides = ['apercu', 'configuration', 'credits', 'entete', 'menus', 'pied'];
+        if (!in_array($onglet, $ongletsValides, true)) {
+            $onglet = 'apercu';
+        }
+
+        $main = $this->renduPage("index", compact('model', 'onglet'));
         $this->afficherPage($main);
     }
 
@@ -72,11 +86,11 @@ class CtrMotif extends Controleur
             $model->SauvegardeElement('Configuration');
 
             $this->flashSucces('Configuration enregistrée.');
-            $Callback = 'index';
-            $variableCallback = [];
-            $this->redirigerRoute(compact('Callback', 'variableCallback'));
+            $this->redirigerVersOnglet('configuration');
+            return;
         }
 
+        // Affichage direct du formulaire (lien depuis un onglet ou favori)
         $main = $this->renduPage("modifConfiguration", compact('model'));
         $this->afficherPage($main);
     }
@@ -115,9 +129,8 @@ class CtrMotif extends Controleur
             $model->SauvegardeElementAttribut('Credits', 'Hebergeur');
 
             $this->flashSucces('Crédits enregistrés.');
-            $Callback = 'index';
-            $variableCallback = [];
-            $this->redirigerRoute(compact('Callback', 'variableCallback'));
+            $this->redirigerVersOnglet('credits');
+            return;
         }
 
         $main = $this->renduPage("modifCredit", compact('model'));
@@ -144,9 +157,8 @@ class CtrMotif extends Controleur
             $model->SauvegardeElement('Entete');
 
             $this->flashSucces('En-tête enregistré.');
-            $Callback = 'index';
-            $variableCallback = [];
-            $this->redirigerRoute(compact('Callback', 'variableCallback'));
+            $this->redirigerVersOnglet('entete');
+            return;
         }
 
         $main = $this->renduPage("modifEntete", compact('model'));
@@ -156,7 +168,13 @@ class CtrMotif extends Controleur
     public function modifMenu(array $variables = [])
     {
         $AdministrationSite = $this->motif;
-        $model = $AdministrationSite['Menus'][$variables['menu']];
+        $model = $AdministrationSite['Menus'][$variables['menu']] ?? null;
+
+        if ($model === null) {
+            $this->flashErreur('Menu introuvable.');
+            $this->redirigerVersOnglet('menus');
+            return;
+        }
 
         if (array_key_exists('form', $variables)) {
 
@@ -181,9 +199,8 @@ class CtrMotif extends Controleur
             $AdministrationSite['Menus'][$variables['menu']]->SauvegardeElement();
 
             $this->flashSucces('Menu enregistré.');
-            $Callback = 'index';
-            $variableCallback = [];
-            $this->redirigerRoute(compact('Callback', 'variableCallback'));
+            $this->redirigerVersOnglet('menus');
+            return;
         }
 
         $main = $this->renduPage("modifMenu", compact('model'));
@@ -193,7 +210,13 @@ class CtrMotif extends Controleur
     public function modifPied(array $variables = [])
     {
         $AdministrationSite = $this->motif;
-        $model = $AdministrationSite['Pied'][$variables['menu']];
+        $model = $AdministrationSite['Pied'][$variables['menu']] ?? null;
+
+        if ($model === null) {
+            $this->flashErreur('Élément de pied de page introuvable.');
+            $this->redirigerVersOnglet('pied');
+            return;
+        }
 
         if (array_key_exists('form', $variables)) {
 
@@ -218,12 +241,21 @@ class CtrMotif extends Controleur
             $AdministrationSite['Pied'][$variables['menu']]->SauvegardeElement();
 
             $this->flashSucces('Pied de page enregistré.');
-            $Callback = 'index';
-            $variableCallback = [];
-            $this->redirigerRoute(compact('Callback', 'variableCallback'));
+            $this->redirigerVersOnglet('pied');
+            return;
         }
 
         $main = $this->renduPage("modifMenu", compact('model'));
         $this->afficherPage($main);
+    }
+
+    /**
+     * Redirige vers la page index avec l'onglet souhaité.
+     */
+    private function redirigerVersOnglet(string $onglet): void
+    {
+        $Callback = 'index';
+        $variableCallback = ['onglet' => $onglet];
+        $this->redirigerRoute(compact('Callback', 'variableCallback'));
     }
 }
