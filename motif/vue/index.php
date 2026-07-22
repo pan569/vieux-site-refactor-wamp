@@ -1,20 +1,22 @@
 <?php
 /**
- * Interface d'administration Motif avec système d'onglets.
+ * Interface d'administration Motif — onglets + formulaires intégrés.
  * Approche B : CSS + JS léger.
  *
  * Onglets : apercu | configuration | credits | entete | menus | pied
  */
-$onglet = $onglet ?? 'apercu';
+use systeme\vue\form;
 
-// URLs des formulaires d'édition
-$urlConfig  = $this->routeur->getRoute('modifConfiguration')->generateUri();
-$urlCredit  = $this->routeur->getRoute('modifCredit')->generateUri();
-$urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
+$onglet = $onglet ?? 'apercu';
+$form   = form::getInstance('form-control');
+
+$urlConfig = $this->routeur->getRoute('modifConfiguration')->generateUri();
+$urlCredit = $this->routeur->getRoute('modifCredit')->generateUri();
+$urlEntete = $this->routeur->getRoute('modifEntete')->generateUri();
 ?>
 
 <style>
-/* Styles de secours pour les onglets (garantit le fonctionnement même si le CSS du thème est en cache) */
+/* Styles de secours pour les onglets */
 .admin-motif .tabs {
     display: flex;
     flex-wrap: wrap;
@@ -76,6 +78,41 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1.25rem;
 }
+.admin-motif details.menu-item-edit {
+    border: 1px solid #E5E5E5;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    background: #fafafa;
+}
+.admin-motif details.menu-item-edit summary {
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.admin-motif details.menu-item-edit summary::-webkit-details-marker {
+    display: none;
+}
+.admin-motif details.menu-item-edit summary::after {
+    content: '▾';
+    color: #9F9F9F;
+    font-size: 0.85rem;
+}
+.admin-motif details.menu-item-edit[open] summary::after {
+    content: '▴';
+}
+.admin-motif details.menu-item-edit .form-body {
+    padding: 0 1rem 1rem;
+    border-top: 1px solid #E5E5E5;
+}
+.admin-motif .url-hint {
+    font-size: 0.85rem;
+    color: #9F9F9F;
+    margin: 0.25rem 0 0.75rem;
+}
 @media (max-width: 720px) {
     .admin-motif .tabs {
         overflow-x: auto;
@@ -97,7 +134,6 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
 <div class="admin-motif">
     <h1>Paramètres du site</h1>
 
-    <!-- Barre d'onglets -->
     <nav class="tabs" role="tablist" aria-label="Sections d'administration">
         <button type="button" class="tab-btn<?= $onglet === 'apercu' ? ' active' : '' ?>" data-tab="apercu" role="tab">Vue d'ensemble</button>
         <button type="button" class="tab-btn<?= $onglet === 'configuration' ? ' active' : '' ?>" data-tab="configuration" role="tab">Configuration</button>
@@ -110,7 +146,7 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
     <!-- ========== ONGLET : Vue d'ensemble ========== -->
     <div class="tab-panel<?= $onglet === 'apercu' ? ' active' : '' ?>" id="panel-apercu" role="tabpanel">
         <div class="card">
-            <h2>Configuration <a class="btn btn-secondaire" href="<?= $urlConfig ?>" style="font-size:0.8rem;padding:0.3rem 0.7rem;">Modifier</a></h2>
+            <h2>Configuration</h2>
             <div class="grid-2">
                 <div>
                     <h3>Le site</h3>
@@ -130,7 +166,7 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
         </div>
 
         <div class="card">
-            <h2>Crédits <a class="btn btn-secondaire" href="<?= $urlCredit ?>" style="font-size:0.8rem;padding:0.3rem 0.7rem;">Modifier</a></h2>
+            <h2>Crédits</h2>
             <div class="grid-3">
                 <div>
                     <h3>Propriétaire</h3>
@@ -151,7 +187,7 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
         </div>
 
         <div class="card">
-            <h2>En-tête <a class="btn btn-secondaire" href="<?= $urlEntete ?>" style="font-size:0.8rem;padding:0.3rem 0.7rem;">Modifier</a></h2>
+            <h2>En-tête</h2>
             <p><strong>Titre :</strong> <?= e($model['Entete']['titre'] ?? '') ?></p>
             <p><strong>Auteur :</strong> <?= e($model['Entete']['auteur'] ?? '') ?></p>
             <p><strong>Description :</strong> <?= e($model['Entete']['description'] ?? '') ?></p>
@@ -162,8 +198,29 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
     <div class="tab-panel<?= $onglet === 'configuration' ? ' active' : '' ?>" id="panel-configuration" role="tabpanel">
         <div class="card">
             <h2>Configuration</h2>
-            <p class="text-muted">Modifiez les paramètres généraux du site et de la base de données.</p>
-            <p><a class="btn" href="<?= $urlConfig ?>">Ouvrir le formulaire de configuration</a></p>
+            <form method="post" action="<?= $urlConfig ?>" enctype="multipart/form-data">
+                <?= $this->champCsrf(); ?>
+                <div class="grid-2">
+                    <div>
+                        <h3>Le site</h3>
+                        <?= $form->ConstructeurChamp('Nom du site', 'SiteNom', $model['Configuration']['SiteNom'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Descriptif', 'SiteDescriptif', $model['Configuration']['SiteDescriptif'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Dossier des thèmes', 'SiteThemeDossier', $model['Configuration']['SiteThemeDossier'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Thème courant', 'SiteThemeNom', $model['Configuration']['SiteThemeNom'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Dossier des fichiers JS', 'SiteJavaScriptDossier', $model['Configuration']['SiteJavaScriptDossier'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Copyright', 'SiteCopyright', $model['Configuration']['SiteCopyright'] ?? '', 'text'); ?>
+                    </div>
+                    <div>
+                        <h3>Base de données</h3>
+                        <?= $form->ConstructeurChamp('Nom du serveur', 'DataBaseServeur', $model['Configuration']['DataBaseServeur'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Nom utilisateur', 'DataBaseUtilisateur', $model['Configuration']['DataBaseUtilisateur'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Mot de passe', 'DataBaseMdP', $model['Configuration']['DataBaseMdP'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Nom de la base', 'DataBaseNon', $model['Configuration']['DataBaseNon'] ?? '', 'text'); ?>
+                    </div>
+                </div>
+                <?= $form->ConstructeurChamp('', 'form', 'true', 'hidden'); ?>
+                <p><button type="submit" class="btn">Enregistrer la configuration</button></p>
+            </form>
         </div>
     </div>
 
@@ -171,8 +228,37 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
     <div class="tab-panel<?= $onglet === 'credits' ? ' active' : '' ?>" id="panel-credits" role="tabpanel">
         <div class="card">
             <h2>Crédits</h2>
-            <p class="text-muted">Propriétaire, développeur et hébergeur du site.</p>
-            <p><a class="btn" href="<?= $urlCredit ?>">Ouvrir le formulaire des crédits</a></p>
+            <form method="post" action="<?= $urlCredit ?>" enctype="multipart/form-data">
+                <?= $this->champCsrf(); ?>
+                <div class="grid-3">
+                    <div>
+                        <h3>Propriétaire</h3>
+                        <?= $form->ConstructeurChamp('Nom', 'Proprietaire_nom', $model['Proprietaire']['nom'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Adresse', 'Proprietaire_adresse', $model['Proprietaire']['adresse'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Téléphone', 'Proprietaire_telephone', $model['Proprietaire']['telephone'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Courriel', 'Proprietaire_email', $model['Proprietaire']['email'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Site', 'Proprietaire_www', $model['Proprietaire']['www'] ?? '', 'text'); ?>
+                    </div>
+                    <div>
+                        <h3>Développeur</h3>
+                        <?= $form->ConstructeurChamp('Nom', 'Developpeur_nom', $model['Developpeur']['nom'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Adresse', 'Developpeur_adresse', $model['Developpeur']['adresse'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Téléphone', 'Developpeur_telephone', $model['Developpeur']['telephone'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Courriel', 'Developpeur_email', $model['Developpeur']['email'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Site', 'Developpeur_www', $model['Developpeur']['www'] ?? '', 'text'); ?>
+                    </div>
+                    <div>
+                        <h3>Hébergeur</h3>
+                        <?= $form->ConstructeurChamp('Nom', 'Hebergeur_nom', $model['Hebergeur']['nom'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Adresse', 'Hebergeur_adresse', $model['Hebergeur']['adresse'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Téléphone', 'Hebergeur_telephone', $model['Hebergeur']['telephone'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Courriel', 'Hebergeur_email', $model['Hebergeur']['email'] ?? '', 'text'); ?>
+                        <?= $form->ConstructeurChamp('Site', 'Hebergeur_www', $model['Hebergeur']['www'] ?? '', 'text'); ?>
+                    </div>
+                </div>
+                <?= $form->ConstructeurChamp('', 'form', 'true', 'hidden'); ?>
+                <p><button type="submit" class="btn">Enregistrer les crédits</button></p>
+            </form>
         </div>
     </div>
 
@@ -180,8 +266,17 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
     <div class="tab-panel<?= $onglet === 'entete' ? ' active' : '' ?>" id="panel-entete" role="tabpanel">
         <div class="card">
             <h2>En-tête (meta)</h2>
-            <p class="text-muted">Titre, description, mots-clés, favicon…</p>
-            <p><a class="btn" href="<?= $urlEntete ?>">Ouvrir le formulaire d'en-tête</a></p>
+            <form method="post" action="<?= $urlEntete ?>" enctype="multipart/form-data">
+                <?= $this->champCsrf(); ?>
+                <?= $form->ConstructeurChamp("Nom de l'auteur", 'auteur', $model['Entete']['auteur'] ?? '', 'text'); ?>
+                <?= $form->ConstructeurChamp('Description', 'description', $model['Entete']['description'] ?? '', 'textarea', [50, 4]); ?>
+                <?= $form->ConstructeurChamp('Mots-clés', 'motsCles', $model['Entete']['motsCles'] ?? '', 'textarea', [50, 3]); ?>
+                <?= $form->ConstructeurChamp('Éditeur', 'editeur', $model['Entete']['editeur'] ?? '', 'text'); ?>
+                <?= $form->ConstructeurChamp('Titre', 'titre', $model['Entete']['titre'] ?? '', 'text'); ?>
+                <?= $form->ConstructeurChamp('Icône (favicon)', 'image', $model['Entete']['image'] ?? '', 'text'); ?>
+                <?= $form->ConstructeurChamp('', 'form', 'true', 'hidden'); ?>
+                <p><button type="submit" class="btn">Enregistrer l'en-tête</button></p>
+            </form>
         </div>
     </div>
 
@@ -192,31 +287,29 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
             <?php if (empty($model['Menus'])): ?>
                 <p class="text-muted">Aucun élément de menu défini.</p>
             <?php else: ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Titre</th>
-                            <th>URL</th>
-                            <th>Cible</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($model['Menus'] as $item): ?>
-                        <tr>
-                            <td><strong><?= e($item['titre'] ?? '') ?></strong></td>
-                            <td><code><?= e($item['url'] ?? '') ?></code></td>
-                            <td><?= e($item['cible'] ?? '') ?></td>
-                            <td>
-                                <a class="btn btn-secondaire" style="font-size:0.8rem;padding:0.25rem 0.6rem;"
-                                   href="<?= $this->routeur->getRoute('modifMenu')->generateUri(['menu' => $item['titre']]) ?>">
-                                    Modifier
-                                </a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <?php foreach ($model['Menus'] as $item): ?>
+                    <?php
+                    $urlMenu = $this->routeur->getRoute('modifMenu')->generateUri(['menu' => $item['titre']]);
+                    ?>
+                    <details class="menu-item-edit">
+                        <summary>
+                            <span><?= e($item['titre'] ?? '') ?></span>
+                        </summary>
+                        <div class="form-body">
+                            <p class="url-hint">URL : <code><?= e($item['url'] ?? '') ?></code></p>
+                            <form method="post" action="<?= $urlMenu ?>" enctype="multipart/form-data">
+                                <?= $this->champCsrf(); ?>
+                                <?= $form->ConstructeurChamp('Description', 'description', $item['description'] ?? '', 'textarea', [50, 3]); ?>
+                                <?= $form->ConstructeurChamp('Cible', 'cible', $item['cible'] ?? '', 'text'); ?>
+                                <?= $form->ConstructeurChamp('CSS', 'css', $item['css'] ?? '', 'textarea', [50, 2]); ?>
+                                <?= $form->ConstructeurChamp('Image', 'image', $item['image'] ?? '', 'text'); ?>
+                                <?= $form->ConstructeurChamp('', 'menu', $item['titre'] ?? '', 'hidden'); ?>
+                                <?= $form->ConstructeurChamp('', 'form', 'true', 'hidden'); ?>
+                                <p><button type="submit" class="btn">Enregistrer « <?= e($item['titre'] ?? '') ?> »</button></p>
+                            </form>
+                        </div>
+                    </details>
+                <?php endforeach; ?>
             <?php endif; ?>
         </div>
     </div>
@@ -228,31 +321,29 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
             <?php if (empty($model['Pied'])): ?>
                 <p class="text-muted">Aucun élément de pied de page défini.</p>
             <?php else: ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Titre</th>
-                            <th>URL</th>
-                            <th>Cible</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($model['Pied'] as $item): ?>
-                        <tr>
-                            <td><strong><?= e($item['titre'] ?? '') ?></strong></td>
-                            <td><code><?= e($item['url'] ?? '') ?></code></td>
-                            <td><?= e($item['cible'] ?? '') ?></td>
-                            <td>
-                                <a class="btn btn-secondaire" style="font-size:0.8rem;padding:0.25rem 0.6rem;"
-                                   href="<?= $this->routeur->getRoute('modifPied')->generateUri(['menu' => $item['titre']]) ?>">
-                                    Modifier
-                                </a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <?php foreach ($model['Pied'] as $item): ?>
+                    <?php
+                    $urlPied = $this->routeur->getRoute('modifPied')->generateUri(['menu' => $item['titre']]);
+                    ?>
+                    <details class="menu-item-edit">
+                        <summary>
+                            <span><?= e($item['titre'] ?? '') ?></span>
+                        </summary>
+                        <div class="form-body">
+                            <p class="url-hint">URL : <code><?= e($item['url'] ?? '') ?></code></p>
+                            <form method="post" action="<?= $urlPied ?>" enctype="multipart/form-data">
+                                <?= $this->champCsrf(); ?>
+                                <?= $form->ConstructeurChamp('Description', 'description', $item['description'] ?? '', 'textarea', [50, 3]); ?>
+                                <?= $form->ConstructeurChamp('Cible', 'cible', $item['cible'] ?? '', 'text'); ?>
+                                <?= $form->ConstructeurChamp('CSS', 'css', $item['css'] ?? '', 'textarea', [50, 2]); ?>
+                                <?= $form->ConstructeurChamp('Image', 'image', $item['image'] ?? '', 'text'); ?>
+                                <?= $form->ConstructeurChamp('', 'menu', $item['titre'] ?? '', 'hidden'); ?>
+                                <?= $form->ConstructeurChamp('', 'form', 'true', 'hidden'); ?>
+                                <p><button type="submit" class="btn">Enregistrer « <?= e($item['titre'] ?? '') ?> »</button></p>
+                            </form>
+                        </div>
+                    </details>
+                <?php endforeach; ?>
             <?php endif; ?>
         </div>
     </div>
@@ -269,8 +360,7 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
     function activerOnglet(nom) {
         for (var i = 0; i < buttons.length; i++) {
             var btn = buttons[i];
-            var actif = btn.getAttribute('data-tab') === nom;
-            if (actif) {
+            if (btn.getAttribute('data-tab') === nom) {
                 btn.classList.add('active');
             } else {
                 btn.classList.remove('active');
@@ -284,8 +374,6 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
                 panel.classList.remove('active');
             }
         }
-
-        // Met à jour l'URL sans recharger
         try {
             var url = new URL(window.location.href);
             url.searchParams.set('onglet', nom);
@@ -302,7 +390,6 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
         })(buttons[k]);
     }
 
-    // Au chargement : s'assurer qu'un panneau est bien visible
     var actif = root.querySelector('.tab-btn.active');
     if (actif) {
         activerOnglet(actif.getAttribute('data-tab'));
