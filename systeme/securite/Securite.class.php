@@ -1,17 +1,17 @@
 <?php
+
 namespace systeme\securite;
 
 /**
  * Helpers de sécurité transverses.
  *
- * - e()          : échappement HTML (anti-XSS)
- * - sanitizeNom  : n'autorise que [a-zA-Z0-9_-] pour application / fonction
- * - nettoyer     : trim + suppression des caractères de contrôle
+ * - Securite::e() : échappement HTML (anti-XSS)
+ * - sanitizeNom   : n'autorise que [a-zA-Z0-9_-] pour application / fonction
+ * - nettoyer      : trim + suppression des caractères de contrôle
  *
  * Utilisation dans les vues :
+ *   <?= e($variable); ?>                      // fonction globale
  *   <?= \systeme\securite\Securite::e($variable); ?>
- *
- * Ou via la fonction globale e() définie en bas de fichier.
  */
 class Securite
 {
@@ -56,13 +56,19 @@ class Securite
     }
 }
 
-/**
- * Fonction globale de confort pour les vues.
- * Usage : <?= e($texte); ?>
- */
-if (!function_exists('e')) {
-    function e($valeur): string
-    {
-        return \systeme\securite\Securite::e($valeur);
+// ---------------------------------------------------------------------------
+// Fonction globale e() — doit être hors du namespace pour être visible partout.
+// On utilise un second bloc namespace { } vide (= global).
+// ---------------------------------------------------------------------------
+namespace {
+    if (!function_exists('e')) {
+        /**
+         * Échappement HTML pour les vues.
+         * Usage : <?= e($texte); ?>
+         */
+        function e($valeur): string
+        {
+            return \systeme\securite\Securite::e($valeur);
+        }
     }
 }
