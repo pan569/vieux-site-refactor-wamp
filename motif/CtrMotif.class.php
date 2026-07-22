@@ -2,9 +2,9 @@
 /**
  * Contrôleur de l'application Motif (administration du site).
  *
- * Phase onglets : une interface unique avec navigation par onglets
- * (Vue d'ensemble / Configuration / Crédits / En-tête / Menus / Pied).
- * Les formulaires POST restent séparés pour simplicité et robustesse.
+ * Interface unique à onglets : tous les formulaires sont dans index.php.
+ * Les méthodes modif* ne gèrent plus que les POST (enregistrement).
+ * En cas d'accès GET ou d'erreur CSRF → retour vers l'onglet concerné.
  *
  * @author Ulysse1976
  */
@@ -37,7 +37,6 @@ class CtrMotif extends Controleur
      */
     public function afficherPage($main)
     {
-        // Plus d'aside complexe pour l'admin : les onglets suffisent
         $this->motif['aside'] = [];
 
         $dossier = "/appBotanique/vue/resources"; // historique, conservé pour compatibilité
@@ -48,15 +47,13 @@ class CtrMotif extends Controleur
     }
 
     /**
-     * Page principale avec système d'onglets.
-     * Paramètre GET 'onglet' pour ouvrir directement le bon panneau après un enregistrement.
+     * Page principale avec système d'onglets + formulaires intégrés.
      */
     public function index(array $variables = [])
     {
         $model  = $this->motif;
         $onglet = $variables['onglet'] ?? ($_GET['onglet'] ?? 'apercu');
 
-        // Onglets autorisés
         $ongletsValides = ['apercu', 'configuration', 'credits', 'entete', 'menus', 'pied'];
         if (!in_array($onglet, $ongletsValides, true)) {
             $onglet = 'apercu';
@@ -68,190 +65,174 @@ class CtrMotif extends Controleur
 
     public function modifConfiguration(array $variables = [])
     {
-        $model = $this->motif;
-
-        if (array_key_exists('form', $variables)) {
-
-            if ($this->refuserSiCsrfInvalide()) {
-                $main = $this->renduPage("modifConfiguration", compact('model'));
-                $this->afficherPage($main);
-                return;
-            }
-
-            $t = [];
-            foreach (array_keys($model['Configuration']) as $clé) {
-                $t[$clé] = $variables[$clé] ?? $model['Configuration'][$clé];
-            }
-            $model['Configuration'] = $t;
-            $model->SauvegardeElement('Configuration');
-
-            $this->flashSucces('Configuration enregistrée.');
+        // Seuls les POST sont traités ici ; le reste renvoie vers l'onglet
+        if (!array_key_exists('form', $variables)) {
             $this->redirigerVersOnglet('configuration');
             return;
         }
 
-        // Affichage direct du formulaire (lien depuis un onglet ou favori)
-        $main = $this->renduPage("modifConfiguration", compact('model'));
-        $this->afficherPage($main);
+        if ($this->refuserSiCsrfInvalide()) {
+            $this->redirigerVersOnglet('configuration');
+            return;
+        }
+
+        $model = $this->motif;
+        $t = [];
+        foreach (array_keys($model['Configuration']) as $clé) {
+            $t[$clé] = $variables[$clé] ?? $model['Configuration'][$clé];
+        }
+        $model['Configuration'] = $t;
+        $model->SauvegardeElement('Configuration');
+
+        $this->flashSucces('Configuration enregistrée.');
+        $this->redirigerVersOnglet('configuration');
     }
 
     public function modifCredit(array $variables = [])
     {
-        $model = $this->motif;
-
-        if (array_key_exists('form', $variables)) {
-
-            if ($this->refuserSiCsrfInvalide()) {
-                $main = $this->renduPage("modifCredit", compact('model'));
-                $this->afficherPage($main);
-                return;
-            }
-
-            $t = [];
-            foreach (array_keys($model['Proprietaire']) as $clé) {
-                $t[$clé] = $variables["Proprietaire_$clé"] ?? $model['Proprietaire'][$clé];
-            }
-            $model['Proprietaire'] = $t;
-            $model->SauvegardeElementAttribut('Credits', 'Proprietaire');
-
-            $t = [];
-            foreach (array_keys($model['Developpeur']) as $clé) {
-                $t[$clé] = $variables["Developpeur_$clé"] ?? $model['Developpeur'][$clé];
-            }
-            $model['Developpeur'] = $t;
-            $model->SauvegardeElementAttribut('Credits', 'Developpeur');
-
-            $t = [];
-            foreach (array_keys($model['Hebergeur']) as $clé) {
-                $t[$clé] = $variables["Hebergeur_$clé"] ?? $model['Hebergeur'][$clé];
-            }
-            $model['Hebergeur'] = $t;
-            $model->SauvegardeElementAttribut('Credits', 'Hebergeur');
-
-            $this->flashSucces('Crédits enregistrés.');
+        if (!array_key_exists('form', $variables)) {
             $this->redirigerVersOnglet('credits');
             return;
         }
 
-        $main = $this->renduPage("modifCredit", compact('model'));
-        $this->afficherPage($main);
+        if ($this->refuserSiCsrfInvalide()) {
+            $this->redirigerVersOnglet('credits');
+            return;
+        }
+
+        $model = $this->motif;
+
+        $t = [];
+        foreach (array_keys($model['Proprietaire']) as $clé) {
+            $t[$clé] = $variables["Proprietaire_$clé"] ?? $model['Proprietaire'][$clé];
+        }
+        $model['Proprietaire'] = $t;
+        $model->SauvegardeElementAttribut('Credits', 'Proprietaire');
+
+        $t = [];
+        foreach (array_keys($model['Developpeur']) as $clé) {
+            $t[$clé] = $variables["Developpeur_$clé"] ?? $model['Developpeur'][$clé];
+        }
+        $model['Developpeur'] = $t;
+        $model->SauvegardeElementAttribut('Credits', 'Developpeur');
+
+        $t = [];
+        foreach (array_keys($model['Hebergeur']) as $clé) {
+            $t[$clé] = $variables["Hebergeur_$clé"] ?? $model['Hebergeur'][$clé];
+        }
+        $model['Hebergeur'] = $t;
+        $model->SauvegardeElementAttribut('Credits', 'Hebergeur');
+
+        $this->flashSucces('Crédits enregistrés.');
+        $this->redirigerVersOnglet('credits');
     }
 
     public function modifEntete(array $variables = [])
     {
-        $model = $this->motif;
-
-        if (array_key_exists('form', $variables)) {
-
-            if ($this->refuserSiCsrfInvalide()) {
-                $main = $this->renduPage("modifEntete", compact('model'));
-                $this->afficherPage($main);
-                return;
-            }
-
-            $t = [];
-            foreach (array_keys($model['Entete']) as $clé) {
-                $t[$clé] = $variables[$clé] ?? $model['Entete'][$clé];
-            }
-            $model['Entete'] = $t;
-            $model->SauvegardeElement('Entete');
-
-            $this->flashSucces('En-tête enregistré.');
+        if (!array_key_exists('form', $variables)) {
             $this->redirigerVersOnglet('entete');
             return;
         }
 
-        $main = $this->renduPage("modifEntete", compact('model'));
-        $this->afficherPage($main);
+        if ($this->refuserSiCsrfInvalide()) {
+            $this->redirigerVersOnglet('entete');
+            return;
+        }
+
+        $model = $this->motif;
+        $t = [];
+        foreach (array_keys($model['Entete']) as $clé) {
+            $t[$clé] = $variables[$clé] ?? $model['Entete'][$clé];
+        }
+        $model['Entete'] = $t;
+        $model->SauvegardeElement('Entete');
+
+        $this->flashSucces('En-tête enregistré.');
+        $this->redirigerVersOnglet('entete');
     }
 
     public function modifMenu(array $variables = [])
     {
-        $AdministrationSite = $this->motif;
-        $model = $AdministrationSite['Menus'][$variables['menu']] ?? null;
+        if (!array_key_exists('form', $variables)) {
+            $this->redirigerVersOnglet('menus');
+            return;
+        }
 
-        if ($model === null) {
+        $AdministrationSite = $this->motif;
+        $menuKey = $variables['menu'] ?? '';
+
+        if (!isset($AdministrationSite['Menus'][$menuKey])) {
             $this->flashErreur('Menu introuvable.');
             $this->redirigerVersOnglet('menus');
             return;
         }
 
-        if (array_key_exists('form', $variables)) {
-
-            if ($this->refuserSiCsrfInvalide()) {
-                $main = $this->renduPage("modifMenu", compact('model'));
-                $this->afficherPage($main);
-                return;
-            }
-
-            if (array_key_exists('description', $variables))
-                $AdministrationSite['Menus'][$variables['menu']]->set('description', $variables['description']);
-
-            if (array_key_exists('image', $variables))
-                $AdministrationSite['Menus'][$variables['menu']]->set('image', $variables['image']);
-
-            if (array_key_exists('css', $variables))
-                $AdministrationSite['Menus'][$variables['menu']]->set('css', $variables['css']);
-
-            if (array_key_exists('cible', $variables))
-                $AdministrationSite['Menus'][$variables['menu']]->set('cible', $variables['cible']);
-
-            $AdministrationSite['Menus'][$variables['menu']]->SauvegardeElement();
-
-            $this->flashSucces('Menu enregistré.');
+        if ($this->refuserSiCsrfInvalide()) {
             $this->redirigerVersOnglet('menus');
             return;
         }
 
-        $main = $this->renduPage("modifMenu", compact('model'));
-        $this->afficherPage($main);
+        if (array_key_exists('description', $variables)) {
+            $AdministrationSite['Menus'][$menuKey]->set('description', $variables['description']);
+        }
+        if (array_key_exists('image', $variables)) {
+            $AdministrationSite['Menus'][$menuKey]->set('image', $variables['image']);
+        }
+        if (array_key_exists('css', $variables)) {
+            $AdministrationSite['Menus'][$menuKey]->set('css', $variables['css']);
+        }
+        if (array_key_exists('cible', $variables)) {
+            $AdministrationSite['Menus'][$menuKey]->set('cible', $variables['cible']);
+        }
+
+        $AdministrationSite['Menus'][$menuKey]->SauvegardeElement();
+
+        $this->flashSucces('Menu enregistré.');
+        $this->redirigerVersOnglet('menus');
     }
 
     public function modifPied(array $variables = [])
     {
-        $AdministrationSite = $this->motif;
-        $model = $AdministrationSite['Pied'][$variables['menu']] ?? null;
+        if (!array_key_exists('form', $variables)) {
+            $this->redirigerVersOnglet('pied');
+            return;
+        }
 
-        if ($model === null) {
+        $AdministrationSite = $this->motif;
+        $menuKey = $variables['menu'] ?? '';
+
+        if (!isset($AdministrationSite['Pied'][$menuKey])) {
             $this->flashErreur('Élément de pied de page introuvable.');
             $this->redirigerVersOnglet('pied');
             return;
         }
 
-        if (array_key_exists('form', $variables)) {
-
-            if ($this->refuserSiCsrfInvalide()) {
-                $main = $this->renduPage("modifMenu", compact('model'));
-                $this->afficherPage($main);
-                return;
-            }
-
-            if (array_key_exists('description', $variables))
-                $AdministrationSite['Pied'][$variables['menu']]->set('description', $variables['description']);
-
-            if (array_key_exists('image', $variables))
-                $AdministrationSite['Pied'][$variables['menu']]->set('image', $variables['image']);
-
-            if (array_key_exists('css', $variables))
-                $AdministrationSite['Pied'][$variables['menu']]->set('css', $variables['css']);
-
-            if (array_key_exists('cible', $variables))
-                $AdministrationSite['Pied'][$variables['menu']]->set('cible', $variables['cible']);
-
-            $AdministrationSite['Pied'][$variables['menu']]->SauvegardeElement();
-
-            $this->flashSucces('Pied de page enregistré.');
+        if ($this->refuserSiCsrfInvalide()) {
             $this->redirigerVersOnglet('pied');
             return;
         }
 
-        $main = $this->renduPage("modifMenu", compact('model'));
-        $this->afficherPage($main);
+        if (array_key_exists('description', $variables)) {
+            $AdministrationSite['Pied'][$menuKey]->set('description', $variables['description']);
+        }
+        if (array_key_exists('image', $variables)) {
+            $AdministrationSite['Pied'][$menuKey]->set('image', $variables['image']);
+        }
+        if (array_key_exists('css', $variables)) {
+            $AdministrationSite['Pied'][$menuKey]->set('css', $variables['css']);
+        }
+        if (array_key_exists('cible', $variables)) {
+            $AdministrationSite['Pied'][$menuKey]->set('cible', $variables['cible']);
+        }
+
+        $AdministrationSite['Pied'][$menuKey]->SauvegardeElement();
+
+        $this->flashSucces('Pied de page enregistré.');
+        $this->redirigerVersOnglet('pied');
     }
 
     /**
-     * Redirige vers la page index avec l'onglet souhaité (query string).
-     * Compatible avec le format d'URL actuel du Routeur.
+     * Redirige vers la page index avec l'onglet souhaité.
      */
     private function redirigerVersOnglet(string $onglet): void
     {
