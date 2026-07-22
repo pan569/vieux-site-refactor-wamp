@@ -13,17 +13,98 @@ $urlCredit  = $this->routeur->getRoute('modifCredit')->generateUri();
 $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
 ?>
 
+<style>
+/* Styles de secours pour les onglets (garantit le fonctionnement même si le CSS du thème est en cache) */
+.admin-motif .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 2px solid #E5E5E5;
+    margin: 1.25rem 0 1.5rem;
+    padding: 0;
+}
+.admin-motif .tab-btn {
+    background: transparent !important;
+    color: #9F9F9F !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    margin: 0 0 -2px 0 !important;
+    padding: 0.65rem 1.1rem !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    border-radius: 0 !important;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+.admin-motif .tab-btn:hover {
+    color: #2c3e50 !important;
+    background: transparent !important;
+}
+.admin-motif .tab-btn.active {
+    color: #2c3e50 !important;
+    border-bottom-color: #2c3e50 !important;
+    background: transparent !important;
+}
+.admin-motif .tab-panel {
+    display: none;
+}
+.admin-motif .tab-panel.active {
+    display: block;
+}
+.admin-motif .card {
+    background: #fff;
+    border: 1px solid #E5E5E5;
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,.05);
+}
+.admin-motif .card h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0;
+}
+.admin-motif .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+.admin-motif .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.25rem;
+}
+@media (max-width: 720px) {
+    .admin-motif .tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    .admin-motif .tab-btn {
+        flex-shrink: 0;
+        padding: 0.55rem 0.9rem !important;
+        font-size: 0.85rem !important;
+    }
+    .admin-motif .grid-2,
+    .admin-motif .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
 <div class="admin-motif">
     <h1>Paramètres du site</h1>
 
     <!-- Barre d'onglets -->
     <nav class="tabs" role="tablist" aria-label="Sections d'administration">
-        <button type="button" class="tab-btn<?= $onglet === 'apercu' ? ' active' : '' ?>" data-tab="apercu" role="tab" aria-selected="<?= $onglet === 'apercu' ? 'true' : 'false' ?>">Vue d'ensemble</button>
-        <button type="button" class="tab-btn<?= $onglet === 'configuration' ? ' active' : '' ?>" data-tab="configuration" role="tab" aria-selected="<?= $onglet === 'configuration' ? 'true' : 'false' ?>">Configuration</button>
-        <button type="button" class="tab-btn<?= $onglet === 'credits' ? ' active' : '' ?>" data-tab="credits" role="tab" aria-selected="<?= $onglet === 'credits' ? 'true' : 'false' ?>">Crédits</button>
-        <button type="button" class="tab-btn<?= $onglet === 'entete' ? ' active' : '' ?>" data-tab="entete" role="tab" aria-selected="<?= $onglet === 'entete' ? 'true' : 'false' ?>">En-tête</button>
-        <button type="button" class="tab-btn<?= $onglet === 'menus' ? ' active' : '' ?>" data-tab="menus" role="tab" aria-selected="<?= $onglet === 'menus' ? 'true' : 'false' ?>">Menus</button>
-        <button type="button" class="tab-btn<?= $onglet === 'pied' ? ' active' : '' ?>" data-tab="pied" role="tab" aria-selected="<?= $onglet === 'pied' ? 'true' : 'false' ?>">Pied de page</button>
+        <button type="button" class="tab-btn<?= $onglet === 'apercu' ? ' active' : '' ?>" data-tab="apercu" role="tab">Vue d'ensemble</button>
+        <button type="button" class="tab-btn<?= $onglet === 'configuration' ? ' active' : '' ?>" data-tab="configuration" role="tab">Configuration</button>
+        <button type="button" class="tab-btn<?= $onglet === 'credits' ? ' active' : '' ?>" data-tab="credits" role="tab">Crédits</button>
+        <button type="button" class="tab-btn<?= $onglet === 'entete' ? ' active' : '' ?>" data-tab="entete" role="tab">En-tête</button>
+        <button type="button" class="tab-btn<?= $onglet === 'menus' ? ' active' : '' ?>" data-tab="menus" role="tab">Menus</button>
+        <button type="button" class="tab-btn<?= $onglet === 'pied' ? ' active' : '' ?>" data-tab="pied" role="tab">Pied de page</button>
     </nav>
 
     <!-- ========== ONGLET : Vue d'ensemble ========== -->
@@ -179,27 +260,54 @@ $urlEntete  = $this->routeur->getRoute('modifEntete')->generateUri();
 
 <script>
 (function () {
-    const buttons = document.querySelectorAll('.admin-motif .tab-btn');
-    const panels  = document.querySelectorAll('.admin-motif .tab-panel');
+    var root = document.querySelector('.admin-motif');
+    if (!root) return;
+
+    var buttons = root.querySelectorAll('.tab-btn');
+    var panels  = root.querySelectorAll('.tab-panel');
 
     function activerOnglet(nom) {
-        buttons.forEach(btn => {
-            const actif = btn.dataset.tab === nom;
-            btn.classList.toggle('active', actif);
-            btn.setAttribute('aria-selected', actif ? 'true' : 'false');
-        });
-        panels.forEach(panel => {
-            panel.classList.toggle('active', panel.id === 'panel-' + nom);
-        });
+        for (var i = 0; i < buttons.length; i++) {
+            var btn = buttons[i];
+            var actif = btn.getAttribute('data-tab') === nom;
+            if (actif) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+        for (var j = 0; j < panels.length; j++) {
+            var panel = panels[j];
+            if (panel.id === 'panel-' + nom) {
+                panel.classList.add('active');
+            } else {
+                panel.classList.remove('active');
+            }
+        }
 
-        // Met à jour l'URL sans recharger (pour partage / favoris)
-        const url = new URL(window.location);
-        url.searchParams.set('onglet', nom);
-        history.replaceState(null, '', url);
+        // Met à jour l'URL sans recharger
+        try {
+            var url = new URL(window.location.href);
+            url.searchParams.set('onglet', nom);
+            history.replaceState(null, '', url.toString());
+        } catch (e) {}
     }
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => activerOnglet(btn.dataset.tab));
-    });
+    for (var k = 0; k < buttons.length; k++) {
+        (function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                activerOnglet(btn.getAttribute('data-tab'));
+            });
+        })(buttons[k]);
+    }
+
+    // Au chargement : s'assurer qu'un panneau est bien visible
+    var actif = root.querySelector('.tab-btn.active');
+    if (actif) {
+        activerOnglet(actif.getAttribute('data-tab'));
+    } else if (buttons.length > 0) {
+        activerOnglet(buttons[0].getAttribute('data-tab'));
+    }
 })();
 </script>
