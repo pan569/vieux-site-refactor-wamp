@@ -572,7 +572,11 @@ hr {
 .mb-1 { margin-bottom: 0.5rem; }
 .mb-2 { margin-bottom: 1rem; }
 
-/* ---------- Responsive ---------- */
+/* ============================================================
+   Responsive
+   - ≤960px : sidebar plus étroite, articles empilés
+   - ≤720px : sidebar SOUS le contenu, menu compact / scrollable
+   ============================================================ */
 
 @media (max-width: 960px) {
     :root {
@@ -598,18 +602,47 @@ hr {
 }
 
 @media (max-width: 720px) {
+    /* Header non fixe : plus de contenu caché sous la barre */
     header {
-        padding: 12px 14px;
         position: relative;
+        padding: 10px 12px;
+        min-height: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
     }
 
+    /* Menu simplifié : une seule ligne, défilement horizontal */
+    header nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0;
+        padding-bottom: 4px;
+        /* masque la barre de scroll tout en gardant le geste */
+        scrollbar-width: thin;
+    }
+
+    .menu-item {
+        margin: 0 10px 0 0;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+    }
+
+    .social {
+        justify-content: flex-end;
+    }
+
+    /* Bannière : plus de marge pour header fixe */
     #banniere {
         margin-top: 0;
         height: 80px;
     }
 
+    /* Sidebar EN DESSOUS du contenu */
     #body {
         flex-direction: column;
+        min-height: 0;
     }
 
     .main {
@@ -619,29 +652,39 @@ hr {
     .sidebar {
         width: 100%;
         border-top: 1px solid var(--couleur-bordure);
+        padding: 24px 16px;
     }
 
     .container {
         padding: 1rem 1rem 2rem;
     }
 
-    .menu-item {
-        margin: 0 6px;
-        font-size: 0.8rem;
-    }
-
+    /* Formulaires pleine largeur */
     input[type="text"],
     input[type="email"],
     input[type="password"],
     input[type="number"],
+    input[type="url"],
+    input[type="search"],
+    input[type="date"],
+    input[type="file"],
     select,
     textarea {
         max-width: 100%;
     }
 
+    /* Tableaux scrollables horizontalement */
     table {
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .article-title {
+        font-size: 1.35rem;
     }
 }
