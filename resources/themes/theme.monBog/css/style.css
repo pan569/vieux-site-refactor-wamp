@@ -573,6 +573,100 @@ hr {
 .mb-2 { margin-bottom: 1rem; }
 
 /* ============================================================
+   Système d'onglets (admin Motif + réutilisable)
+   ============================================================ */
+
+.admin-motif .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 2px solid var(--couleur-bordure);
+    margin: 1.25rem 0 1.5rem;
+    padding: 0;
+}
+
+.admin-motif .tab-btn {
+    background: transparent;
+    color: var(--couleur-muted);
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin: 0 0 -2px 0;
+    padding: 0.65rem 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 0;
+    cursor: pointer;
+    transition: color .2s, border-color .2s;
+}
+
+.admin-motif .tab-btn:hover {
+    color: var(--couleur-accent);
+    background: transparent;
+}
+
+.admin-motif .tab-btn.active {
+    color: var(--couleur-accent);
+    border-bottom-color: var(--couleur-accent);
+    background: transparent;
+}
+
+.admin-motif .tab-panel {
+    display: none;
+}
+
+.admin-motif .tab-panel.active {
+    display: block;
+}
+
+.admin-motif .card {
+    background: var(--couleur-blanc);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--rayon);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--ombre-legere);
+}
+
+.admin-motif .card h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0;
+}
+
+.admin-motif .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.admin-motif .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.25rem;
+}
+
+@media (max-width: 720px) {
+    .admin-motif .tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .admin-motif .tab-btn {
+        flex-shrink: 0;
+        padding: 0.55rem 0.9rem;
+        font-size: 0.85rem;
+    }
+
+    .admin-motif .grid-2,
+    .admin-motif .grid-3 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================
    Responsive
    - ≤960px : sidebar plus étroite, articles empilés
    - ≤720px : sidebar SOUS le contenu, menu compact / scrollable
