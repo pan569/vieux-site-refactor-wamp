@@ -1,6 +1,6 @@
 <?php
 
-namespace systeme\securite;
+namespace systeme\securite {
 
 /**
  * Helpers de sécurité transverses.
@@ -56,19 +56,19 @@ class Securite
     }
 }
 
-// ---------------------------------------------------------------------------
-// Fonction globale e() — doit être hors du namespace pour être visible partout.
-// On utilise un second bloc namespace { } vide (= global).
-// ---------------------------------------------------------------------------
+} // fin namespace systeme\securite
+
 namespace {
-    if (!function_exists('e')) {
-        /**
-         * Échappement HTML pour les vues.
-         * Usage : <?= e($texte); ?>
-         */
-        function e($valeur): string
-        {
-            return \systeme\securite\Securite::e($valeur);
-        }
+
+/**
+ * Fonction globale d'échappement HTML pour les vues.
+ * Usage : <?= e($texte); ?>
+ */
+if (!function_exists('e')) {
+    function e($valeur): string
+    {
+        return \systeme\securite\Securite::e($valeur);
     }
 }
+
+} // fin namespace global
